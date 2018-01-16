@@ -1,0 +1,200 @@
+# 高诚智能家居协议思考
+
+借此机会重新梳理一下智能家居部分的网络通讯协议使用情况，并总结一下做为指导。当然只是抛砖引玉，不一定完全正确，需要大家一起商议后决定。
+
+
+---
+* 文章中应该设计协议：现在写的这些
+* 业务（业务流程）：从第一次安装App，到操作的方方面面
+* 按步骤一一列出
+* 强调规范：一个单词尽量选择5--7个字母的，这样才最优美。
+* 添加更多的规范，参考阿里巴巴的java手册，android开发手册，iOS开发命名手册。
+* 首字母缩写的尽量都用大写，你用个小写，人家还以为是一个单词比如:appID。当然uri、url、urn这种除外，因为大家都知道这个是什么。
+* 规范我们公司的基础包名与项目的关系，看需不需要前后端统一一下，现在的亿社区是：com.aglhz.yicommunity，智能家居还是用美伦安保为蓝本：com.meilun.security.smart。所有还有很多细节需要完善啊，现在不改等到后面用的地方越来越多，比如地图定位，支付等，这些虽然改不改无所谓，但是会让后来人引起不必要的误会，尤其是像我这种有强迫症的人，完全难以忍受。
+* 前后端的某些名称概念要统一用某一个单词，比如支付的统一订单，支付宝用的是order，微信用的是unifiedorder，那我们统一对订单这个概念用order这个词。再比如主机：后台用gateway，现在我们统一用host。这单词不统一很容易分裂。
+---
+
+用xmid描述出要做的业务
+
+用流程图描述出来每一个业务的流程
+![3偷t](https://i.imgur.com/tHAdtSU.png)
+
+
+## 规范
+
+首先定义一些规范，提出一些硬性要求。
+
+### URI规范
+
+URI 表示资源，资源一般对应服务器端领域模型中的实体类。
+
+1. 不用大写
+2. 用中杠-不用下杠_
+3. 参数列表要encode
+4. URI中的名词表示资源集合，使用复数形式
+
+### JSON规范
+
+1. 不要使用缩写
+2. 统一用驼峰命名法
+3. 不要使用_或者-
+4. 用名词复数表示集合类型
+
+## Http部分
+
+### 使用场景
+
+* App的初始化数据尽量都用http协议获取
+* 页面的初始化数据尽量都用http协议获取
+
+### 其他
+待定
+
+## MQTT部分
+
+### 使用场景
+* 所有对智能家居的**设备、传感器等硬件**操作都尽量使用MQTT协议
+* 所有需要**双向通讯（确切的说是需要后台主动推送给前端的情景）**的部分都尽量使用MQTT协议
+
+### 应用列举
+
+包括主机、传感器、设备、场景（联动）相关操作，所谓操作无非增删改查（CRUD），理论上来说，对于数据的任何细微变化都应该有一个消息通过MQTT传送出来，让其他端可以任意支配，此时的MQTT就好比一个数据库的观察者，这样才能充分利用MQTT，这个端也能充分感知数据库的变化。
+
+#### 主机操作
+对主机的增删改查等。
+
+##### 1. 新增主机
+这个推送是用于用户账号第一次新添加主机时界面的刷新，如果没有这个推送，也可以实现在第一次添加完主机之后刷新相关界面，但是作法是在添加界面添加成功后，在退出界面的时候发一个消息然后相关界面得到这个信号后刷新，就能拿到新添加的主机的信息显示出来。
+
+###### 发布
+此处无需发布。
+
+###### 订阅
+* topic
+
+
+
+##### 2. 主机布防状态变更
+
+##### 传感器操作
+1. 传感器状态变更
+
+##### 设备操作
+1. 设备状态变更
+
+##### 界面相关
+1. 消息提示：比如底部导航栏的tab勋章提示
+
+##### 后续的IM
+待定
+
+## 错误处理
+
+1. 不要发生了错误但给2xx响应，客户端可能会缓存成功的http请求；
+2. 正确设置http状态码，不要自定义；
+3. Response body 提供 1) 错误的代码（日志/问题追查）；2) 错误的描述文本（展示给用户）。
+
+对第三点的实现稍微多说一点：
+
+Java 服务器端一般用异常表示 RESTful API 的错误。API 可能抛出两类异常：业务异常和非业务异常。业务异常由自己的业务代码抛出，表示一个用例的前置条件不满足、业务规则冲突等，比如参数校验不通过、权限校验失败。非业务类异常表示不在预期内的问题，通常由类库、框架抛出，或由于自己的代码逻辑错误导致，比如数据库连接失败、空指针异常、除0错误等等。
+
+业务类异常必须提供2种信息：
+
+1. 如果抛出该类异常，HTTP 响应状态码应该设成什么；
+2. 异常的文本描述；
+
+在Controller层使用统一的异常拦截器：
+
+1. 设置 HTTP 响应状态码：对业务类异常，用它指定的 HTTP code；对非业务类异常，统一500；
+2. Response Body 的错误码：异常类名
+3. Response Body 的错误描述：对业务类异常，用它指定的错误文本；对非业务类异常，线上可以统一文案如“服务器端错误，请稍后再试”，开发或测试环境中用异常的 stacktrace，服务器端提供该行为的开关。
+
+常用的http状态码及使用场景：
+
+|状态码 | 使用场景|
+| - | -| 
+|400 | bad request	常用在参数校验 |
+|401 | unauthorized	未经验证的用户，常见于未登录。如果经过验证后依然没权限，应该 403（即 authentication 和 authorization 的区别）。|
+|403 | forbidden	无权限|
+|404 | not found	资源不存在|
+|500 | internal server error	非业务类异常|
+|503 | service unavaliable	由容器抛出，自己的代码不要抛这个异常|
+
+
+
+
+```
+错误描述
+{
+  "error": {
+    "message": "java.lang.IllegalStateException: Expected BEGIN_OBJECT but was STRING at line 1 column 1 path $",
+    "code": 500,
+    "exception": {
+      "class": "com.google.gson.JsonSyntaxException",
+      "message": "java.lang.IllegalStateException: Expected BEGIN_OBJECT but was STRING at line 1 column 1 path $",
+      "localized-message": "java.lang.IllegalStateException: Expected BEGIN_OBJECT but was STRING at line 1 column 1 path $",
+      "cause": "java.lang.IllegalStateException"
+    }
+  }
+}
+```
+
+```
+错误请求头
+{
+  "date": "Mon, 08 Jan 2018 03:07:08 GMT",
+  "server": "nginx/1.10.3 (Ubuntu)",
+  "connection": "keep-alive",
+  "content-length": "237",
+  "content-type": "application/json"
+}
+```
+
+
+
+## 接口版本（Versioning）
+个人倾向于将版本号放在HTTP/MQTT头信息中，虽然不如放入URL中更直观，但是不方便我们统一管理，因为在前端URL是拼出来的String，请求头是统一个对象去设置，除非有特殊情况，某一个接口需1.0版本，某一个接口需2.0版本，这就另当别论，到时候统一商量，在拼这个URL的时候，放到固定目录（位置），如：smarthome.aghl.com:8080<u>**/版本（一般用v1、v2）/**</u>user  统一放在一级目录，这样的前端在拼接的时候，统一放到某个位置，也就方便管理了。
+
+## URL失效
+
+随着系统发展，总有一些API失效或者迁移，对失效的API，返回404 not found 或 410 gone；对迁移的API，返回 301 重定向。
+
+## 安全
+待定
+
+### 参考
+* [http://www.ruanyifeng.com/blog/2011/09/restful.html](http://www.ruanyifeng.com/blog/2011/09/restful.html "理解RESTful架构")
+* [http://www.ruanyifeng.com/blog/2014/05/restful_api.html](http://www.ruanyifeng.com/blog/2014/05/restful_api.html "RESTful API 设计指南")
+* [https://demo.openhab.org:8443/doc/index.html](https://demo.openhab.org:8443/doc/index.html "demo")
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
