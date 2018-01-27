@@ -1,0 +1,478 @@
+# 高诚智能家居协议思考
+
+借此机会重新梳理一下智能家居部分的网络通讯协议使用情况，并总结一下做为指导。当然只是抛砖引玉，不一定完全正确，需要大家一起商议后决定。
+
+---
+
+https://api.github.com/
+https://developer.github.com/v3/search/#search-users
+http://www.infoq.com/cn/articles/webber-rest-workflow/
+https://www.zhihu.com/question/27785028
+http://www.infoq.com/cn/articles/webber-rest-workflow/
+https://www.jianshu.com/p/0ede793d41cc
+http://wiki.jikexueyuan.com/project/github-developer-guides/getting-started.html
+https://www.zhihu.com/question/28557115
+https://www.zhihu.com/question/35210451
+
+
+---
+
+
+## 规范
+
+### 命名规范
+一名二姓三风水，四积阴德五读书，名不正则言不顺，言不顺则事难成。软件开发其实就是门命名的艺术，所以首先定义一些规范，提出一些硬性要求，大家在命名的时候尽量多花点心思，多参考优秀的命名风格。
+* 强烈推荐参考：[参考阿里巴巴Java开发手册](http://www.baidu.com "阿里巴巴Java开发手册")，[iOS开发手册](https://www.baidu.com/s?ie=utf-8&f=3&rsv_bp=1&ch=3&tn=98010089_dg&wd=iOS%E5%BC%80%E5%8F%91%E7%BC%96%E7%A0%81%E5%8F%8A%E5%91%BD%E5%90%8D%E8%A7%84%E8%8C%83&oq=ios%25E5%25BC%2580%25E5%258F%2591%25E5%2591%25BD%25E5%2590%258D%25E8%25A7%2584%25E8%258C%2583&rsv_pq=861604950004ebc0&rsv_t=58c07RTbI99q5XYs9eJyxgRtHHUk%2FLDHkwLo0Z86N1kK3GeDd1ktZqvYuIIsSazuXxg&rqlang=cn&rsv_enter=1&inputT=3905&rsv_sug3=17&rsv_sug1=16&rsv_sug7=100&rsv_n=2&bs=ios%E5%BC%80%E5%8F%91%E5%91%BD%E5%90%8D%E8%A7%84%E8%8C%83 "iOS开发编码及命名规范")。
+* 一个单词尽量选择5--7个字母的，这样才最优美。
+* 首字母缩写的单词尽量每个字母都用大写，例如ID。用个小写，人家还以为是一个单词。当然uri、url、urn这种除外，因为大家都知道这个是什么。
+* 规范我们公司的基础包名与项目的关系，看需不需要前后端统一一下，现在的亿社区是：com.aglhz.yicommunity，智能家居还是用美伦安保为蓝本：com.meilun.security.smart。还有很多细节需要完善啊，现在不改等到后面引用的地方越来越多，比如地图，支付、社会化分享等，这些虽然改不改无所谓，但是会让后来人引起不必要的误会，尤其是像我这种有强迫症的人，完全难以忍受。
+* 前后端的某些名称概念要统一用某一个单词，比如支付的统一订单，支付宝用的是order，微信用的是unifiedorder，那我们统一对订单这个概念用order这个词。再比如主机：后台用gateway，现在我们统一用host。这单词不统一很容易分裂。
+
+### URI规范
+
+URI 表示资源，资源一般对应服务器端领域模型中的实体类。
+
+1. 不用大写
+2. 尽量不用横杠分隔符，万一要用，请使用中杠-不用下杠_
+3. 参数列表要encode
+4. URI中的名词表示资源集合，使用复数形式
+
+### JSON规范
+1. 不要使用缩写
+2. 统一用驼峰命名法
+3. 不要使用_或者-
+4. 用名词复数表示集合类型
+
+## 智能家居使用流程
+![智能家居使用流程](https://i.imgur.com/ciGj9jg.png)
+
+如图所示，智能家居部分的网络通讯均以MQTT协议来完成，通过订阅/发布的方式来与服务器沟通，任何操作和细节都会产生记录并通过多种展现形式实时反馈给用户。
+
+## 业务简介
+其他业务，如设备、传感器的增删改查及其相应是基本业务，比较简单，就不过多赘述，其中场景需要着重了解。这里的场景包括联动，是指以时间（定时）、传感器、用户操作等为触发因素来进行一系列操作的集合。
+![场景业务介绍](https://i.imgur.com/SB83wFS.png)
+场景是一种智能化的使用体验，既可以满足用户的定制需求，又可以使产品更加高达上。
+
+## Http部分
+
+### 使用场景
+
+* App的初始化数据尽量都用http协议获取
+* 页面的初始化数据尽量都用http协议获取
+
+### 其他
+待定
+
+## MQTT部分
+
+### 使用场景
+* 所有对智能家居的**主机、设备、传感器等硬件**操作都尽量使用MQTT协议（考虑到未来局域网的使用）
+* 所有需要**双向通讯（确切的说是需要后台主动推送给前端的情景**的部分都尽量使用MQTT协议
+
+### 应用列举
+
+包括主机、传感器、设备、场景（联动）相关操作，所谓操作无非增删改查（CRUD），理论上来说，对于数据的任何细微变化都应该有一个消息通过MQTT传送出来，让其他端可以任意支配，此时的MQTT就好比一个数据库的观察者，这样才能充分利用MQTT，这个端也能充分感知数据库的变化。需要订阅的主题除了接下来要分析的响应各类操作相关的主题之外，还有与App用户体验相关的，如：消息提醒、公司活动等。
+
+### 协议格式
+MQTT协议是以主题（topic）的订阅与发布来与服务器异步通讯的，不论发布还是订阅都涉及到主题与内容两部分。
+
+###### 主题格式
+
+> {namespace}/{entityType}/{entity}/{action}
+
+> **我们公司则在这个基础上限定了每一层级的意义{company}/{business type}/{client ID}/{things type}/{action}，每一层级要填入的东西都是有特殊限定的，最后一级是动词描述动作，分为三大类，对应着事物的增删改查、绑定关系、对事物的操作**
+
+* 增删改查是将世间万物的一次虚拟，将世间万物映射到数据库中。
+
+|动作 | 描述|
+| - | -| 
+|add | 新增一个或者多个事物，即对应的在数据库中新增一条或者多条某类型的事物。|
+|delete | 删除某一条或者多条事物。|
+|update | 更新某一条或者多条事物。|
+|get | 查询某一条或者多条事物。|
+
+* 绑定关系,==暂时仅仅是暂时==定义的关系是有方向的所属关系，用父与子来定义,描述世间万物的联系，将上述已经新增事物产生联系，比如卧室的灯，则卧室这个thing与灯这个thing就是有联系的。
+
+|动作 | 描述|
+| - | - | 
+|bind | 将一个事物与一个或多个父绑定，与一个或多个字绑定。|
+|unbind | 将一个事物与一个或多个父解绑，与一个或多个字解绑。|
+
+![事物父子关系](https://i.imgur.com/qwKUFqn.png)
+
+* 操作
+
+|动作 | 描述|
+| - | -| 
+|read | 读取某一个或者多个事物的可操作状态。如：获取网关的布防状态、音量设置情况。|
+|write | 操作某一个或者多个事物的可操作状态。如：操作网关的布防状态变更、设置音量大小。|
+
+所有主题具有一定的唯一性，同时又具备运算能力，此处说的运算能力是指其匹配性。
+对于唯一性，我们用一个uri来描述主题，因此用一个UTF-8字符串，由一个或多个主题级别组成。每个主题级别之间由正斜杠（主题级别分隔符）分隔。对于uri只用描述资源，而对于资源的操作，如增删改查，我们用把这些动作写uri的末尾一级,即：add、get、update、delete。
+
+###### 举例
+```
+gaocheng/smarthome/clientid/things/add
+```
+
+对于匹配性，我们用通配符来描述。当客户端订阅主题时，它可以使用消息发布到的确切主题，或者可以使用通配符同时订阅更多的主题。 通配符只能在订阅主题时使用，并且在发布消息时不允许使用。主要分为单级和多级通配符。
+
+###### 单级: +
+
+正如名称已经表明的，单个级别的通配符代替一个主题级别。 加号表示主题中的单个级别通配符。
+![单级匹配](https://i.imgur.com/rMeTBGJ.png)
+
+除了通配符以外的任意字符串所构成的主题级别，可以与由单级通配符构成的主题级别相匹配。 例如，对于myhome/groundfloor/+/temperature的订阅将匹配或不匹配以下主题：
+![单级匹配举例](https://i.imgur.com/sYZV6kz.png)
+
+###### 多级: #
+
+单级通配符仅涵盖一个主题级别，而多级通配符可以涵盖任意数量的主题级别。 为了确定匹配的主题，需要多级通配符总为主题中的最后一个字符，并且确保它前面是正斜杠。
+![多级匹配](https://i.imgur.com/Q5dircz.png)
+![多级通配符举例](https://i.imgur.com/mdUlW66.png)
+
+
+>因此对于某一个端其实只需要订阅```gaocheng/smarthome/clientid/#```
+
+###### topic的订阅方式
+* 统一订阅，然后订阅端自己过滤，如：```gaocheng/smarthome/clientid/#```
+* 按类型订阅，如：```gaocheng/smarthome/clientid/host/#```
+* 具体订阅，如：```gaocheng/smarthome/clientid/things/{uuid}```
+
+###### 内容格式
+内容部分统一用json，由于MQTT是异步通讯，在前端希望模拟出同步的表象，所以需要一些特殊的、通用标志信息。
+
+|key | value|
+| - | -| 
+|uuid | 标志一次前后端通讯过程，发布出去的uuid的与订阅返回的一致，才能表示是一个完整的请求和对应的响应过程。|
+|topic | 告诉订阅者订阅的哪个主题返回的内容。|
+|type | 事件类型。|
+|payload | 此次通讯数据的核心部分，类似http协议中的请求体，故有些人喜欢命名成body。|
+|message | 后台返回给前端显示用的。|
+
+###### 举例
+```
+{
+    "message": "添加成功",
+    "payload": {
+        "latitude": "33.33",
+        "longitude": "33.33",
+        "name": "xxx",
+        "thingUUID": "111-1-11-1-11"
+    },
+    "topic": "gaocheng/smarthome/clientid/things/add",
+    "type": "InboxAddedEvent",
+    "uuid": "90909-090909-090909"
+}
+```
+理论上来说对于每一个动作实施的对象都应该有单个和多个之分的，对应的是单个操作和批量操作,因此json数组会使用比较多，这个后期再考虑分页进行，分页也有两种方式，一种是传递开始+结尾，一种是传递开始+长度。
+
+#### 主机相关
+对主机的增删改查等及其操作。
+
+##### 1. 主机增删改查（CRUD）
+主机是一种类型的事物，比如取名叫host类型，应该有一张host类型的表来描述出主机的所有特征属性等，增删改查就是在数据库中描述出这种类型的事物出来。
+
+###### topic
+针对主机的订阅，只需要只要订阅```gaocheng/smarthome/clientid/things/host/#```
+
+|action | topic|使用场景|
+| - | -| -|
+|新增 | gaocheng/smarthome/clientid/things/host/add |用于向后台发布添加的主机信息和订阅添加成功后的推送，利用这个推送来刷新主机列表界面。如果没有这个推送，也可以实现在添加完主机之后刷新相关界面，但是作法是在添加界面添加成功后，在退出界面的时候发一个消息然后相关界面得到这个信号后刷新，就能拿到新添加的主机的信息显示出来，这种作法弊端就是只能新该手机App界面，其他人的手机App就无法更新了。|
+|删除 | gaocheng/smarthome/clientid/things/host/delete |与新增类似|
+|修改 | gaocheng/smarthome/clientid/things/host/update |与新增类似|
+|查询 | gaocheng/smarthome/clientid/things/host/get（查询多个）或者gaocheng/smarthome/clientid/things/uuid/get（查询单个） |与新增类似|
+
+###### 内容举例
+```
+{
+    "message": "添加网关",
+    "payload": [
+        {
+            "address": "凯宾斯基",
+            "latitude": "33.33",
+            "longitude": "33.33",
+            "name": "xxx",
+            "thingUUID": "111-1-11-1-11"
+        },
+        {
+            "address": "凯宾斯基",
+            "latitude": "33.33",
+            "longitude": "33.33",
+            "name": "xxx",
+            "thingUUID": "111-1-11-1-11"
+        }
+    ],
+    "topic": "gaocheng/smarthome/clientid/items/host/add",
+    "type": "ThingAddEvent",
+    "uuid": "90909-090909-090909"
+}
+```
+
+##### 2. 主机关系(bingd/unbind)
+主机这种类型的事物与其他事物产生联系一般都是与房间和传感器或者设备等。
+
+###### topic
+针对主机的订阅，只需要只要订阅```gaocheng/smarthome/clientid/things/host/#```
+
+|action | topic|使用场景|
+| - | -| -|
+|bind | gaocheng/smarthome/clientid/things/host/bind |与其他事物绑定父子关系|
+|unbind | gaocheng/smarthome/clientid/things/host/unbind |与其他事物解绑父子关系|
+
+###### 内容举例
+```
+{
+    "message": "绑定网关",
+    "payload": [
+        {
+            "children": [
+                {
+                    "childUUID": "11-11-1-1"
+                },
+                {
+                    "childUUID": "11-11-1-1"
+                }
+            ],
+            "parents": [
+                {
+                    "parentUUID": "11-11-1-1"
+                },
+                {
+                    "parentUUID": "11-11-1-1"
+                }
+            ],
+            "thingUUID": "111-1-11-1-11"
+        },
+        {
+            "children": [
+                {
+                    "childUUID": "11-11-1-1"
+                },
+                {
+                    "childUUID": "11-11-1-1"
+                }
+            ],
+            "parents": [
+                {
+                    "parentUUID": "11-11-1-1"
+                },
+                {
+                    "parentUUID": "11-11-1-1"
+                }
+            ],
+            "thingUUID": "111-1-11-1-11"
+        }
+    ],
+    "topic": "gaocheng/smarthome/clientid/things/host/bind",
+    "type": "ThingsBindEvent",
+    "uuid": "90909-090909-090909"
+}
+```
+
+##### 3. 主机操作(operation)
+针对主机这一物端的操作，即对主机的布防、撤防、设置音量、设置报警、设置留言等等。
+
+###### topic
+针对主机的订阅，只需要只要订阅```gaocheng/smarthome/clientid/things/host/read```
+
+|action | topic|使用场景|
+|- | -| -|
+|write | gaocheng/smarthome/clientid/host/write |用于向主机发送指令来操作主机，如：布防状态变更等。|
+|read |gaocheng/smarthome/clientid/host/read|用于读取主机的状态，如主机布防状态，音量设置状态等。|
+
+###### 操作内容举例
+此处能想到的有两种指令方案
+* 操作分类+对应的值，指某一个元操作（对硬件最小粒度的原子性的操作）代表一个具体的操作，然后配合对应的指来表达这一个操作。
+
+```
+例如：控制两个网关的某些功能。
+{
+    "message": "操作主机UUID",
+    "payload": [
+        {
+            "command": [
+                {
+                    "name": "defenseState",
+                    "value": "0"
+                },
+                {
+                    "name": "volume",
+                    "value": "0"
+                }
+            ],
+            "thingUUID": "99-99-99-99"
+        },
+        {
+            "command": [
+                {
+                    "name": "defenseState",
+                    "value": "0"
+                },
+                {
+                    "name": "volume",
+                    "value": "0"
+                }
+            ],
+            "thingUUID": "99-99-99-99"
+        }
+    ],
+    "topic": "gaocheng/smarthome/clientid/things/host/write",
+    "type": "ThingActionEvent",
+    "uuid": "90909-090909-090909"
+}
+```
+* 每一次发送的指令都是一个操作全集，以一个数组的形式，每一个index对应的对象就对应到一个具体的元操作，提前严格规定好。
+```
+例如：控制两个网关的某些功能。
+{
+    "message": "操作主机UUID",
+    "payload": [
+        {
+            "command": [
+                "1",
+                "2",
+                "47",
+                "开",
+                "红色"
+            ],
+            "itemUUID": "99-99-99-99"
+        },
+        {
+            "command": [
+                "1",
+                "2",
+                "47",
+                "开",
+                "红色"
+            ],
+            "itemUUID": "99-99-99-99"
+        }
+    ],
+    "topic": "gaocheng/smarthome/clientid/things/host/write",
+    "type": "ThingActionEvent",
+    "uuid": "90909-090909-090909"
+}
+```
+
+##### 传感器相关
+对传感器的相关介绍其实与主机类似。
+
+##### 设备相关
+对传感器的相关介绍其实与主机类似。
+
+##### 界面相关
+1. 消息提示：比如底部导航栏的tab勋章提示。
+2. 广告弹框：比如后台发送一个广告信息，界面会弹出一个广告弹框。
+3. 社区所有业务提示：比如物业交费，申请房屋。
+
+##### 后续的IM
+待定
+
+## 错误处理
+
+1. 不要发生了错误但给2xx响应，客户端可能会缓存成功的http请求；
+2. 正确设置http状态码，不要自定义；
+3. Response body 提供 1) 错误的代码（日志/问题追查）；2) 错误的描述文本（展示给用户）。
+
+对第三点的实现稍微多说一点：
+
+Java 服务器端一般用异常表示 RESTful API 的错误。API 可能抛出两类异常：业务异常和非业务异常。业务异常由自己的业务代码抛出，表示一个用例的前置条件不满足、业务规则冲突等，比如参数校验不通过、权限校验失败。非业务类异常表示不在预期内的问题，通常由类库、框架抛出，或由于自己的代码逻辑错误导致，比如数据库连接失败、空指针异常、除0错误等等。
+
+业务类异常必须提供2种信息：
+
+1. 如果抛出该类异常，HTTP 响应状态码应该设成什么；
+2. 异常的文本描述；
+
+在Controller层使用统一的异常拦截器：
+
+1. 设置 HTTP 响应状态码：对业务类异常，用它指定的 HTTP code；对非业务类异常，统一500；
+2. Response Body 的错误码：异常类名
+3. Response Body 的错误描述：对业务类异常，用它指定的错误文本；对非业务类异常，线上可以统一文案如“服务器端错误，请稍后再试”，开发或测试环境中用异常的 stacktrace，服务器端提供该行为的开关。
+
+常用的http状态码及使用场景：
+
+|状态码 | 使用场景|
+| - | -| 
+|400 | bad request	常用在参数校验 |
+|401 | unauthorized	未经验证的用户，常见于未登录。如果经过验证后依然没权限，应该 403（即 authentication 和 authorization 的区别）。|
+|403 | forbidden	无权限|
+|404 | not found	资源不存在|
+|500 | internal server error	非业务类异常|
+|503 | service unavaliable	由容器抛出，自己的代码不要抛这个异常|
+
+```
+错误描述
+{
+  "error": {
+    "message": "java.lang.IllegalStateException: Expected BEGIN_OBJECT but was STRING at line 1 column 1 path $",
+    "code": 500,
+    "exception": {
+      "class": "com.google.gson.JsonSyntaxException",
+      "message": "java.lang.IllegalStateException: Expected BEGIN_OBJECT but was STRING at line 1 column 1 path $",
+      "localized-message": "java.lang.IllegalStateException: Expected BEGIN_OBJECT but was STRING at line 1 column 1 path $",
+      "cause": "java.lang.IllegalStateException"
+    }
+  }
+}
+```
+
+```
+错误请求头
+{
+  "date": "Mon, 08 Jan 2018 03:07:08 GMT",
+  "server": "nginx/1.10.3 (Ubuntu)",
+  "connection": "keep-alive",
+  "content-length": "237",
+  "content-type": "application/json"
+}
+```
+
+
+
+## 接口版本（Versioning）
+个人倾向于将版本号放在HTTP/MQTT头信息中，虽然不如放入URL中更直观，但是不方便我们统一管理，因为在前端URL是拼出来的String，请求头是统一个对象去设置，除非有特殊情况，某一个接口需1.0版本，某一个接口需2.0版本，这就另当别论，到时候统一商量，在拼这个URL的时候，放到固定目录（位置），如：smarthome.aghl.com:8080<u>**/版本（一般用v1、v2）/**</u>user  统一放在一级目录，这样的前端在拼接的时候，统一放到某个位置，也就方便管理了。
+
+## URL失效
+
+随着系统发展，总有一些API失效或者迁移，对失效的API，返回404 not found 或 410 gone；对迁移的API，返回 301 重定向。
+
+## 安全
+待定
+
+### 参考
+* [http://www.ruanyifeng.com/blog/2011/09/restful.html](http://www.ruanyifeng.com/blog/2011/09/restful.html "理解RESTful架构")
+* [http://www.ruanyifeng.com/blog/2014/05/restful_api.html](http://www.ruanyifeng.com/blog/2014/05/restful_api.html "RESTful API 设计指南")
+* [https://demo.openhab.org:8443/doc/index.html](https://demo.openhab.org:8443/doc/index.html "demo")
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
