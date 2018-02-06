@@ -3,6 +3,7 @@
 >主要依赖HTTP+MQTT完成整个电商项目的前后端通讯和协作。当然只是抛砖引玉，不一定完全正确，需要大家一起商议后决定，由于不知道后台具体的表的设计如何，因此只能猜测着用url定义资源，因此url设计的路径部分会有不合理的地方，所以最好商讨、抽象出一套合理的资源路径，要注意这一点,可参考** [github接口](https://developer.github.com/v3/ "github接口") **和** [淘宝Api](http://open.taobao.com/doc2/apiList.htm "淘宝Api") **的设计。
 
 ---
+草稿
 
 https://api.github.com/
 https://developer.github.com/v3/search/#search-users
