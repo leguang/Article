@@ -17,11 +17,14 @@ https://www.zhihu.com/question/28557115
 https://www.zhihu.com/question/35210451
 
 https://leancloud.cn/dashboard/apionline/index.html
+https://github.com/Microsoft/api-guidelines
 
 首页（这个其实可以用，因为真的如果是需要首页展示的话，也应该是拼凑出来的，当我们完成了分类这个模块的内容的话，其实就只要根据分类模块获取分类列表，然后根据这个列表返回的路径，然后挨个的获取每一个分类的里的商品，就可以拼凑出一个首页的数据了。）
 
 
 对于get的列表，比如shop、product，如没有id路径，则返回的是整个表中的数据，只是需要分页而已，每一次返回20--100条。
+
+product还是得包含店铺信息
 
 ---
 
@@ -100,9 +103,9 @@ https://{serviceRoot}/{collection}/{id}
 
 ### 个性参数（该方案待定）
 个性参数就是除了公共参数之外的，看能否考虑统一用json浓缩成一个参数，把想要表达的参数通过json中的key-value形式传递。
-> 例如：https://xxx.com/ec/v1/search/product?params={keyword:方便面,order:des}
+> 例如：https://xxx.com/ec/v1/search/products?params={keyword:方便面,order:des}
 这种方式我暂时还不确定是否合理，或者考虑与业务相关的参数就用json形式包装，而与业务无关的个性参数就还是用传统的方式另立一个参数。
-> 例如：https://xxx.com/ec/v1/search/product?limit=10&offset=10&params={keyword:方便面,order:des}
+> 例如：https://xxx.com/ec/v1/search/products?limit=10&offset=10&params={keyword:方便面,order:des}
 
 ### 公共响应体
 ```
@@ -164,7 +167,7 @@ https://{serviceRoot}/{collection}/{id}
 * base url：https://xxx.com/ec/v1/
 * 注册登录（暂不考虑）
 * 搜索search
-地址：https://xxx.com/ec/v1/search/{搜索分类：如product}
+地址：https://xxx.com/ec/v1/search/{搜索分类：如products}
 参数：key、order等
 * 首页home
 地址：https://xxx.com/ec/v1/home
@@ -182,7 +185,7 @@ https://{serviceRoot}/{collection}/{id}
 地址：https://xxx.com/ec/v1/recommend
 参数：key、order等
 * 商品product
-地址：https://xxx.com/ec/v1/product/{具体商品id}
+地址：https://xxx.com/ec/v1/products/{具体商品id}
 参数：key、category、order等
 * 商铺shop
 地址：https://xxx.com/ec/v1/shop/{商铺id}
@@ -191,11 +194,7 @@ https://{serviceRoot}/{collection}/{id}
 ## 登录注册部分接口
 暂不考虑
 
-## 搜索部分接口
-1. 提取关键字接口
-2. 获取搜索结果接口
-
-### 提取关键字接口
+### 关键字部分
 提取关键字只需要“增删改查”中的“查”，所以只有GET
 > 例如：https://xxx.com/ec/v1/keyword?params={keyword:方便面,order:des}
 不传参数则获取热门搜索，或者推荐搜索，这个由于界面上限制的是最多9个，所以不需要分页操作。
@@ -259,18 +258,19 @@ Status:200 OK
 |keyword | String | 返回匹配的关键字，显示到界面上 |
 |extra | int | 作为扩展字段，比如返回当前关键字的商品个数 |
 
-### 获取搜索结果接口
-由于智能硬件和便利店搜索的内容不一样，但是数据格式一样，所以：
-* 智能硬件：https://xxx.com/ec/v1/search/smarthome?params={keyword:方便面,order:des}
-* 便利店/商场/超市：https://xxx.com/ec/v1/search/supermarket?params={keyword:方便面,order:des}
+### 搜索部分
+提取关键字只需要“增删改查”中的“查”，所以只有GET
+>由于智能硬件和便利店搜索的内容不一样，但是数据格式一样，所以：
+智能硬件：https://xxx.com/ec/v1/search/smarthome?params={keyword:方便面,order:des}
+便利店/商场/超市：https://xxx.com/ec/v1/search/shop?params={keyword:方便面,order:des}
 
-如果未来是统一的搜索的商品，那接口应为：https://xxx.com/ec/v1/search/product?params={keyword:方便面,order:des}
-不传参数是不允许的。
+如果未来统一的搜索是商品，那接口应为：https://xxx.com/ec/v1/search/products?params={keyword:方便面,order:des}
+还可以扩展一下，比如搜索用户，搜索店铺等。不传参数是不允许的。
 
 ###### 请求头
 
 ```
-GET /ec/v1/search/product
+GET /ec/v1/search/products
 Accept: application/json
 Content-Type: application/json;charset=UTF-8
 ```
@@ -302,7 +302,7 @@ Status:200 OK
             "detailUrl": "https://item.jd.com/4264502.html",
             "title": "安防小卫士",
             "description": "wifi/电话双网 您的智能小卫士",
-            "uid": "13212133313",
+            "UID": "13212133313",
             "type": "smarthome",
             "price": "589.0",
             "currency": "¥"
@@ -312,7 +312,7 @@ Status:200 OK
             "detailUrl": "https://item.jd.com/4264502.html",
             "title": "安防小卫士",
             "description": "wifi/电话双网 您的智能小卫士",
-            "uid": "13212133313",
+            "UID": "13212133313",
             "type": "smarthome",
             "price": "589.0",
             "currency": "¥"
@@ -322,7 +322,7 @@ Status:200 OK
             "detailUrl": "https://item.jd.com/4264502.html",
             "title": "安防小卫士",
             "description": "wifi/电话双网 您的智能小卫士",
-            "uid": "13212133313",
+            "UID": "13212133313",
             "type": "smarthome",
             "price": "589.0",
             "currency": "¥"
@@ -337,17 +337,810 @@ Status:200 OK
 |name | String | 该商品的名称|
 |description | String | 对商品的简单描述 |
 |uid | String | 该商品唯一识别id |
-|type | String | 表示当前商品的类型：智能家居smarthome、便利店/超市/商场supermarkey |
+|type | String | 表示当前商品的类型：智能家居smarthome、便利店/超市/商场shop |
 |price | String | 价格 |
 |currency | String | 标识币种，可以是符号，也可以是文字，看前后端的需求，也可以再立一个字段表示 |
 
-## 购物车
-## 订单
-## 首页
-## 分类
-## 推荐（考虑把这个推荐放到商品那里去，相当于不传参数）
+### 递送部分
+递送部分接口有“增删改查”
+>地址：https://xxx.com/ec/v1/delivery/{递送uid}
+
+#### 新增一条或者多条递送
+>地址：https://xxx.com/ec/v1/delivery
+
+###### 请求头
+
+```
+POST /ec/v1/delivery
+Accept: application/json
+Content-Type: application/json;charset=UTF-8
+```
+
+###### 参数
+```
+{
+    "message": "上传这几个地址",
+    "data": [
+        {
+            "name": "BeJson",
+            "gender": "male",
+            "phoneNumber": "13888888888",
+            "location": "凯宾斯基",
+            "address": "C栋801",
+            "longitude": "85.66",
+            "latitude": "36.33"
+        },
+        {
+            "name": "BeJson",
+            "gender": "male",
+            "phoneNumber": "13888888888",
+            "location": "凯宾斯基",
+            "address": "C栋801",
+            "longitude": "85.66",
+            "latitude": "36.33"
+        },
+        {
+            "name": "BeJson",
+            "gender": "male",
+            "phoneNumber": "13888888888",
+            "location": "凯宾斯基",
+            "address": "C栋801",
+            "longitude": "85.66",
+            "latitude": "36.33"
+        },
+        {
+            "name": "BeJson",
+            "gender": "male",
+            "phoneNumber": "13888888888",
+            "location": "凯宾斯基",
+            "address": "C栋801",
+            "longitude": "85.66",
+            "latitude": "36.33"
+        }
+    ]
+}
+```
+
+|params | 类型 | 描述 |
+| - | -| -|
+|name | String | 新增的这个收货人的姓名 |
+|gender | String | 性别：只能取male或者female或者secrecy，默认是不用选择性别的，也允许保存成功，没选性别就是secrecy |
+|phoneNumber | String | 电话号码 |
+|location | String | 定位地址，只是粗略地址 |
+|address | String | 详细地址 |
+|longitude | String | 经度，用于后台搜索店铺使用 |
+|latitude | String | 纬度，用于后台搜索店铺使用 |
+
+###### 响应头
+
+```
+Content-Type:application/json; charset=utf-8
+Status:200 OK
+```
+
+###### 响应
+```
+{
+    "message": "居然被你保存成功了",
+    "code": 200
+}
+```
+
+#### 删除一条或者多条递送
+* 删除一条https://xxx.com/ec/v1/delivery/{递送uid}
+* 删除多条https://xxx.com/ec/v1/delivery
+
+###### 请求头
+
+```
+DELETE /ec/v1/delivery
+Accept: application/json
+Content-Type: application/json;charset=UTF-8
+```
+
+###### 参数
+删除一条则不需要参数，因为url中已经包含了地址uid，删除多条则需要以下参数。
+```
+{
+    "message": "删除这几个递送",
+    "data": [
+        {
+            "UID": "1333644113313131"
+        },
+        {
+            "UID": "1333644113313131"
+        },
+        {
+            "UID": "1333644113313131"
+        }
+    ]
+}
+```
+
+|params | 类型 | 描述 |
+| - | -| -|
+|uid | String | 表示某条递送信息的主键 |
+
+###### 响应头
+
+```
+Content-Type:application/json; charset=utf-8
+Status:200 OK
+```
+
+###### 响应
+```
+{
+    "message": "居然被你删除成功了",
+    "code": 200
+    "data": [
+        {
+            "UID": "1333644113313131"
+        },
+        {
+            "UID": "1333644113313131"
+        },
+        {
+            "UID": "1333644113313131"
+        }
+    ]
+}
+```
+|params | 类型 | 描述 |
+| - | -| -|
+|uid | String | 表示已删除递送信息的主键 |
+
+#### 修改一条或者多条递送
+* 修改一条https://xxx.com/ec/v1/delivery/{递送uid}
+* 修改多条https://xxx.com/ec/v1/delivery
+###### 请求头
+
+```
+PUT /ec/v1/address
+Accept: application/json
+Content-Type: application/json;charset=UTF-8
+```
+
+###### 参数
+如果是修改某一条可以不传uid，因为url中已经包含uid，如果是修改多条则传一个json数组，数组中的每一个对象都得包含uid。
+```
+{
+    "message": "上传这几个递送",
+    "data": [
+        {
+            "name": "BeJson",
+            "gender": "male",
+            "phoneNumber": "13888888888",
+            "location": "凯宾斯基",
+            "UID": "655656133131313",
+            "address": "C栋801",
+            "longitude": "85.66",
+            "latitude": "36.33"
+        }
+    ]
+}
+```
+
+|params | 类型 | 描述 |
+| - | -| -|
+|name | String | 新增的这个收货人的姓名 |
+|gender | String | 性别：只能取male或者female或者secrecy，默认是不用选择性别的，也允许保存成功，没选性别就是secrecy |
+|phoneNumber | String | 电话号码 |
+|location | String | 定位地址，只是粗略地址 |
+|uid | String | 地址主键 |
+|address | String | 详细地址 |
+|longitude | String | 经度，用于后台搜索店铺使用 |
+|latitude | String | 纬度，用于后台搜索店铺使用 |
+
+###### 响应头
+
+```
+Content-Type:application/json; charset=utf-8
+Status:200 OK
+```
+
+###### 响应
+```
+{
+    "message": "居然被你修改成功了",
+    "code": 200
+    "data": [
+        {
+            "UID": "1333644113313131"
+        }
+    ]
+}
+```
+|params | 类型 | 描述 |
+| - | -| -|
+|uid | String | 表示已修改递送信息的主键 |
+
+#### 查询一条或者多条递送
+* 查询一条https://xxx.com/ec/v1/delivery/{递送uid}
+* 查询多条https://xxx.com/ec/v1/delivery
+###### 请求头
+
+```
+GET /ec/v1/delivery
+Accept: application/json
+Content-Type: application/json;charset=UTF-8
+```
+
+###### 参数
+如果是查询某一条递送时，由于uid已经在url上，所以返回一条指定递送数据。
+
+###### 响应头
+
+```
+Content-Type:application/json; charset=utf-8
+Status:200 OK
+```
+
+###### 响应
+```
+{
+    "message": "居然被你查询成功了",
+    "code": "200",
+    "data": [
+        {
+            "name": "BeJson",
+            "UID": "655656133131313",
+            "gender": "male",
+            "phoneNumber": "13888888888",
+            "location": "凯宾斯基",
+            "address": "C栋801",
+            "longitude": "85.66",
+            "latitude": "36.33"
+        },
+        {
+            "name": "BeJson",
+            "UID": "655656133131313",
+            "gender": "male",
+            "phoneNumber": "13888888888",
+            "location": "凯宾斯基",
+            "address": "C栋801",
+            "longitude": "85.66",
+            "latitude": "36.33"
+        },
+        {
+            "name": "BeJson",
+            "UID": "655656133131313",
+            "gender": "male",
+            "phoneNumber": "13888888888",
+            "location": "凯宾斯基",
+            "address": "C栋801",
+            "longitude": "85.66",
+            "latitude": "36.33"
+        },
+        {
+            "name": "BeJson",
+            "UID": "655656133131313",
+            "gender": "male",
+            "phoneNumber": "13888888888",
+            "location": "凯宾斯基",
+            "address": "C栋801",
+            "longitude": "85.66",
+            "latitude": "36.33"
+        }
+    ]
+}
+```
+
+|params | 类型 | 描述 |
+| - | -| -|
+|name | String | 新增的这个收货人的姓名 |
+|gender | String | 性别：只能取male或者female或者secrecy，默认是不用选择性别的，也允许保存成功，没选性别就是secrecy |
+|phoneNumber | String | 电话号码 |
+|location | String | 定位地址，只是粗略地址 |
+|uid | String | 地址主键 |
+|address | String | 详细地址 |
+|longitude | String | 经度，用于后台搜索店铺使用 |
+|latitude | String | 纬度，用于后台搜索店铺使用 |
+
+### 订单部分
+订单部分接口有“增删改查”中的增、删、查。
+> 地址：https://xxx.com/ec/v1/orders/{订单uid}
+
+#### 新增一条或者多条订单
+> 地址：https://xxx.com/ec/v1/orders
+
+###### 请求头
+
+```
+POST /ec/v1/orders
+Accept: application/json
+Content-Type: application/json;charset=UTF-8
+```
+
+###### 参数
+```
+{
+    "message": "上传这几个订单",
+    "data": [
+        {
+            "deliveryUid": "6666565656",
+            "note": "带一个勺子",
+            "products": [
+                {
+                    "uid": "13212133313",
+                    "amount": "5"
+                },
+                {
+                    "uid": "13212133313",
+                    "amount": "5"
+                }
+            ]
+        },
+        {
+            "deliveryUid": "6666565656",
+            "note": "带一个勺子",
+            "products": [
+                {
+                    "uid": "13212133313",
+                    "amount": "5"
+                },
+                {
+                    "uid": "13212133313",
+                    "amount": "5"
+                }
+            ]
+        }
+    ]
+}
+```
+
+|params | 类型 | 描述 |
+| - | -| -|
+|deliveryUid | String | 递送信息的主键，由这个ID可以查询递送信息，包括人的信息和地址信息 |
+|note | String | 留言 |
+|uid | String | 商品主键 |
+|amount | String | 商品个数 |
+
+###### 响应头
+
+```
+Content-Type:application/json; charset=utf-8
+Status:200 OK
+```
+
+###### 响应
+此处返回支付的统一订单信息。
+**这里有待商榷，看你们是想在这一步就生成统一订单去支付，还是先上传成功后，返回订单id，然后再用这个订单id去请求支付接口。**
+
+```
+{
+    "message": "居然被你保存成功了",
+    "code": 200,
+    "date": {
+       返回支付信息还是订单信息有待商榷
+    }
+}
+```
+以下为我暂时考虑的
+```
+{
+    "message": "居然被你保存成功了",
+    "code": 200,
+    "date": {
+        "uid": "33331313"
+    }
+}
+```
+|params | 类型 | 描述 |
+| - | -| -|
+|uid | String | 订单主键，根据这个主键可以查询该订单的详细信息 |
+
+#### 删除一条或者多条订单
+> 地址：https://xxx.com/ec/v1/orders
+
+###### 请求头
+
+```
+DELETE /ec/v1/orders
+Accept: application/json
+Content-Type: application/json;charset=UTF-8
+```
+
+###### 参数
+如果是删除某一个，则不需要参数，只需要接口改成https://xxx.com/ec/v1/orders/{订单uid}即可。
+```
+{
+    "message": "删除这几个订单",
+    "data": [
+        {
+            "uid": "13212133313"
+        },
+        {
+            "uid": "13212133313"
+        }
+    ]
+}
+```
+
+|params | 类型 | 描述 |
+| - | -| -|
+|uid | String | 订单主键 |
+
+###### 响应头
+
+```
+Content-Type:application/json; charset=utf-8
+Status:200 OK
+```
+
+###### 响应
+```
+{
+    "message": "居然被你删除成功了",
+    "code": 200,
+    "date": [
+        {
+            "uid": "33331313"
+        },
+        {
+            "uid": "33331313"
+        }
+    ]
+}
+```
+| params | 类型 | 描述 |
+| - | -| - |
+|uid | String | 已经删除的订单主键 |
+
+#### 查询一条或者多条订单
+* 查询一条https://xxx.com/ec/v1/orders/{订单uid}
+* 查询多条https://xxx.com/ec/v1/orders
+
+###### 请求头
+
+```
+GET /ec/v1/orders
+Accept: application/json
+Content-Type: application/json;charset=UTF-8
+```
+
+###### 参数
+不传参数表达查询全部。
+```
+?params={state:0}
+```
+
+|params | 类型 | 描述 |
+| - | -| -|
+|state | String | 0表示待付款，1表示待收货，2表示退款/售后 |
+
+###### 响应头
+
+```
+Content-Type:application/json; charset=utf-8
+Status:200 OK
+```
+
+###### 响应
+
+```
+{
+    "message": "居然被你查询成功了",
+    "code": "200",
+    "data": [
+        {
+            "shopName": "克拉家园便利店",
+            "shopUID": "656461778373",
+            "shopType": "shop",
+            "amount": "2",
+            "state": "0",
+            "cost": "10",
+            "name": "黄沙",
+            "gender": "male",
+            "note": "带一个勺子",
+            "phoneNumber": "13888888888",
+            "location": "凯宾斯基",
+            "address": "C栋801",
+            "longitude": "85.66",
+            "latitude": "36.33",
+            "products": [
+                {
+                    "imageUrl": "http://ww3.sinaimg.cn/large/0060lm7Tly1fo6vt0p500j30af0ad758.jpg",
+                    "detailUrl": "https://item.jd.com/4264502.html",
+                    "title": "优乐美奶茶",
+                    "description": "wifi/电话双网 您的智能小卫士",
+                    "uid": "13212133313",
+                    "price": "5.0",
+                    "currency": "¥"
+                },
+                {
+                    "imageUrl": "http://ww3.sinaimg.cn/large/0060lm7Tly1fo6vt0p500j30af0ad758.jpg",
+                    "detailUrl": "https://item.jd.com/4264502.html",
+                    "title": "安防小卫士",
+                    "description": "wifi/电话双网 您的智能小卫士",
+                    "uid": "13212133313",
+                    "type": "smarthome",
+                    "price": "589.0",
+                    "currency": "¥"
+                }
+            ]
+        },
+        {
+            "shopName": "克拉家园便利店",
+            "shopUID": "656461778373",
+            "shopType": "shop",
+            "amount": "2",
+            "state": "0",
+            "cost": "10",
+            "name": "黄沙",
+            "gender": "male",
+            "note": "带一个勺子",
+            "phoneNumber": "13888888888",
+            "location": "凯宾斯基",
+            "address": "C栋801",
+            "longitude": "85.66",
+            "latitude": "36.33",
+            "products": [
+                {
+                    "imageUrl": "http://ww3.sinaimg.cn/large/0060lm7Tly1fo6vt0p500j30af0ad758.jpg",
+                    "detailUrl": "https://item.jd.com/4264502.html",
+                    "title": "优乐美奶茶",
+                    "description": "wifi/电话双网 您的智能小卫士",
+                    "uid": "13212133313",
+                    "price": "5.0",
+                    "currency": "¥"
+                },
+                {
+                    "imageUrl": "http://ww3.sinaimg.cn/large/0060lm7Tly1fo6vt0p500j30af0ad758.jpg",
+                    "detailUrl": "https://item.jd.com/4264502.html",
+                    "title": "安防小卫士",
+                    "description": "wifi/电话双网 您的智能小卫士",
+                    "uid": "13212133313",
+                    "type": "smarthome",
+                    "price": "589.0",
+                    "currency": "¥"
+                }
+            ]
+        }
+    ]
+}
+```
+|params | 类型 | 描述 |
+| - | -| -|
+|shopName | String | 店铺名称 |
+|shopUID | String | 店铺主键，可以通过这个主键查询店铺详情 |
+|shopType | String | 店铺类型 |
+|amount | String | 该订单中包含的商品个数 |
+|state | String | 该订单处于什么状态，0表示待付款，1表示待收货，2表示退款/售后 |
+|cost | String | 该订单总共需要付款数 |
+|name | String | 收货人的姓名 |
+|gender | String | 性别：只能取male或者female或者secrecy，默认是不用选择性别的，也允许保存成功，没选性别就是secrecy |
+|phoneNumber | String | 电话号码 |
+|location | String | 定位地址，只是粗略地址 |
+|address | String | 详细地址 |
+|longitude | String | 经度，用于后台搜索店铺使用 |
+|latitude | String | 纬度，用于后台搜索店铺使用 |
+|imageUrl | String | 该商品缩略图url |
+|detailUrl | String | 跳转到该商品详情页的web url|
+|name | String | 该商品的名称|
+|description | String | 对商品的简单描述 |
+|uid | String | 该商品唯一识别id |
+|type | String | 表示当前商品的类型：智能家居smarthome、便利店/超市/商场shop |
+|price | String | 价格 |
+|currency | String | 标识币种，可以是符号，也可以是文字，看前后端的需求，也可以再立一个字段表示 |
+
+### 分类部分
+分类部分接口只需要“增删改查”中的“查”，所以只有GET
+> 例如：https://xxx.com/ec/v1/categories/{分类uid}
+
+###### 请求头
+
+```
+GET /ec/v1/categories
+Accept: application/json
+Content-Type: application/json;charset=UTF-8
+```
+
+###### 参数
+不传参数则默认是返回一级分类。
+>?params={uid:1313113,keyword:方便面,order:des}
+
+|params | 类型 | 描述 |
+| - | -| - |
+|uid | String | 某分类主键 |
+|keyword | String | 查询的关键字 |
+|order | String | 默认值为des，值为des表示降序，值为asc表示升序|
+
+###### 响应头
+
+```
+Content-Type:application/json; charset=utf-8
+Status:200 OK
+```
+
+###### 响应
+```
+{
+	"uid": "516165654656"
+    "message": "居然被你查询成功了",
+    "code": 200,
+    "data": [
+        {
+            "category": "智能主机",
+            "uid": "516165654656"
+        },
+        {
+            "category": "智能门锁",
+            "uid": "516165654656"
+        },
+        {
+            "category": "智能配件",
+            "uid": "516165654656"
+        }
+    ]
+}
+```
+|key | 类型 | 描述 |
+| - | -| -|
+|category | String | 种类名称 |
+|uid | String | 种类主键，**外层json中的uid表示其父分类的uid，如果是一级分类，则其父分类uid可以为空字符串** |
+
+### 商品（产品）部分
+商品部分接口只需要“增删改查”中的“查”，所以只有GET
+> 例如：https://xxx.com/ec/v1/products/{商品uid}
+
+#### 商品列表
+> 例如：https://xxx.com/ec/v1/products
+###### 请求头
+
+```
+GET /ec/v1/products
+Accept: application/json
+Content-Type: application/json;charset=UTF-8
+```
+
+###### 参数
+不传参数则默认返回的是根据系统推荐的产品，对应的业务是“为您推荐”。
+>?params={category:1313113}
+
+|params | 类型 | 描述 |
+| - | - | - |
+|category | String | 某分类主键 |
+
+###### 响应头
+
+```
+Content-Type:application/json; charset=utf-8
+Status:200 OK
+```
+
+###### 响应
+```
+{
+    "message": "居然被你查询成功了",
+    "code": 200,
+    "data": [
+        {
+            "imageUrl": "http://ww3.sinaimg.cn/large/0060lm7Tly1fo6vt0p500j30af0ad758.jpg",
+            "detailUrl": "https://item.jd.com/4264502.html",
+            "title": "安防小卫士",
+            "description": "wifi/电话双网 您的智能小卫士",
+            "UID": "13212133313",
+            "type": "smarthome",
+            "price": "589.0",
+            "currency": "¥"
+        },
+        {
+            "imageUrl": "http://ww3.sinaimg.cn/large/0060lm7Tly1fo6vt0p500j30af0ad758.jpg",
+            "detailUrl": "https://item.jd.com/4264502.html",
+            "title": "安防小卫士",
+            "description": "wifi/电话双网 您的智能小卫士",
+            "UID": "13212133313",
+            "type": "smarthome",
+            "price": "589.0",
+            "currency": "¥"
+        },
+        {
+            "imageUrl": "http://ww3.sinaimg.cn/large/0060lm7Tly1fo6vt0p500j30af0ad758.jpg",
+            "detailUrl": "https://item.jd.com/4264502.html",
+            "title": "安防小卫士",
+            "description": "wifi/电话双网 您的智能小卫士",
+            "UID": "13212133313",
+            "type": "smarthome",
+            "price": "589.0",
+            "currency": "¥"
+        }
+    ]
+}
+```
+|key | 类型 | 描述 |
+| - | -| -|
+|imageUrl | String | 该商品缩略图url |
+|detailUrl | String | 跳转到该商品详情页的web url|
+|name | String | 该商品的名称|
+|description | String | 对商品的简单描述 |
+|uid | String | 该商品唯一识别id |
+|type | String | 表示当前商品的类型：智能家居smarthome、便利店/超市/商场shop |
+|price | String | 价格 |
+|currency | String | 标识币种，可以是符号，也可以是文字，看前后端的需求，也可以再立一个字段表示 |
+
+#### 商品详情
+> 例如：https://xxx.com/ec/v1/products/65464131
+###### 请求头
+
+```
+GET /ec/v1/products
+Accept: application/json
+Content-Type: application/json;charset=UTF-8
+```
+
+###### 参数
+不需要传参数。
+
+###### 响应头
+
+```
+Content-Type:application/json; charset=utf-8
+Status:200 OK
+```
+
+###### 响应
+```
+{
+    "message": "居然被你查询成功了",
+    "code": 200,
+    "data": [
+        {
+            "imageUrl": "http://ww3.sinaimg.cn/large/0060lm7Tly1fo6vt0p500j30af0ad758.jpg",
+            "detailUrl": "https://item.jd.com/4264502.html",
+            "title": "巧克力豆",
+            "currency": "¥",
+            "description": "500g/包",
+            "uid": "4264502",
+            "type": "shop",
+            "price": "589.0",
+            "categories": [
+                {
+                    "category": "便利店",
+                    "uid": "656656565"
+                },
+                {
+                    "category": "糖果",
+                    "uid": "656656565"
+                },
+                {
+                    "category": "巧克力",
+                    "uid": "656656565"
+                }
+            ],
+            "images": [
+                {
+                    "iamge": "00.jpg",
+                    "url": "http://ww3.sinaimg.cn/large/0060lm7Tly1fo6vt0p500j30af0ad758.jpg"
+                },
+                {
+                    "iamge": "01.jpg",
+                    "url": "http://ww3.sinaimg.cn/large/0060lm7Tly1fo6vt0p500j30af0ad758.jpg"
+                },
+                {
+                    "iamge": "02.jpg",
+                    "url": "http://ww3.sinaimg.cn/large/0060lm7Tly1fo6vt0p500j30af0ad758.jpg"
+                }
+            ]
+        }
+    ]
+}
+```
+|key | 类型 | 描述 |
+| - | -| -|
+|imageUrl | String | 该商品缩略图url |
+|detailUrl | String | 跳转到该商品详情页的web url|
+|name | String | 该商品的名称|
+|description | String | 对商品的简单描述 |
+|uid | String | 该商品唯一识别id |
+|type | String | 表示当前商品的类型：智能家居smarthome、便利店/超市/商场shop |
+|price | String | 价格 |
+|currency | String | 标识币种，可以是符号，也可以是文字，看前后端的需求，也可以再立一个字段表示 |
+|categories | String | 该商品的标签，也就是所属的分类列表 |
+|images | String | 该商品的详情系列图片 |
+
 ## 商铺
-## 商品
+
 
 
 ## MQTT部分
