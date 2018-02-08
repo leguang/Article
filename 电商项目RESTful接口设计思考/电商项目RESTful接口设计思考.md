@@ -3,28 +3,7 @@
 >主要依赖HTTP+MQTT完成整个电商项目的前后端通讯和协作。当然只是抛砖引玉，不一定完全正确，需要大家一起商议后决定，由于不知道后台具体的表的设计如何，因此只能猜测着用url定义资源，因此url设计的路径部分会有不合理的地方，所以最好商讨、抽象出一套合理的资源路径，要注意这一点,可参考** [github接口](https://developer.github.com/v3/ "github接口") **和** [淘宝Api](http://open.taobao.com/doc2/apiList.htm "淘宝Api") **的设计。
 
 ---
-草稿
 
-https://api.github.com/
-https://developer.github.com/v3/search/#search-users
-http://open.taobao.com/docs/api_list.htm?spm=a219a.7629140.0.0.Z2srrA
-http://www.infoq.com/cn/articles/webber-rest-workflow/
-https://www.zhihu.com/question/27785028
-http://www.infoq.com/cn/articles/webber-rest-workflow/
-https://www.jianshu.com/p/0ede793d41cc
-http://wiki.jikexueyuan.com/project/github-developer-guides/getting-started.html
-https://www.zhihu.com/question/28557115
-https://www.zhihu.com/question/35210451
-
-https://leancloud.cn/dashboard/apionline/index.html
-https://github.com/Microsoft/api-guidelines
-
-首页（这个其实可以用，因为真的如果是需要首页展示的话，也应该是拼凑出来的，当我们完成了分类这个模块的内容的话，其实就只要根据分类模块获取分类列表，然后根据这个列表返回的路径，然后挨个的获取每一个分类的里的商品，就可以拼凑出一个首页的数据了。）
-
-
-对于get的列表，比如shop、product，如没有id路径，则返回的是整个表中的数据，只是需要分页而已，每一次返回20--100条。
-
-product还是得包含店铺信息
 
 ---
 
@@ -159,7 +138,7 @@ https://{serviceRoot}/{collection}/{id}
 |500|内部服务器错误。|
 
 ### 电商项目url预览
-![url预览](https://i.imgur.com/yTzDLVC.png)
+![url预览](https://i.imgur.com/eGCmMFt.png)
 
 站在数据的角度，若想满足7大模块的功能需求，可以将接口分成如下几类：
 * base url：https://xxx.com/ec/v1/
@@ -168,7 +147,7 @@ https://{serviceRoot}/{collection}/{id}
 |分类|接口|参数|
 | - | -| - |
 |搜索search|https://xxx.com/ec/v1/search/{搜索分类：如products}|keyword、order等|
-|首页home|https://xxx.com/ec/v1/home|key、order等|keyword、category等|
+|首页home|https://xxx.com/ec/v1/home|keyword、category等|
 |配送delivery|https://xxx.com/ec/v1/address/{配送uid}|keyword、order、name、address、phone等|
 |分类（或者叫“更多”）category|https://xxx.com/ec/v1/category/{种类名称或者id，包括具体的种类和子种类}|keyword、order等|
 |订单order|https://xxx.com/ec/v1/order/{订单uid}|keyword、sort、order、productID等|
@@ -176,8 +155,8 @@ https://{serviceRoot}/{collection}/{id}
 |商铺shop|https://xxx.com/ec/v1/shop/{商铺uid}|keyword、order等|
 |搜索search|https://xxx.com/ec/v1/search/{搜索分类：如products}|keyword、order等|
 
-### 登录注册部分接口
-暂不考虑
+### ~~登录注册部分接口~~
+~~暂不考虑~~
 
 ### 关键字部分
 提取关键字只需要“增删改查”中的“查”，所以只有GET
@@ -287,7 +266,7 @@ Status:200 OK
             "detailUrl": "https://item.jd.com/4264502.html",
             "title": "安防小卫士",
             "description": "wifi/电话双网 您的智能小卫士",
-            "UID": "13212133313",
+            "uid": "13212133313",
             "type": "smarthome",
             "price": "589.0",
             "currency": "¥"
@@ -297,7 +276,7 @@ Status:200 OK
             "detailUrl": "https://item.jd.com/4264502.html",
             "title": "安防小卫士",
             "description": "wifi/电话双网 您的智能小卫士",
-            "UID": "13212133313",
+            "uid": "13212133313",
             "type": "smarthome",
             "price": "589.0",
             "currency": "¥"
@@ -307,7 +286,7 @@ Status:200 OK
             "detailUrl": "https://item.jd.com/4264502.html",
             "title": "安防小卫士",
             "description": "wifi/电话双网 您的智能小卫士",
-            "UID": "13212133313",
+            "uid": "13212133313",
             "type": "smarthome",
             "price": "589.0",
             "currency": "¥"
@@ -430,13 +409,13 @@ Content-Type: application/json;charset=UTF-8
     "message": "删除这几个递送",
     "data": [
         {
-            "UID": "1333644113313131"
+            "uid": "1333644113313131"
         },
         {
-            "UID": "1333644113313131"
+            "uid": "1333644113313131"
         },
         {
-            "UID": "1333644113313131"
+            "uid": "1333644113313131"
         }
     ]
 }
@@ -460,13 +439,13 @@ Status:200 OK
     "code": 200
     "data": [
         {
-            "UID": "1333644113313131"
+            "uid": "1333644113313131"
         },
         {
-            "UID": "1333644113313131"
+            "uid": "1333644113313131"
         },
         {
-            "UID": "1333644113313131"
+            "uid": "1333644113313131"
         }
     ]
 }
@@ -569,7 +548,7 @@ Status:200 OK
     "data": [
         {
             "name": "BeJson",
-            "UID": "655656133131313",
+            "uid": "655656133131313",
             "gender": "male",
             "phoneNumber": "13888888888",
             "location": "凯宾斯基",
@@ -579,7 +558,7 @@ Status:200 OK
         },
         {
             "name": "BeJson",
-            "UID": "655656133131313",
+            "uid": "655656133131313",
             "gender": "male",
             "phoneNumber": "13888888888",
             "location": "凯宾斯基",
@@ -589,7 +568,7 @@ Status:200 OK
         },
         {
             "name": "BeJson",
-            "UID": "655656133131313",
+            "uid": "655656133131313",
             "gender": "male",
             "phoneNumber": "13888888888",
             "location": "凯宾斯基",
@@ -599,7 +578,7 @@ Status:200 OK
         },
         {
             "name": "BeJson",
-            "UID": "655656133131313",
+            "uid": "655656133131313",
             "gender": "male",
             "phoneNumber": "13888888888",
             "location": "凯宾斯基",
@@ -1069,46 +1048,48 @@ Status:200 OK
 {
     "message": "居然被你查询成功了",
     "code": 200,
-    "data": [
-        {
-            "imageUrl": "http://ww3.sinaimg.cn/large/0060lm7Tly1fo6vt0p500j30af0ad758.jpg",
-            "detailUrl": "https://item.jd.com/4264502.html",
-            "title": "巧克力豆",
-            "currency": "¥",
-            "description": "500g/包",
-            "uid": "4264502",
+    "data": {
+        "imageUrl": "http://ww3.sinaimg.cn/large/0060lm7Tly1fo6vt0p500j30af0ad758.jpg",
+        "detailUrl": "https://item.jd.com/4264502.html",
+        "title": "巧克力豆",
+        "currency": "¥",
+        "description": "500g/包",
+        "uid": "4264502",
+        "price": "589.0",
+        "shop": {
+            "name": "克拉家园店",
             "type": "shop",
-            "price": "589.0",
-            "categories": [
-                {
-                    "category": "便利店",
-                    "uid": "656656565"
-                },
-                {
-                    "category": "糖果",
-                    "uid": "656656565"
-                },
-                {
-                    "category": "巧克力",
-                    "uid": "656656565"
-                }
-            ],
-            "images": [
-                {
-                    "iamge": "00.jpg",
-                    "url": "http://ww3.sinaimg.cn/large/0060lm7Tly1fo6vt0p500j30af0ad758.jpg"
-                },
-                {
-                    "iamge": "01.jpg",
-                    "url": "http://ww3.sinaimg.cn/large/0060lm7Tly1fo6vt0p500j30af0ad758.jpg"
-                },
-                {
-                    "iamge": "02.jpg",
-                    "url": "http://ww3.sinaimg.cn/large/0060lm7Tly1fo6vt0p500j30af0ad758.jpg"
-                }
-            ]
-        }
-    ]
+            "uid": "54545454545"
+        },
+        "categories": [
+            {
+                "category": "便利店",
+                "uid": "656656565"
+            },
+            {
+                "category": "糖果",
+                "uid": "656656565"
+            },
+            {
+                "category": "巧克力",
+                "uid": "656656565"
+            }
+        ],
+        "images": [
+            {
+                "iamge": "00.jpg",
+                "url": "http://ww3.sinaimg.cn/large/0060lm7Tly1fo6vt0p500j30af0ad758.jpg"
+            },
+            {
+                "iamge": "01.jpg",
+                "url": "http://ww3.sinaimg.cn/large/0060lm7Tly1fo6vt0p500j30af0ad758.jpg"
+            },
+            {
+                "iamge": "02.jpg",
+                "url": "http://ww3.sinaimg.cn/large/0060lm7Tly1fo6vt0p500j30af0ad758.jpg"
+            }
+        ]
+    }
 }
 ```
 |key | 类型 | 描述 |
@@ -1117,7 +1098,7 @@ Status:200 OK
 |detailUrl | String | 跳转到该商品详情页的web url|
 |name | String | 该商品的名称|
 |description | String | 对商品的简单描述 |
-|uid | String | 该商品唯一识别id |
+|uid | String | 最外层为该商品主键，shop内的uid为商铺uid，categories中uid为分类主键 |
 |type | String | 表示当前商品的类型：智能家居smarthome、便利店/超市/商场shop |
 |price | String | 价格 |
 |currency | String | 标识币种，可以是符号，也可以是文字，看前后端的需求，也可以再立一个字段表示 |
@@ -1292,7 +1273,24 @@ Java 服务器端一般用异常表示 RESTful API 的错误。API 可能抛出�
 * http://open.taobao.com/docs/api_list.htm?spm=a219a.7629140.0.0.Z2srrA
 
 
+草稿，后期参数
+https://api.github.com/
+https://developer.github.com/v3/search/#search-users
+http://open.taobao.com/docs/api_list.htm?spm=a219a.7629140.0.0.Z2srrA
+http://www.infoq.com/cn/articles/webber-rest-workflow/
+https://www.zhihu.com/question/27785028
+http://www.infoq.com/cn/articles/webber-rest-workflow/
+https://www.jianshu.com/p/0ede793d41cc
+http://wiki.jikexueyuan.com/project/github-developer-guides/getting-started.html
+https://www.zhihu.com/question/28557115
+https://www.zhihu.com/question/35210451
 
+https://leancloud.cn/dashboard/apionline/index.html
+https://github.com/Microsoft/api-guidelines
+
+首页（这个其实可以用，因为真的如果是需要首页展示的话，也应该是拼凑出来的，当我们完成了分类这个模块的内容的话，其实就只要根据分类模块获取分类列表，然后根据这个列表返回的路径，然后挨个的获取每一个分类的里的商品，就可以拼凑出一个首页的数据了。）
+
+product还是得包含店铺信息，因为订单可以点击到店铺，但是这个也可以不需要包含，因为生成的订单那个数据是来自详情的，详情可以有店铺信息
 
 
 
