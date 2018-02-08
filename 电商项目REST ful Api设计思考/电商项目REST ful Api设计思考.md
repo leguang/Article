@@ -113,9 +113,7 @@ https://{serviceRoot}/{collection}/{id}
     "message": "居然被你查询成功了",
     "code": 200,
     "data": {
-        "latitude": "33.33",
-        "longitude": "33.33",
-        "name": "xxx"
+        "uid": "6565656565665"
     }
 }
 ```
@@ -124,6 +122,7 @@ https://{serviceRoot}/{collection}/{id}
 |message | String | 返回给接口调用者的描述，有可能用于显示到界面上，需要进行国际化处理 |
 |code | int | 这个与请求头中的状态码一致，是为了满足部分开发者的习惯 |
 |data | object | 当前接口的具体数据由该json对象承载 |
+|uid | String | **对于每一个资源对象，在返回的时候，都应该返回操作这个资源对象的唯一码** |
 
 ### HTTP动词表示操作。
 常用的HTTP动词有下面五个（括号里是对应的SQL命令）。
@@ -1139,8 +1138,83 @@ Status:200 OK
 |categories | String | 该商品的标签，也就是所属的分类列表 |
 |images | String | 该商品的详情系列图片 |
 
-## 商铺
+## 商铺部分
+商铺接口只需要“增删改查”中的“查”，所以只有GET
+> 例如：https://xxx.com/ec/v1/shop/{商铺uid}
 
+###### 请求头
+
+```
+GET /ec/v1/shop
+Accept: application/json
+Content-Type: application/json;charset=UTF-8
+```
+
+###### 参数
+* 不传任何参数则返回全部商铺。
+* 对于接口https://xxx.com/ec/v1/shop/734237982375则不需要传参数，返回商铺详情。
+
+```
+?params={longitude:25.53,latitude:65.36}
+```
+
+|params | 类型 | 描述 |
+| - | -| -|
+|longitude | String | 以当前经纬度为中心搜索周边店铺 |
+|latitude | String | 以当前经纬度为中心搜索周边店铺 |
+
+###### 响应头
+
+```
+Content-Type:application/json; charset=utf-8
+Status:200 OK
+```
+
+###### 响应
+```
+{
+    "message": "居然被你查询成功了",
+    "code": 200,
+    "data": [
+        {
+            "uid": "56565665656",
+            "name": "云山凯宾斯基店",
+            "address": "惠州市云山西路2号凯宾斯基C座301-302",
+            "time": "09:00-24:00",
+            "url": "http://ww3.sinaimg.cn/large/0060lm7Tly1fo6vt0p500j30af0ad758.jpg",
+            "longitude": "85.66",
+            "latitude": "36.33"
+        },
+        {
+            "uid": "56565665656",
+            "name": "云山凯宾斯基店",
+            "address": "惠州市云山西路2号凯宾斯基C座301-302",
+            "time": "09:00-24:00",
+            "url": "http://ww3.sinaimg.cn/large/0060lm7Tly1fo6vt0p500j30af0ad758.jpg",
+            "longitude": "85.66",
+            "latitude": "36.33"
+        },
+        {
+            "uid": "56565665656",
+            "name": "云山凯宾斯基店",
+            "address": "惠州市云山西路2号凯宾斯基C座301-302",
+            "time": "09:00-24:00",
+            "url": "http://ww3.sinaimg.cn/large/0060lm7Tly1fo6vt0p500j30af0ad758.jpg",
+            "longitude": "85.66",
+            "latitude": "36.33"
+        }
+    ]
+}
+```
+|key | 类型 | 描述 |
+| - | -| -|
+|uid | String | 该店铺的主键 |
+|name | String | 店铺的名称 |
+|address | String | 该店铺地址 |
+|time | String | 营业时间 |
+|url | String | icon的url |
+|longitude | String | 该店铺的经度 |
+|latitude | String | 该店铺的纬度 |
 
 
 ## MQTT部分
