@@ -144,12 +144,12 @@ https://{serviceRoot}/{collection}/{id}
 | - | -| - |
 |搜索search|https://xxx.com/ec/v1/search/{搜索分类：如products}|keyword、order等|
 |首页home|https://xxx.com/ec/v1/home|keyword、category等|
-|配送delivery|https://xxx.com/ec/v1/address/{配送uid}|keyword、order、name、address、phone等|
+|配送delivery|https://xxx.com/ec/v1/delivery/{配送uid}|keyword、order、name、address、phone等|
 |分类（或者叫“更多”）category|https://xxx.com/ec/v1/category/{种类名称或者id，包括具体的种类和子种类}|keyword、order等|
 |订单order|https://xxx.com/ec/v1/order/{订单uid}|keyword、sort、order、productID等|
 |商品product|https://xxx.com/ec/v1/products/{具体商品uid}|keyword、category、order等
 |商铺shop|https://xxx.com/ec/v1/shop/{商铺uid}|keyword、order等|
-|搜索search|https://xxx.com/ec/v1/search/{搜索分类：如products}|keyword、order等|
+|关键字keyword|地址：https://xxx.com/ec/v1/keyword/{具体关键字}|keyword、order等|
 
 ### ~~登录注册部分接口~~
 ~~暂不考虑~~
