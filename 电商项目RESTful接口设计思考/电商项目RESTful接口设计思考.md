@@ -162,35 +162,21 @@ https://{serviceRoot}/{collection}/{id}
 ![url预览](https://i.imgur.com/yTzDLVC.png)
 
 站在数据的角度，若想满足7大模块的功能需求，可以将接口分成如下几类：
-
 * base url：https://xxx.com/ec/v1/
 * 注册登录（暂不考虑）
-* 搜索search
-地址：https://xxx.com/ec/v1/search/{搜索分类：如products}
-参数：key、order等
-* 首页home
-地址：https://xxx.com/ec/v1/home
-参数：key、category等
-* 地址address
-地址：https://xxx.com/ec/v1/address/{地址id}
-参数：key、order、name、address、phone等
-* 分类（或者叫“更多”）category
-地址：https://xxx.com/ec/v1/category/{种类名称或者id，包括具体的种类和子种类}
-参数：key、order等
-* 订单order
-地址：https://xxx.com/ec/v1/order/{orderID}
-参数：key、sort、order、productID等
-* 商品推荐recommend
-地址：https://xxx.com/ec/v1/recommend
-参数：key、order等
-* 商品product
-地址：https://xxx.com/ec/v1/products/{具体商品id}
-参数：key、category、order等
-* 商铺shop
-地址：https://xxx.com/ec/v1/shop/{商铺id}
-参数：key、order等
 
-## 登录注册部分接口
+|分类|接口|参数|
+| - | -| - |
+|搜索search|https://xxx.com/ec/v1/search/{搜索分类：如products}|keyword、order等|
+|首页home|https://xxx.com/ec/v1/home|key、order等|keyword、category等|
+|配送delivery|https://xxx.com/ec/v1/address/{配送uid}|keyword、order、name、address、phone等|
+|分类（或者叫“更多”）category|https://xxx.com/ec/v1/category/{种类名称或者id，包括具体的种类和子种类}|keyword、order等|
+|订单order|https://xxx.com/ec/v1/order/{订单uid}|keyword、sort、order、productID等|
+|商品product|https://xxx.com/ec/v1/products/{具体商品uid}|keyword、category、order等
+|商铺shop|https://xxx.com/ec/v1/shop/{商铺uid}|keyword、order等|
+|搜索search|https://xxx.com/ec/v1/search/{搜索分类：如products}|keyword、order等|
+
+### 登录注册部分接口
 暂不考虑
 
 ### 关键字部分
