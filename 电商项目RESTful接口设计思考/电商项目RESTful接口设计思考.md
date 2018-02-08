@@ -149,7 +149,7 @@ https://{serviceRoot}/{collection}/{id}
 |订单order|https://xxx.com/ec/v1/order/{订单uid}|keyword、sort、order、productID等|
 |商品product|https://xxx.com/ec/v1/products/{具体商品uid}|keyword、category、order等
 |商铺shop|https://xxx.com/ec/v1/shop/{商铺uid}|keyword、order等|
-|关键字keyword|地址：https://xxx.com/ec/v1/keyword/{具体关键字}|keyword、order等|
+|关键字keyword|https://xxx.com/ec/v1/keyword/{具体关键字}|keyword、order等|
 
 ### ~~登录注册部分接口~~
 ~~暂不考虑~~
