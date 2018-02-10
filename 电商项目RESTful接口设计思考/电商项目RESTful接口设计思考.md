@@ -1052,52 +1052,68 @@ Status:200 OK
     "code": 200,
     "data": {
         "imageUrl": "http://ww3.sinaimg.cn/large/0060lm7Tly1fo6vt0p500j30af0ad758.jpg",
-        "detailUrl": "https://item.jd.com/4264502.html",
         "title": "巧克力豆",
+        "uid": "45645646545454",
+        "description": "500g/包",
+        "share": "https://item.jd.com/4264502.html",
         "pay": {
-            "now": 79900,
-            "nowTitle": "￥799.00",
-            "origin": 0,
-            "total": 79900,
-            "currency": "¥",
-            "totalTitle": "￥799.00"
-        },
-        "attribute": {
-            "description": "500g/包"
+            "cost": "4.125",
+            "discount": "7.5",
+            "price": "5.5",
+            "currency": "¥"
         },
         "shop": {
             "name": "克拉家园店",
             "type": "shop",
             "uid": "54545454545"
         },
-        "categories": [
+        "detail": 
             {
-                "category": "便利店",
-                "uid": "656656565"
+                "url": "http://ww3.sinaimg.cn/large/0060lm7Tly1fo6vt0p500j30af0ad758.jpg"
+            }
+        ,
+        "attributes": [
+            {
+                "attribute": "领券",
+                "uid": "356465464",
+                "name": "满140元减10元券",
+                "type": {
+                    "uid": "6564656565656",
+                    "name": "店铺优惠券"
+                }
             },
             {
-                "category": "糖果",
-                "uid": "656656565"
+                "attribute": "服务",
+                "uid": "356465464",
+                "name": "7天无理由",
+                "type": {
+                    "uid": "6564656565656",
+                    "name": "服务类型"
+                }
             },
             {
-                "category": "巧克力",
-                "uid": "656656565"
+                "attribute": "参数",
+                "uid": "356465464",
+                "name": "净含量12g，包装方式...",
+                "type": {
+                    "uid": "6564656565656",
+                    "name": "参数类型是这个"
+                }
+            },
+            {
+                "attribute": "促销",
+                "uid": "356465464",
+                "name": "满1元可享受10倍积分",
+                "type": {
+                    "uid": "6564656565656",
+                    "name": "积分"
+                }
             }
         ],
-        "images": [
-            {
-                "iamge": "00.jpg",
-                "url": "http://ww3.sinaimg.cn/large/0060lm7Tly1fo6vt0p500j30af0ad758.jpg"
-            },
-            {
-                "iamge": "01.jpg",
-                "url": "http://ww3.sinaimg.cn/large/0060lm7Tly1fo6vt0p500j30af0ad758.jpg"
-            },
-            {
-                "iamge": "02.jpg",
-                "url": "http://ww3.sinaimg.cn/large/0060lm7Tly1fo6vt0p500j30af0ad758.jpg"
-            }
-        ]
+        "sku": {
+            "uid": "575454545454",
+            "我实在是想不到还有什么属性了": "这个不需要skuid都可以"
+        }
     }
 }
 ```
