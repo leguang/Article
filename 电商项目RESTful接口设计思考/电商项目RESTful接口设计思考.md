@@ -896,7 +896,9 @@ Status:200 OK
 
 ### 分类部分
 分类部分接口只需要“增删改查”中的“查”，所以只有GET
-> 例如：https://xxx.com/ec/v1/categories/{分类uid}
+
+#### 查询分类
+> 地址：https://xxx.com/ec/v1/categories/{分类uid}
 
 ###### 请求头
 
@@ -1491,7 +1493,7 @@ Status:200 OK
                 "type": "shop",
                 "uid": "54545454545"
             },
-            "sku": {
+            "skus": {
                 "uid": "575454545454",
                 "tips": "这里其实不需要这个uid，因为一个商品的sku是固定的，只要根据商品uid就可以查询sku了，但是为了符合REST接口风格返回uid，方便sku接口查询"
             }
@@ -1513,7 +1515,145 @@ Status:200 OK
 |shop | 对象 | 该商品所属的商店信息，不过多解释 |
 |sku | 对象 | 以库存为单位的概念 |
 
-###sku部分
+###skus部分（最小库存单元集合）
+sku为最小库存单元，这部分概念需要大家自行补习一下。反正要想唯一确定一个库存里的商品，就需要一系列属性来确定，这里的属性包括分类属性+产品属性+其他属性。在详情页中点击放入购物车或购买时，请求该接口来获取商品的详细规格来选择商品。
+
+#### 查询一条或者多条订单
+> 地址：https://xxx.com/ec/v1/skus/{sku的uid}
+
+###### 请求头
+
+```
+GET /ec/v1/skus/566646464
+Accept: application/json
+Content-Type: application/json;charset=UTF-8
+```
+
+###### 参数
+无
+
+###### 响应头
+
+```
+Content-Type:application/json; charset=utf-8
+Status:200 OK
+```
+
+###### 响应
+
+```
+{
+    "message": "居然被你查询成功了",
+    "code": "200",
+    "data": [
+        {
+            "shopName": "克拉家园便利店",
+            "shopUID": "656461778373",
+            "shopType": "shop",
+            "amount": "2",
+            "state": "0",
+            "cost": "10",
+            "name": "黄沙",
+            "gender": "male",
+            "note": "带一个勺子",
+            "phoneNumber": "13888888888",
+            "location": "凯宾斯基",
+            "address": "C栋801",
+            "longitude": "85.66",
+            "latitude": "36.33",
+            "products": [
+                {
+                    "imageUrl": "http://ww3.sinaimg.cn/large/0060lm7Tly1fo6vt0p500j30af0ad758.jpg",
+                    "detailUrl": "https://item.jd.com/4264502.html",
+                    "title": "优乐美奶茶",
+                    "description": "wifi/电话双网 您的智能小卫士",
+                    "uid": "13212133313",
+                    "price": "5.0",
+                    "currency": "¥"
+                },
+                {
+                    "imageUrl": "http://ww3.sinaimg.cn/large/0060lm7Tly1fo6vt0p500j30af0ad758.jpg",
+                    "detailUrl": "https://item.jd.com/4264502.html",
+                    "title": "安防小卫士",
+                    "description": "wifi/电话双网 您的智能小卫士",
+                    "uid": "13212133313",
+                    "type": "smarthome",
+                    "price": "589.0",
+                    "currency": "¥"
+                }
+            ]
+        },
+        {
+            "shopName": "克拉家园便利店",
+            "shopUID": "656461778373",
+            "shopType": "shop",
+            "amount": "2",
+            "state": "0",
+            "cost": "10",
+            "name": "黄沙",
+            "gender": "male",
+            "note": "带一个勺子",
+            "phoneNumber": "13888888888",
+            "location": "凯宾斯基",
+            "address": "C栋801",
+            "longitude": "85.66",
+            "latitude": "36.33",
+            "products": [
+                {
+                    "imageUrl": "http://ww3.sinaimg.cn/large/0060lm7Tly1fo6vt0p500j30af0ad758.jpg",
+                    "detailUrl": "https://item.jd.com/4264502.html",
+                    "title": "优乐美奶茶",
+                    "description": "wifi/电话双网 您的智能小卫士",
+                    "uid": "13212133313",
+                    "price": "5.0",
+                    "currency": "¥"
+                },
+                {
+                    "imageUrl": "http://ww3.sinaimg.cn/large/0060lm7Tly1fo6vt0p500j30af0ad758.jpg",
+                    "detailUrl": "https://item.jd.com/4264502.html",
+                    "title": "安防小卫士",
+                    "description": "wifi/电话双网 您的智能小卫士",
+                    "uid": "13212133313",
+                    "type": "smarthome",
+                    "price": "589.0",
+                    "currency": "¥"
+                }
+            ]
+        }
+    ]
+}
+```
+|params | 类型 | 描述 |
+| - | -| -|
+|shopName | String | 店铺名称 |
+|shopUID | String | 店铺主键，可以通过这个主键查询店铺详情 |
+|shopType | String | 店铺类型 |
+|amount | String | 该订单中包含的商品个数 |
+|state | String | 该订单处于什么状态，0表示待付款，1表示待收货，2表示退款/售后 |
+|cost | String | 该订单总共需要付款数 |
+|name | String | 收货人的姓名 |
+|gender | String | 性别：只能取male或者female或者secrecy，默认是不用选择性别的，也允许保存成功，没选性别就是secrecy |
+|phoneNumber | String | 电话号码 |
+|location | String | 定位地址，只是粗略地址 |
+|address | String | 详细地址 |
+|longitude | String | 经度，用于后台搜索店铺使用 |
+|latitude | String | 纬度，用于后台搜索店铺使用 |
+|imageUrl | String | 该商品缩略图url |
+|detailUrl | String | 跳转到该商品详情页的web url|
+|name | String | 该商品的名称|
+|description | String | 对商品的简单描述 |
+|uid | String | 该商品唯一识别id |
+|type | String | 表示当前商品的类型：智能家居smarthome、便利店/超市/商场shop |
+|price | String | 价格 |
+|currency | String | 标识币种，可以是符号，也可以是文字，看前后端的需求，也可以再立一个字段表示 |
+
+
+
+
+
+
+
+
 
 
 ## MQTT部分
