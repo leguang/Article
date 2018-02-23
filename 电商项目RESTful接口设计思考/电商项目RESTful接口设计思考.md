@@ -1059,9 +1059,18 @@ Status:200 OK
     "code": 200,
     "data": {
         "images": [
-            "http://ww3.sinaimg.cn/large/0060lm7Tly1fo6vt0p500j30af0ad758.jpg",
-            "http://ww3.sinaimg.cn/large/0060lm7Tly1fo6vt0p500j30af0ad758.jpg",
-            "http://ww3.sinaimg.cn/large/0060lm7Tly1fo6vt0p500j30af0ad758.jpg"
+            {
+                "image": "http://ww3.sinaimg.cn/large/0060lm7Tly1fo6vt0p500j30af0ad758.jpg",
+                "discription": "500g/包"
+            },
+            {
+                "image": "http://ww3.sinaimg.cn/large/0060lm7Tly1fo6vt0p500j30af0ad758.jpg",
+                "discription": "500g/包"
+            },
+            {
+                "image": "http://ww3.sinaimg.cn/large/0060lm7Tly1fo6vt0p500j30af0ad758.jpg",
+                "discription": "500g/包"
+            }
         ],
         "title": "巧克力豆",
         "uid": "45645646545454",
@@ -1543,118 +1552,90 @@ Status:200 OK
 
 ```
 {
-    "message": "居然被你查询成功了",
     "code": "200",
-    "data": [
-        {
-            "shopName": "克拉家园便利店",
-            "shopUID": "656461778373",
-            "shopType": "shop",
-            "amount": "2",
-            "state": "0",
-            "cost": "10",
-            "name": "黄沙",
-            "gender": "male",
-            "note": "带一个勺子",
-            "phoneNumber": "13888888888",
-            "location": "凯宾斯基",
-            "address": "C栋801",
-            "longitude": "85.66",
-            "latitude": "36.33",
-            "products": [
-                {
-                    "imageUrl": "http://ww3.sinaimg.cn/large/0060lm7Tly1fo6vt0p500j30af0ad758.jpg",
-                    "detailUrl": "https://item.jd.com/4264502.html",
-                    "title": "优乐美奶茶",
-                    "description": "wifi/电话双网 您的智能小卫士",
-                    "uid": "13212133313",
-                    "price": "5.0",
-                    "currency": "¥"
-                },
-                {
-                    "imageUrl": "http://ww3.sinaimg.cn/large/0060lm7Tly1fo6vt0p500j30af0ad758.jpg",
-                    "detailUrl": "https://item.jd.com/4264502.html",
-                    "title": "安防小卫士",
-                    "description": "wifi/电话双网 您的智能小卫士",
-                    "uid": "13212133313",
-                    "type": "smarthome",
-                    "price": "589.0",
-                    "currency": "¥"
-                }
-            ]
-        },
-        {
-            "shopName": "克拉家园便利店",
-            "shopUID": "656461778373",
-            "shopType": "shop",
-            "amount": "2",
-            "state": "0",
-            "cost": "10",
-            "name": "黄沙",
-            "gender": "male",
-            "note": "带一个勺子",
-            "phoneNumber": "13888888888",
-            "location": "凯宾斯基",
-            "address": "C栋801",
-            "longitude": "85.66",
-            "latitude": "36.33",
-            "products": [
-                {
-                    "imageUrl": "http://ww3.sinaimg.cn/large/0060lm7Tly1fo6vt0p500j30af0ad758.jpg",
-                    "detailUrl": "https://item.jd.com/4264502.html",
-                    "title": "优乐美奶茶",
-                    "description": "wifi/电话双网 您的智能小卫士",
-                    "uid": "13212133313",
-                    "price": "5.0",
-                    "currency": "¥"
-                },
-                {
-                    "imageUrl": "http://ww3.sinaimg.cn/large/0060lm7Tly1fo6vt0p500j30af0ad758.jpg",
-                    "detailUrl": "https://item.jd.com/4264502.html",
-                    "title": "安防小卫士",
-                    "description": "wifi/电话双网 您的智能小卫士",
-                    "uid": "13212133313",
-                    "type": "smarthome",
-                    "price": "589.0",
-                    "currency": "¥"
-                }
-            ]
-        }
-    ]
+    "message": "居然被你查询成功了",
+    "data": {
+        "attributes": [
+            {
+                "attribute": "性别",
+                "values": [
+                    {
+                        "stockQuantity": 30,
+                        "value": "男"
+                    },
+                    {
+                        "stockQuantity": 10,
+                        "value": "女"
+                    }
+                ]
+            },
+            {
+                "attribute": "尺码",
+                "values": [
+                    {
+                        "stockQuantity": 30,
+                        "value": "红色"
+                    },
+                    {
+                        "stockQuantity": 10,
+                        "value": "黄色"
+                    },
+                    {
+                        "stockQuantity": 0,
+                        "value": "蓝色"
+                    }
+                ]
+            },
+            {
+                "attribute": "尺码",
+                "values": [
+                    {
+                        "stockQuantity": 30,
+                        "value": "X码"
+                    },
+                    {
+                        "stockQuantity": 10,
+                        "value": "L码"
+                    },
+                    {
+                        "stockQuantity": 0,
+                        "value": "M码"
+                    }
+                ]
+            }
+        ],
+        "skus": [
+            {
+                "sku": "男+红色+X码",
+                "stockQuantity": 30,
+                "price": 50.00,
+                "currency": "¥"
+            },
+            {
+                "sku": "男+黄色+X码",
+                "stockQuantity": 30,
+                "price": 50.00,
+                "currency": "¥"
+            },
+            {
+                "sku": "男+黄色+M码",
+                "stockQuantity": 30,
+                "price": 50.00,
+                "currency": "¥"
+            }
+        ]
+    }
 }
 ```
 |params | 类型 | 描述 |
 | - | -| -|
-|shopName | String | 店铺名称 |
-|shopUID | String | 店铺主键，可以通过这个主键查询店铺详情 |
+|attributes | 数组 | 该产品的属性集合 |
+|attribute | String | 属性类型，对应着一系列值values |
+|values | 数组 | 对应的属性值的集合 |
+|stockQuantity | 整型 | 库存数量 |
 |shopType | String | 店铺类型 |
-|amount | String | 该订单中包含的商品个数 |
-|state | String | 该订单处于什么状态，0表示待付款，1表示待收货，2表示退款/售后 |
-|cost | String | 该订单总共需要付款数 |
-|name | String | 收货人的姓名 |
-|gender | String | 性别：只能取male或者female或者secrecy，默认是不用选择性别的，也允许保存成功，没选性别就是secrecy |
-|phoneNumber | String | 电话号码 |
-|location | String | 定位地址，只是粗略地址 |
-|address | String | 详细地址 |
-|longitude | String | 经度，用于后台搜索店铺使用 |
-|latitude | String | 纬度，用于后台搜索店铺使用 |
-|imageUrl | String | 该商品缩略图url |
-|detailUrl | String | 跳转到该商品详情页的web url|
-|name | String | 该商品的名称|
-|description | String | 对商品的简单描述 |
-|uid | String | 该商品唯一识别id |
-|type | String | 表示当前商品的类型：智能家居smarthome、便利店/超市/商场shop |
-|price | String | 价格 |
+|price | String | 价格，精确到小数点后两位，单元为元 |
 |currency | String | 标识币种，可以是符号，也可以是文字，看前后端的需求，也可以再立一个字段表示 |
-
-
-
-
-
-
-
-
-
 
 ## MQTT部分
 
