@@ -1,0 +1,257 @@
+{
+    "api": "mtop.trade.querybag",
+    "data": {
+        "controlParas": {
+            "allowClearCache": true,
+            "cItemHost": "//a.m.taobao.com/i${itemId}.htm",
+            "cShopHost": "//shop.m.taobao.com/shop/shop_index.htm?shop_id=${shopId}",
+            "carts2": "1",
+            "closeCleanCard": false,
+            "closeDouble11Model": true,
+            "eTag": "0556348812c14362bfa999ccca0e93e0",
+            "invalidItemRecommendUrl": "//market.m.taobao.com/apps/market/similar/index.html?wh_weex=true&appid=2016&from=9422176&",
+            "isSettlementAlone": true,
+            "itemRecommendType": "sideslip",
+            "itemRecommendUrl": "//market.m.taobao.com/apps/market/similar/index.html?wh_weex=true&appid=2016&from=9422176&",
+            "jhsCrossHost": "//ju.taobao.com/m/jusp/alone/kuacoudan/mtp.htm?activityId=${shopId}",
+            "orderByH5Urls": {
+                "ALITRIP": "//tripbuy.fliggy.com/h5/confirmOrderH5.htm?buyer_from=cart",
+                "YY": "//buy.m.tmall.com/order/confirm_order_wap.htm?hex=n&use_cod=false&buyer_from=tmall_wap&ttid=227200@taobao_android_7.5.3",
+                "YYZY": "//buy.m.tmall.com/order/confirm_order_wap.htm?hex=n&use_cod=false&buyer_from=tmall_wap"
+            },
+            "orderByNative": {
+                "YY": "trade-acs.m.taobao.com",
+                "YYZY": "trade-acs.m.taobao.com"
+            },
+            "preLoadOpen": true,
+            "recomm": {
+                "num": 16
+            },
+            "remoteCheck": false,
+            "showAutoCleanCard": false,
+            "smItemHost": "//page.m.tmall.com/chaoshi/detail.htm?id=${itemId}",
+            "smShopHost": "//chaoshi.m.tmall.com/",
+            "time": 1518076146146,
+            "useACDS": false
+        },
+        "data": {
+            "allItemv2_1": {
+                "fields": {
+                    "title": "购物车(1)",
+                    "value": 1
+                },
+                "id": "1",
+                "tag": "allItemv2"
+            },
+            "banner_1": {
+                "fields": {
+                    "channel": "carts",
+                    "contentDesc": "亲情号",
+                    "enableClose": "true",
+                    "iconUrl": "//img.alicdn.com/tfs/TB1.8SfSVXXXXaDXpXXXXXXXXXX-31-37.png",
+                    "pic": "http://gw.alicdn.com/mt/TB1izR1Xh1YBuNjy1zcXXbNcXXa-750-144.jpg",
+                    "rate": "0.2",
+                    "text": "亲情号",
+                    "textBgColor": "#FFF7D3",
+                    "textCloseDays": 1,
+                    "textCloseHours": 0,
+                    "textColor": "#FF5000",
+                    "textDisturbCloseSeconds": 86400,
+                    "url": "https://family.alicdn.com/apps/market/far/main.html?wh_weex=true&brand=true"
+                },
+                "id": "1",
+                "tag": "banner"
+            },
+            "bundlev2_s_2201343759": {
+                "fields": {
+                    "bundleId": "s_2201343759",
+                    "valid": true
+                },
+                "id": "s_2201343759",
+                "tag": "bundlev2"
+            },
+            "footer_1": {
+                "fields": {
+                    "checkAll": {
+                        "checked": false,
+                        "editable": true,
+                        "title": "全选"
+                    },
+                    "pay": {
+                        "fromServer": true,
+                        "price": 0,
+                        "priceTitle": "￥0",
+                        "totalDiscount": "￥0"
+                    },
+                    "quantity": {
+                        "value": 0
+                    },
+                    "submit": {
+                        "status": "disable",
+                        "title": "结算(0)"
+                    }
+                },
+                "id": "1",
+                "tag": "footer"
+            },
+            "global_1": {
+                "fields": {},
+                "id": "1",
+                "tag": "global"
+            },
+            "group_i_2201343759": {
+                "fields": {
+                    "backgroundColor": "ffffff",
+                    "groupId": "i_2201343759",
+                    "groupType": 0,
+                    "isRelationItem": false
+                },
+                "id": "i_2201343759",
+                "tag": "group"
+            },
+            "itemv2_713604956667": {
+                "fields": {
+                    "bundleId": "s_2201343759",
+                    "bundleType": "shop",
+                    "canBatchRemove": true,
+                    "cartId": "713604956667",
+                    "checked": false,
+                    "checkedBackgroundColor": "05000000",
+                    "exclude": "B",
+                    "itemId": "563178367335",
+                    "itemRecParamId": "{"catid":"50011165","sellerid":"2201343759","nid":"563178367335","h5version":"2"}",
+                    "mutex": "B",
+                    "operate": [
+                        "edit",
+                        "addFavor",
+                        "delete"
+                    ],
+                    "pay": {
+                        "afterPromPrice": 20800,
+                        "now": 20800,
+                        "nowTitle": "￥208.00",
+                        "origin": 40600,
+                        "originTitle": "￥406.00",
+                        "total": 20800,
+                        "totalTitle": "￥208.00"
+                    },
+                    "pic": "//img.alicdn.com/bao/uploaded/i4/2201343759/TB2iejhjlDH8KJjy1zeXXXjepXa_!!2201343759.jpg_sum.jpg",
+                    "quantity": {
+                        "editable": true,
+                        "max": 17,
+                        "min": 1,
+                        "multiple": 1,
+                        "quantity": 1
+                    },
+                    "sellerId": 2201343759,
+                    "settlement": "563178367335_1_3543095116083_null_0_null_null_713604956667_null_null_null_0_null_buyerCondition~0~~dpbUpgrade~null~~cartCreateTime~1518075201000_0_0_null_null_null_null_null_null_null_null_null",
+                    "shopId": "112903600",
+                    "showCheckBox": true,
+                    "sku": {
+                        "areaId": "441302",
+                        "editable": true,
+                        "skuId": "3543095116083",
+                        "skuInvalid": false,
+                        "status": "CAN_CHANGE_SKU",
+                        "title": "6001黑色无毛领;XL"
+                    },
+                    "title": "男士外套冬季2018新款棉服潮流韩版中长款棉衣服帅气加厚袄子男装",
+                    "toBuy": "tmall",
+                    "url": "${cItemHost}",
+                    "valid": true
+                },
+                "id": "713604956667",
+                "tag": "itemv2"
+            },
+            "shopv2_s_2201343759": {
+                "fields": {
+                    "checked": false,
+                    "hasBonus": false,
+                    "is11": false,
+                    "sType": "B",
+                    "seller": "senyideer旗舰店",
+                    "sellerId": 2201343759,
+                    "shopId": "112903600",
+                    "title": "senyideer旗舰店",
+                    "url": "${cShopHost}",
+                    "valid": true
+                },
+                "id": "s_2201343759",
+                "tag": "shopv2"
+            }
+        },
+        "excludes": {
+            "global": [
+                "ALITRIP",
+                "HK",
+                "HKDF",
+                "SX",
+                "OSDS",
+                "HKGS"
+            ],
+            "inner": {},
+            "innerGlobal": [
+                "HKDF",
+                "SX",
+                "OSDS",
+                "HKGS"
+            ],
+            "tip": {
+                "ALITRIP": "亲，阿里旅行的宝贝不能和其他店铺一起结算哦",
+                "DEFAULT": "请分开结算以下商品",
+                "HK": "亲，天猫国际的宝贝不能和其它店铺一起结算哦",
+                "HKDF": "亲，天猫国际免税店的宝贝不能和其他店铺一起结算哦",
+                "OSDS": "亲，天猫全球官方店的宝贝不能和其他店铺一起结算哦",
+                "SX": "亲，天猫商超的宝贝不能跨区域购买哦"
+            }
+        },
+        "feature": {
+            "asyncCheck": true,
+            "carts2": true,
+            "clientTotalPrice": false,
+            "exceedMaxCountTips": "勾选商品太多啦，优惠金额请在结算页查看哦～",
+            "forceReload": false,
+            "gzip": true,
+            "maxCheckCount": 30,
+            "otherParams": {
+                "currentCartTotalSize": "1"
+            }
+        },
+        "hierarchy": {
+            "root": "global_1",
+            "structure": {
+                "allItemv2_1": [
+                    "bundlev2_s_2201343759",
+                    "footer_1"
+                ],
+                "bundlev2_s_2201343759": [
+                    "shopv2_s_2201343759",
+                    "group_i_2201343759"
+                ],
+                "global_1": [
+                    "banner_1",
+                    "allItemv2_1"
+                ],
+                "group_i_2201343759": [
+                    "itemv2_713604956667"
+                ]
+            }
+        },
+        "pageMeta": {
+            "checkMax": 50,
+            "invalidCount": 0,
+            "isEndPage": true,
+            "isExchangeIdentity": false,
+            "isNext": true,
+            "pageNo": 1,
+            "pageSize": 10,
+            "startTimestamp": "2018-02-08 15:33:21",
+            "totalCount": 1,
+            "validCount": 1
+        }
+    },
+    "ret": [
+        "SUCCESS::调用成功"
+    ],
+    "v": "5.0"
+}
