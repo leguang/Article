@@ -1608,20 +1608,29 @@ Status:200 OK
             {
                 "sku": "男+红色+X码",
                 "stockQuantity": 30,
-                "price": 50.00,
-                "currency": "¥"
+                "price": 50,
+                "currency": "¥",
+                "note": "备注：该商品XXX",
+                "uid": "34646464464",
+                "imageUrl": "http://ww3.sinaimg.cn/large/0060lm7Tly1fo6vt0p500j30af0ad758.jpg"
             },
             {
                 "sku": "男+黄色+X码",
                 "stockQuantity": 30,
-                "price": 50.00,
-                "currency": "¥"
+                "price": 50,
+                "currency": "¥",
+                "note": "备注：该商品XXX",
+                "uid": "34646464464",
+                "imageUrl": "http://ww3.sinaimg.cn/large/0060lm7Tly1fo6vt0p500j30af0ad758.jpg"
             },
             {
                 "sku": "男+黄色+M码",
                 "stockQuantity": 30,
-                "price": 50.00,
-                "currency": "¥"
+                "price": 50,
+                "currency": "¥",
+                "note": "备注：该商品XXX",
+                "uid": "34646464464",
+                "imageUrl": "http://ww3.sinaimg.cn/large/0060lm7Tly1fo6vt0p500j30af0ad758.jpg"
             }
         ]
     }
