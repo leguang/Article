@@ -134,7 +134,7 @@ https://{serviceRoot}/{collection}/{id}
 |500|内部服务器错误。|
 
 ### 电商项目url预览
-![url预览](https://i.imgur.com/e7x6key.png)
+![url预览](https://i.imgur.com/3VKI6Oy.png)
 
 站在数据的角度，若想满足7大模块的功能需求，可以将接口分成如下几类：
 * base url：https://xxx.com/ec/v1/
@@ -304,15 +304,15 @@ Status:200 OK
 
 ### 递送部分
 递送部分接口有“增删改查”
->地址：https://xxx.com/ec/v1/delivery/{递送uid}
+>地址：https://xxx.com/ec/v1/deliveries/{递送uid}
 
 #### 新增一条或者多条递送
->地址：https://xxx.com/ec/v1/delivery
+>地址：https://xxx.com/ec/v1/deliveries
 
 ###### 请求头
 
 ```
-POST /ec/v1/delivery
+POST /ec/v1/deliveries
 Accept: application/json
 Content-Type: application/json;charset=UTF-8
 ```
@@ -388,13 +388,13 @@ Status:200 OK
 ```
 
 #### 删除一条或者多条递送
-* 删除一条https://xxx.com/ec/v1/delivery/{递送uid}
-* 删除多条https://xxx.com/ec/v1/delivery
+* 删除一条https://xxx.com/ec/v1/deliveries/{递送uid}
+* 删除多条https://xxx.com/ec/v1/deliveries
 
 ###### 请求头
 
 ```
-DELETE /ec/v1/delivery
+DELETE /ec/v1/deliveries
 Accept: application/json
 Content-Type: application/json;charset=UTF-8
 ```
@@ -452,8 +452,8 @@ Status:200 OK
 |uid | String | 表示已删除递送信息的主键 |
 
 #### 修改一条或者多条递送
-* 修改一条https://xxx.com/ec/v1/delivery/{递送uid}
-* 修改多条https://xxx.com/ec/v1/delivery
+* 修改一条https://xxx.com/ec/v1/deliveries/{递送uid}
+* 修改多条https://xxx.com/ec/v1/deliveries
 ###### 请求头
 
 ```
@@ -517,8 +517,8 @@ Status:200 OK
 |uid | String | 表示已修改递送信息的主键 |
 
 #### 查询一条或者多条递送
-* 查询一条https://xxx.com/ec/v1/delivery/{递送uid}
-* 查询多条https://xxx.com/ec/v1/delivery
+* 查询一条https://xxx.com/ec/v1/deliveries/{递送uid}
+* 查询多条https://xxx.com/ec/v1/deliveries
 ###### 请求头
 
 ```
