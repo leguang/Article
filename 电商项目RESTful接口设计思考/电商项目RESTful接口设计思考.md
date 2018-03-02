@@ -187,28 +187,27 @@ Status:200 OK
 ###### 响应
 ```
 {
-    "query": "方便面",
     "message": "居然被你查询成功了",
     "code": 200,
     "data": [
         {
+            "query": "方便面",
             "keyword": "方便面的危害",
             "extra": "10"
         },
         {
+            "query": "方便面",
             "keyword": "方便面批发市场",
             "extra": "10"
         },
         {
+            "query": "方便面",
             "keyword": "方便面生产线",
             "extra": "10"
         },
         {
+            "query": "方便面",
             "keyword": "方便面怎么煮好吃",
-            "extra": "10"
-        },
-        {
-            "keyword": "方便面品牌",
             "extra": "10"
         }
     ]
