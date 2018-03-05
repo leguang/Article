@@ -1380,7 +1380,7 @@ Status:200 OK
 ```
 |params | 类型 | 描述 |
 | - | -| -|
-|uid | String | 表示已删除递送信息的主键 |
+|uid | String | 表示已删除的商品主键 |
 
 #### 修改购物车一个或者多个商品
 > 地址：https://xxx.com/ec/v1/carts/656464646446
