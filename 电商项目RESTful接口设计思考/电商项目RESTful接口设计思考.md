@@ -64,12 +64,12 @@ https://{serviceRoot}/{collection}/{id}
 - {collection} – 要访问的资源
 - {id} – 要访问的资源的唯一编号
 
-### 公共请求头（建议公共参数放到请求头里）
+### 公共请求头
 通过Content-Type指定请求与返回的数据格式有json和xml,暂时我们只管json的。其中请求数据还要指定Accept。
 >Accept: application/json
 >Content-Type: application/json;charset=UTF-8
 
-### 公共参数
+### 公共参数（建议公共参数放到请求头里）
 公共参数是指每一个接口应该传的参数，同时后天要指定公共参数的默认值，**且要保证没有传公共参数不会报错，所以需要一定的容错性，比如priceDes这个参数值，如果是用的是全部小写的，只要是不冲突，则可认为是准确的参数并且表达了按价格降序排列这个语意**。
 
 公共参数的位置有以下几种：
