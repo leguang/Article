@@ -64,7 +64,7 @@ https://{serviceRoot}/{collection}/{id}
 - {collection} – 要访问的资源
 - {id} – 要访问的资源的唯一编号
 
-### 公共请求头
+### 公共请求头（建议公共参数放到请求头里）
 通过Content-Type指定请求与返回的数据格式有json和xml,暂时我们只管json的。其中请求数据还要指定Accept。
 >Accept: application/json
 >Content-Type: application/json;charset=UTF-8
@@ -72,6 +72,7 @@ https://{serviceRoot}/{collection}/{id}
 ### 公共参数
 公共参数是指每一个接口应该传的参数，同时后天要指定公共参数的默认值，**且要保证没有传公共参数不会报错，所以需要一定的容错性，比如priceDes这个参数值，如果是用的是全部小写的，只要是不冲突，则可认为是准确的参数并且表达了按价格降序排列这个语意**。
 
+公共参数的位置有以下几种：
 * 拼在url后
 
 ```
@@ -86,6 +87,12 @@ https://xxx.com/products/token=token_G34G34G34G34G35G5
 	其他参数……
 }
 ```
+* 放在请求头里
+
+```
+    token: token_G34G34G34G34G35G5
+	其他参数……
+```
 
 |params | 类型 | 描述 |
 | - | -| - |
@@ -96,6 +103,9 @@ https://xxx.com/products/token=token_G34G34G34G34G35G5
 > 例如：https://xxx.com/ec/v1/search/products?params={keyword:方便面,order:des}
 这种方式我暂时还不确定是否合理，或者考虑与业务相关的参数就用json形式包装，而与业务无关的个性参数就还是用传统的方式另立一个参数。
 > 例如：https://xxx.com/ec/v1/search/products?limit=10&offset=10&params={keyword:方便面,order:des}
+
+### 公共响应头
+其中状态码要与公共响应体里的json中的code字段一样。
 
 ### 公共响应体
 ```
