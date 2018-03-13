@@ -331,7 +331,8 @@ Status:200 OK
 >地址：https://xxx.com/ec/v1/deliveries/{递送uid}
 
 #### 新增一条或者多条递送
->地址：https://xxx.com/ec/v1/deliveries
+>新增一条递送：https://xxx.com/ec/v1/deliveries/{递送uid}
+>新增多条递送：https://xxx.com/ec/v1/deliveries
 
 ###### 请求头
 
@@ -342,6 +343,7 @@ Content-Type: application/json;charset=UTF-8
 ```
 
 ###### 参数
+如果是新增一条，data中则不需要传数组，只需要传一个对象就行了。
 ```
 {
     "message": "上传这几个地址",
@@ -423,8 +425,8 @@ Status:200 OK
 ```
 
 #### 删除一条或者多条递送
-* 删除一条https://xxx.com/ec/v1/deliveries/{递送uid}
-* 删除多条https://xxx.com/ec/v1/deliveries
+* 删除一条：https://xxx.com/ec/v1/deliveries/{递送uid}
+* 删除多条：https://xxx.com/ec/v1/deliveries
 
 ###### 请求头
 
@@ -487,8 +489,8 @@ Status:200 OK
 |uid | String | 表示已删除递送信息的主键 |
 
 #### 修改一条或者多条递送
-* 修改一条https://xxx.com/ec/v1/deliveries/{递送uid}
-* 修改多条https://xxx.com/ec/v1/deliveries
+* 修改一条：https://xxx.com/ec/v1/deliveries/{递送uid}
+* 修改多条：https://xxx.com/ec/v1/deliveries
 ###### 请求头
 
 ```
@@ -552,8 +554,8 @@ Status:200 OK
 |uid | String | 表示已修改递送信息的主键 |
 
 #### 查询一条或者多条递送
-* 查询一条https://xxx.com/ec/v1/deliveries/{递送uid}
-* 查询多条https://xxx.com/ec/v1/deliveries
+* 查询一条：https://xxx.com/ec/v1/deliveries/{递送uid}
+* 查询多条：https://xxx.com/ec/v1/deliveries
 ###### 请求头
 
 ```
@@ -641,7 +643,8 @@ Status:200 OK
 > 地址：https://xxx.com/ec/v1/orders/{订单uid}
 
 #### 新增一条或者多条订单
-> 地址：https://xxx.com/ec/v1/orders
+> 新增一条订单：https://xxx.com/ec/v1/orders
+> 新增多条订单：https://xxx.com/ec/v1/orders/{订单uid}
 
 ###### 请求头
 
@@ -652,6 +655,8 @@ Content-Type: application/json;charset=UTF-8
 ```
 
 ###### 参数
+如果是只新增一条，则data中不需要传数组。
+
 ```
 {
     "message": "上传这几个订单",
@@ -735,7 +740,8 @@ Status:200 OK
 |uid | String | 返回刚保存的订单主键，根据这个主键可以查询该订单的详细信息 |
 
 #### 删除一条或者多条订单
-> 地址：https://xxx.com/ec/v1/orders
+> 删除一条订单：https://xxx.com/ec/v1/orders
+> 删除多条订单：https://xxx.com/ec/v1/orders/{订单uid}
 
 ###### 请求头
 
@@ -792,8 +798,8 @@ Status:200 OK
 |uid | String | 已经删除的订单主键 |
 
 #### 查询一条或者多条订单
-* 查询一条https://xxx.com/ec/v1/orders/{订单uid}
-* 查询多条https://xxx.com/ec/v1/orders
+> 查询多条https://xxx.com/ec/v1/orders
+> 查询一条https://xxx.com/ec/v1/orders/{订单uid}
 
 ###### 请求头
 
@@ -1287,7 +1293,7 @@ Status:200 OK
 购物车接口原本是不需要的，可以通过缓存来实现，但是考虑到一个端上买了东西放到购物车，其他端也可以看得到，并继续完成购物流程，所以还是得有这部分接口，有“增删改查”四部分，**注意：这里说的“增删改查”是指针对购物车里的商品的增删改查，不是针对购物车的增删改查**。针对一般电商而已，从App的角度来看，每个用户只有一个购物车，所以不需要知道购物车的uid，根据token就可以查询该用户名下购物车存放的商品信息，但是我们的业务特殊一点，包含便利店外卖成分，所以是一个用户对应多个购物车，**并且是一个店铺一个购物车，一一对应**，至于智能家居则是一个特殊店铺而已，默认每个用户对每个店铺就配有一个购物车，所以购物车是不需要增删改查操作的，**但是这个购物车的uid不知道怎么获得，由于一个店铺就对应一个购物车，因此暂定购物车的uid就是店铺的uid，后期再议**。
 
 #### 新增一个或者多个商品到购物车
-> 地址：https://xxx.com/ec/v1/carts/{cartUID}/products/{productUID}
+> 地址：https://xxx.com/ec/v1/carts/{cartUID}/products
 
 ###### 请求头
 
@@ -1346,8 +1352,9 @@ Status:200 OK
 | - | -| -|
 |uid | String | 保存到购物车的商品主键 |
 
-#### 删除一个或者多个购物车中的商品
-> 地址：https://xxx.com/ec/v1/carts/{cartUID}/products/{productUID}
+#### 删除一个购物车中的商品
+>删除一个购物车中的商品：https://xxx.com/ec/v1/carts/{cartUID}/products/{productUID}
+>删除多个购物车中的商品：https://xxx.com/ec/v1/carts/{cartUID}/products
 
 ###### 请求头
 
@@ -1358,7 +1365,7 @@ Content-Type: application/json;charset=UTF-8
 ```
 
 ###### 参数
-清空该购物车商品则不需要参数，删除购物车中的一个或者多个商品则需要以下参数。
+清空该购物车商品则不需要参数，删除购物车中的多个商品则需要以下参数。如果是只删除一个，则不需要参数，因为uid已经在url上了。
 ```
 {
     "message": "删除这几个商品",
@@ -1404,7 +1411,8 @@ Status:200 OK
 |uid | String | 表示已删除的商品主键 |
 
 #### 修改购物车一个或者多个商品
-> 地址：https://xxx.com/ec/v1/carts/{cartUID}/products/{productUID}
+> 修改购物车一个商品：https://xxx.com/ec/v1/carts/{cartUID}/products/{productUID}
+> 修改购物车多个商品：https://xxx.com/ec/v1/carts/{cartUID}/products
 ###### 请求头
 
 ```
@@ -1414,6 +1422,7 @@ Content-Type: application/json;charset=UTF-8
 ```
 
 ###### 参数
+如果是修改一个，则不需要穿数组，因为uid已经在url上，此时已经限定了只操作这个uid的商品。
 ```
 {
     "message": "修改这几个商品",
