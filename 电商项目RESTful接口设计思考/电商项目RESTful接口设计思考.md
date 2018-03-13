@@ -1287,12 +1287,12 @@ Status:200 OK
 购物车接口原本是不需要的，可以通过缓存来实现，但是考虑到一个端上买了东西放到购物车，其他端也可以看得到，并继续完成购物流程，所以还是得有这部分接口，有“增删改查”四部分，**注意：这里说的“增删改查”是指针对购物车里的商品的增删改查，不是针对购物车的增删改查**。针对一般电商而已，从App的角度来看，每个用户只有一个购物车，所以不需要知道购物车的uid，根据token就可以查询该用户名下购物车存放的商品信息，但是我们的业务特殊一点，包含便利店外卖成分，所以是一个用户对应多个购物车，**并且是一个店铺一个购物车，一一对应**，至于智能家居则是一个特殊店铺而已，默认每个用户对每个店铺就配有一个购物车，所以购物车是不需要增删改查操作的，**但是这个购物车的uid不知道怎么获得，由于一个店铺就对应一个购物车，因此暂定购物车的uid就是店铺的uid，后期再议**。
 
 #### 新增一个或者多个商品到购物车
-> 地址：https://xxx.com/ec/v1/carts/656464646446
+> 地址：https://xxx.com/ec/v1/carts/{cartUID}/products/{productUID}
 
 ###### 请求头
 
 ```
-POST /ec/v1/carts/656464646446
+POST /ec/v1/carts/656464646/products/32434
 Accept: application/json
 Content-Type: application/json;charset=UTF-8
 ```
@@ -1347,12 +1347,12 @@ Status:200 OK
 |uid | String | 保存到购物车的商品主键 |
 
 #### 删除一个或者多个购物车中的商品
-> 地址：https://xxx.com/ec/v1/carts/656464646446
+> 地址：https://xxx.com/ec/v1/carts/{cartUID}/products/{productUID}
 
 ###### 请求头
 
 ```
-DELETE /ec/v1/carts/656464646446
+DELETE /ec/v1/carts/6564646464/products/13434123
 Accept: application/json
 Content-Type: application/json;charset=UTF-8
 ```
@@ -1404,11 +1404,11 @@ Status:200 OK
 |uid | String | 表示已删除的商品主键 |
 
 #### 修改购物车一个或者多个商品
-> 地址：https://xxx.com/ec/v1/carts/656464646446
+> 地址：https://xxx.com/ec/v1/carts/{cartUID}/products/{productUID}
 ###### 请求头
 
 ```
-PUT /ec/v1/carts/656464646446
+PUT /ec/v1/carts/656464646/products/25234524
 Accept: application/json
 Content-Type: application/json;charset=UTF-8
 ```
@@ -1475,12 +1475,12 @@ Status:200 OK
 |uid | String | 表示已修改商品的主键 |
 
 #### 查询购物车商品信息
-> 地址：https://xxx.com/ec/v1/carts/{购物车uid}
+> 地址：https://xxx.com/ec/v1/carts/{cartUID}/products
 
 ###### 请求头
 
 ```
-GET /ec/v1/carts/{购物车uid}
+GET /ec/v1/carts/356466/products
 Accept: application/json
 Content-Type: application/json;charset=UTF-8
 ```
