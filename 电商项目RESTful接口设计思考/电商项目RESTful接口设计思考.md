@@ -112,6 +112,12 @@ https://xxx.com/products/token=token_G34G34G34G34G35G5
 {
     "message": "居然被你查询成功了",
     "code": 200,
+    "page": 0,
+    "pageSize": 20,
+    "first": "https://...",
+    "next": "https://...",
+    "previous": "https://...",
+    "last": "https://...",
     "data": {
         "uid": "6565656565665"
     }
@@ -121,6 +127,12 @@ https://xxx.com/products/token=token_G34G34G34G34G35G5
 | - | -| -|
 |message | String | 返回给接口调用者的描述，有可能用于显示到界面上，需要进行国际化处理 |
 |code | int | 这个与请求头中的状态码一致，是为了满足部分开发者的习惯 |
+|page | int | 分页请求中请求的当前页的页码 |
+|pageSize | int | 分页请求中一页的个数，默认为20 |
+|first | String | 分页请求中第一页的url ，如果没有则返回空字符串|
+|next | String | 分页请求中下一页的url，如果没有则返回空字符串 |
+|previous | String | 分页请求中上一页的url，如果没有则返回空字符串 |
+|last | String | 分页请求中最后一页的url，如果没有则返回空字符串 |
 |data | object | 当前接口的具体数据由该json对象承载 |
 |uid | String | **对于每一个资源对象，在返回的时候，都应该返回操作这个资源对象的唯一码** |
 
@@ -214,6 +226,12 @@ Status:200 OK
 {
     "message": "居然被你查询成功了",
     "code": 200,
+    "page": 0,
+    "pageSize": 20,
+    "first": "https://...",
+    "next": "https://...",
+    "previous": "https://...",
+    "last": "https://...",
     "data": [
         {
             "query": "方便面",
@@ -281,6 +299,12 @@ Status:200 OK
 {
     "message": "居然被你查询成功了",
     "code": 200,
+    "page": 0,
+    "pageSize": 20,
+    "first": "https://...",
+    "next": "https://...",
+    "previous": "https://...",
+    "last": "https://...",
     "data": [
         {
             "imageUrl": "http://ww3.sinaimg.cn/large/0060lm7Tly1fo6vt0p500j30af0ad758.jpg",
@@ -580,18 +604,14 @@ Status:200 OK
 ```
 {
     "message": "居然被你查询成功了",
-    "code": "200",
+    "code": 200,
+    "page": 0,
+    "pageSize": 20,
+    "first": "https://...",
+    "next": "https://...",
+    "previous": "https://...",
+    "last": "https://...",
     "data": [
-        {
-            "name": "BeJson",
-            "uid": "655656133131313",
-            "gender": "male",
-            "phoneNumber": "13888888888",
-            "location": "凯宾斯基",
-            "address": "C栋801",
-            "longitude": "85.66",
-            "latitude": "36.33"
-        },
         {
             "name": "BeJson",
             "uid": "655656133131313",
@@ -832,7 +852,13 @@ Status:200 OK
 ```
 {
     "message": "居然被你查询成功了",
-    "code": "200",
+    "code": 200,
+    "page": 0,
+    "pageSize": 20,
+    "first": "https://...",
+    "next": "https://...",
+    "previous": "https://...",
+    "last": "https://...",
     "data": [
         {
             "shopName": "克拉家园便利店",
@@ -971,6 +997,12 @@ Status:200 OK
 {
     "message": "居然被你查询成功了",
     "code": 200,
+    "page": 0,
+    "pageSize": 20,
+    "first": "https://...",
+    "next": "https://...",
+    "previous": "https://...",
+    "last": "https://...",
     "data": [
         {
             "parentUid": "25235235235235",
@@ -1045,6 +1077,12 @@ Status:200 OK
 {
     "message": "居然被你查询成功了",
     "code": 200,
+    "page": 0,
+    "pageSize": 20,
+    "first": "https://...",
+    "next": "https://...",
+    "previous": "https://...",
+    "last": "https://...",
     "data": [
         {
             "imageUrl": "http://ww3.sinaimg.cn/large/0060lm7Tly1fo6vt0p500j30af0ad758.jpg",
@@ -1248,6 +1286,12 @@ Status:200 OK
 {
     "message": "居然被你查询成功了",
     "code": 200,
+    "page": 0,
+    "pageSize": 20,
+    "first": "https://...",
+    "next": "https://...",
+    "previous": "https://...",
+    "last": "https://...",
     "data": [
         {
             "uid": "56565665656",
@@ -1515,7 +1559,13 @@ Status:200 OK
 ```
 {
     "message": "居然被你查询成功了",
-    "code": "200",
+    "code": 200,
+    "page": 0,
+    "pageSize": 20,
+    "first": "https://...",
+    "next": "https://...",
+    "previous": "https://...",
+    "last": "https://...",
     "data": [
         {
             "title": "巧克力豆",
@@ -1773,28 +1823,20 @@ Java 服务器端一般用异常表示 RESTful API 的错误。API 可能抛出�
 * https://api.github.com/
 * https://developer.github.com/v3/search/#search-users
 * http://open.taobao.com/docs/api_list.htm?spm=a219a.7629140.0.0.Z2srrA
-
-
-草稿，后期删除
-https://api.github.com/
-https://developer.github.com/v3/search/#search-users
-http://open.taobao.com/docs/api_list.htm?spm=a219a.7629140.0.0.Z2srrA
-http://www.infoq.com/cn/articles/webber-rest-workflow/
-https://www.zhihu.com/question/27785028
-http://www.infoq.com/cn/articles/webber-rest-workflow/
-https://www.jianshu.com/p/0ede793d41cc
-http://wiki.jikexueyuan.com/project/github-developer-guides/getting-started.html
-https://www.zhihu.com/question/28557115
-https://www.zhihu.com/question/35210451
-
-https://leancloud.cn/dashboard/apionline/index.html
-https://github.com/Microsoft/api-guidelines
-
+* https://api.github.com/
+* https://developer.github.com/v3/search/#search-users
+* http://open.taobao.com/docs/api_list.htm?spm=a219a.7629140.0.0.Z2srrA
+* http://www.infoq.com/cn/articles/webber-rest-workflow/
+* https://www.zhihu.com/question/27785028
+* http://www.infoq.com/cn/articles/webber-rest-workflow/
+* https://www.jianshu.com/p/0ede793d41cc
+* http://wiki.jikexueyuan.com/project/github-developer-guides/getting-started.html
+* https://www.zhihu.com/question/28557115
+* https://www.zhihu.com/question/35210451
+* https://leancloud.cn/dashboard/apionline/index.html
+* https://github.com/Microsoft/api-guidelines
 首页（这个其实可以用，因为真的如果是需要首页展示的话，也应该是拼凑出来的，当我们完成了分类这个模块的内容的话，其实就只要根据分类模块获取分类列表，然后根据这个列表返回的路径，然后挨个的获取每一个分类的里的商品，就可以拼凑出一个首页的数据了。）
-
 product还是得包含店铺信息，因为订单可以点击到店铺，但是这个也可以不需要包含，因为生成的订单那个数据是来自详情的，详情可以有店铺信息
-
-
 SPU概念和SKU概念，其中SPU概念在我们平台用不到。
 
 
