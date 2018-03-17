@@ -951,10 +951,104 @@ Status:200 OK
                 "cartUid": "235353552352",
                 "uid": "54545454545"
             },
+            "products": [
+                {
+                    "imageUrl": "http://ww3.sinaimg.cn/large/0060lm7Tly1fo6vt0p500j30af0ad758.jpg",
+                    "detailUrl": "https://item.jd.com/4264502.html",
+                    "title": "优乐美奶茶",
+                    "description": "wifi/电话双网 您的智能小卫士",
+                    "uid": "13212133313"
+                },
+                {
+                    "imageUrl": "http://ww3.sinaimg.cn/large/0060lm7Tly1fo6vt0p500j30af0ad758.jpg",
+                    "detailUrl": "https://item.jd.com/4264502.html",
+                    "title": "优乐美奶茶",
+                    "description": "wifi/电话双网 您的智能小卫士",
+                    "uid": "13212133313"
+                }
+            ]
+        }
+    ]
+}
+```
+|params | 类型 | 描述 |
+| - | -| -|
+|uid | String | 该订单主键 |
+|amount | String | 该订单中包含的商品个数 |
+|cost | String | 该订单总共需要付款数 |
+|imageUrl | String | 该商品缩略图url |
+|detailUrl | String | 跳转到该商品详情页的web url|
+|description | String | 对商品的简单描述 |
+|deliveryType|String|送货上门、快递服务|
+|actions|action数组|用户描述对该订单的操作，对应界面上的每条订单上的“删除订单、去付款、取消订单”等按钮|
+|action|对象|category订单状态的分类uid，表达对应的action操作所需要的参数的值。比如待付款状态要取消这条订单，则在订单的update接口中，category参数传这个uid|
+
+#### 查询一条订单
+> 查询一条https://xxx.com/ec/v1/orders/{订单uid}
+
+###### 请求头
+
+```
+GET /ec/v1/orders/34634634
+Accept: application/json
+Content-Type: application/json;charset=UTF-8
+```
+
+###### 参数
+无
+
+###### 响应头
+
+```
+Content-Type:application/json; charset=utf-8
+Status:200 OK
+```
+
+###### 响应
+
+```
+{
+    "message": "居然被你查询成功了",
+    "code": 200,
+    "page": 0,
+    "pageSize": 20,
+    "first": "https://...",
+    "next": "https://...",
+    "previous": "https://...",
+    "last": "https://...",
+    "data": [
+        {
+            "uid": "43433331313",
+            "deliveryType": "送货上门",
+            "amount": "4",
+            "category": "待付款",
+            "orderNumber": "64614646464",
+            "time": "2018-03-12 15:33:24",
+            "note": "带一包烟上来",
+            "cost": "10",
+            "actions": [
+                {
+                    "action": "取消订单",
+                    "category": "2353552352"
+                },
+                {
+                    "action": "去付款",
+                    "category": "2353343535"
+                },
+                {
+                    "action": "删除订单",
+                    "category": ""
+                }
+            ],
+            "shop": {
+                "name": "克拉家园店",
+                "type": "shop",
+                "cartUid": "235353552352",
+                "uid": "54545454545"
+            },
             "delivery": {
                 "name": "黄沙",
                 "gender": "male",
-                "note": "带一个勺子",
                 "phoneNumber": "13888888888",
                 "location": "凯宾斯基",
                 "address": "C栋801",
@@ -1004,6 +1098,9 @@ Status:200 OK
 |detailUrl | String | 跳转到该商品详情页的web url|
 |description | String | 对商品的简单描述 |
 |deliveryType|String|送货上门、快递服务|
+|note|String|下单时的备注|
+|time|String|下单时间|
+|orderNumber|String|订单号|
 |actions|action数组|用户描述对该订单的操作，对应界面上的每条订单上的“删除订单、去付款、取消订单”等按钮|
 |action|对象|category订单状态的分类uid，表达对应的action操作所需要的参数的值。比如待付款状态要取消这条订单，则在订单的update接口中，category参数传这个uid|
 
