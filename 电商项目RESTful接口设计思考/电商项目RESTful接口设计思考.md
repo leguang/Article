@@ -817,6 +817,71 @@ Status:200 OK
 | - | -| - |
 |uid | String | 已经删除的订单主键 |
 
+#### 修改一条或者多条订单
+**由于订单是不能修改内容，只能修改状态分类的，即由一种状态修改成另一种状态，比如从“待付款”状态修改成“已取消”状态，因此只传这个category字段即可**
+> 修改一条订单：https://xxx.com/ec/v1/orders
+> 修改多条订单：https://xxx.com/ec/v1/orders/{订单uid}
+
+###### 请求头
+
+```
+PUT /ec/v1/orders
+Accept: application/json
+Content-Type: application/json;charset=UTF-8
+```
+
+###### 参数
+如果是修改某一个，只需要接口改成https://xxx.com/ec/v1/orders/{订单uid}即可。
+```
+{
+    "message": "修改这几个订单的状态",
+    "data": [
+        {
+            "category": "323532235",
+            "uid": "13212133313"
+        },
+        {
+            "category": "323532235",
+            "uid": "13212133313"
+        }
+    ]
+}
+```
+
+|params | 类型 | 描述 |
+| - | -| -|
+|uid | String | 订单主键 |
+|category | String | 要修改的状态分类uid |
+
+###### 响应头
+
+```
+Content-Type:application/json; charset=utf-8
+Status:200 OK
+```
+
+###### 响应
+```
+{
+    "message": "居然被你修改成功了",
+    "code": 200,
+    "data": [
+        {
+            "category": "已取消",
+            "uid": "13212133313"
+        },
+        {
+            "category": "已删除",
+            "uid": "13212133313"
+        }
+    ]
+}
+```
+| params | 类型 | 描述 |
+| - | -| - |
+|uid | String | 已经修改的订单主键 |
+|category | String | 修改成功后的状态分类uid |
+
 #### 查询一条或者多条订单
 > 查询多条https://xxx.com/ec/v1/orders
 > 查询一条https://xxx.com/ec/v1/orders/{订单uid}
@@ -832,12 +897,12 @@ Content-Type: application/json;charset=UTF-8
 ###### 参数
 不传参数表达查询全部。
 ```
-?params={state:0}
+?params={category:23552355}
 ```
 
 |params | 类型 | 描述 |
 | - | -| -|
-|state | String | 默认不传表示获取全部订单，0表示获取待付款订单，1表示获取待收货订单，2表示获取退款/售后订单 |
+|category | String | 默认不传表示获取全部订单，**待付款、已取消、待收货、已完成、退款/售后**等类型的uid，通过分类接口获取 |
 |sort | String | 排序参数，不传或者default-->综合排序，des-->降序，asc-->升序，priceDes-->价格从高到低，priceAsc-->价格从低到高，costDes-->总价从高到低，costAsc-->总价从低到高|
 
 ###### 响应头
@@ -861,57 +926,41 @@ Status:200 OK
     "last": "https://...",
     "data": [
         {
-            "shopName": "克拉家园便利店",
-            "shopUID": "656461778373",
-            "shopType": "shop",
-            "amount": "2",
-            "state": "0",
+            "uid": "43433331313",
+            "deliveryType": "送货上门",
+            "amount": "4",
+            "category": "待付款",
             "cost": "10",
-            "name": "黄沙",
-            "gender": "male",
-            "note": "带一个勺子",
-            "phoneNumber": "13888888888",
-            "location": "凯宾斯基",
-            "address": "C栋801",
-            "longitude": "85.66",
-            "latitude": "36.33",
-            "products": [
+            "actions": [
                 {
-                    "imageUrl": "http://ww3.sinaimg.cn/large/0060lm7Tly1fo6vt0p500j30af0ad758.jpg",
-                    "detailUrl": "https://item.jd.com/4264502.html",
-                    "title": "优乐美奶茶",
-                    "description": "wifi/电话双网 您的智能小卫士",
-                    "uid": "13212133313",
-                    "price": "5.0",
-                    "currency": "¥"
+                    "action": "取消订单",
+                    "category": "2353552352"
                 },
                 {
-                    "imageUrl": "http://ww3.sinaimg.cn/large/0060lm7Tly1fo6vt0p500j30af0ad758.jpg",
-                    "detailUrl": "https://item.jd.com/4264502.html",
-                    "title": "安防小卫士",
-                    "description": "wifi/电话双网 您的智能小卫士",
-                    "uid": "13212133313",
-                    "type": "smarthome",
-                    "price": "589.0",
-                    "currency": "¥"
+                    "action": "去付款",
+                    "category": "2353343535"
+                },
+                {
+                    "action": "删除订单",
+                    "category": ""
                 }
-            ]
-        },
-        {
-            "shopName": "克拉家园便利店",
-            "shopUID": "656461778373",
-            "shopType": "shop",
-            "amount": "2",
-            "state": "0",
-            "cost": "10",
-            "name": "黄沙",
-            "gender": "male",
-            "note": "带一个勺子",
-            "phoneNumber": "13888888888",
-            "location": "凯宾斯基",
-            "address": "C栋801",
-            "longitude": "85.66",
-            "latitude": "36.33",
+            ],
+            "shop": {
+                "name": "克拉家园店",
+                "type": "shop",
+                "cartUid": "235353552352",
+                "uid": "54545454545"
+            },
+            "delivery": {
+                "name": "黄沙",
+                "gender": "male",
+                "note": "带一个勺子",
+                "phoneNumber": "13888888888",
+                "location": "凯宾斯基",
+                "address": "C栋801",
+                "longitude": "85.66",
+                "latitude": "36.33"
+            },
             "products": [
                 {
                     "imageUrl": "http://ww3.sinaimg.cn/large/0060lm7Tly1fo6vt0p500j30af0ad758.jpg",
@@ -919,18 +968,27 @@ Status:200 OK
                     "title": "优乐美奶茶",
                     "description": "wifi/电话双网 您的智能小卫士",
                     "uid": "13212133313",
-                    "price": "5.0",
-                    "currency": "¥"
+                    "amount": "2",
+                    "pay": {
+                        "cost": "4.125",
+                        "discount": "7.5",
+                        "price": "5.5",
+                        "currency": "¥"
+                    }
                 },
                 {
                     "imageUrl": "http://ww3.sinaimg.cn/large/0060lm7Tly1fo6vt0p500j30af0ad758.jpg",
                     "detailUrl": "https://item.jd.com/4264502.html",
-                    "title": "安防小卫士",
+                    "title": "优乐美奶茶",
                     "description": "wifi/电话双网 您的智能小卫士",
                     "uid": "13212133313",
-                    "type": "smarthome",
-                    "price": "589.0",
-                    "currency": "¥"
+                    "amount": "2",
+                    "pay": {
+                        "cost": "4.125",
+                        "discount": "7.5",
+                        "price": "5.5",
+                        "currency": "¥"
+                    }
                 }
             ]
         }
@@ -939,30 +997,18 @@ Status:200 OK
 ```
 |params | 类型 | 描述 |
 | - | -| -|
-|shopName | String | 店铺名称 |
-|shopUID | String | 店铺主键，可以通过这个主键查询店铺详情 |
-|shopType | String | 店铺类型 |
+|uid | String | 该订单主键 |
 |amount | String | 该订单中包含的商品个数 |
-|state | String | 该订单处于什么状态，0表示待付款，1表示待收货，2表示退款/售后 |
 |cost | String | 该订单总共需要付款数 |
-|name | String | 收货人的姓名 |
-|gender | String | 性别：只能取male或者female或者secrecy，默认是不用选择性别的，也允许保存成功，没选性别就是secrecy |
-|phoneNumber | String | 电话号码 |
-|location | String | 定位地址，只是粗略地址 |
-|address | String | 详细地址 |
-|longitude | String | 经度，用于后台搜索店铺使用 |
-|latitude | String | 纬度，用于后台搜索店铺使用 |
 |imageUrl | String | 该商品缩略图url |
 |detailUrl | String | 跳转到该商品详情页的web url|
-|name | String | 该商品的名称|
 |description | String | 对商品的简单描述 |
-|uid | String | 该商品唯一识别id |
-|type | String | 表示当前商品的类型：智能家居smarthome、便利店/超市/商场shop |
-|price | String | 价格 |
-|currency | String | 标识币种，可以是符号，也可以是文字，看前后端的需求，也可以再立一个字段表示 |
+|deliveryType|String|送货上门、快递服务|
+|actions|action数组|用户描述对该订单的操作，对应界面上的每条订单上的“删除订单、去付款、取消订单”等按钮|
+|action|对象|category订单状态的分类uid，表达对应的action操作所需要的参数的值。比如待付款状态要取消这条订单，则在订单的update接口中，category参数传这个uid|
 
 ### 分类部分
-分类部分接口只需要“增删改查”中的“查”，所以只有GET
+由于这个分类接口是一个抽象的获取字符串的接口，因此我把商品的分类和订单的状态分类都归于这个接口。分类部分接口只需要“增删改查”中的“查”，所以只有GET，其他的我就不设计了。
 
 #### 查询分类
 > 地址：https://xxx.com/ec/v1/categories/{分类uid}
@@ -977,11 +1023,12 @@ Content-Type: application/json;charset=UTF-8
 
 ###### 参数
 不传参数则默认是返回一级分类。
->?params={uid:1313113,keyword:方便面,order:des}
+>?params={type:orders,uid:1313113,keyword:方便面,order:des}
 
 |params | 类型 | 描述 |
 | - | -| - |
 |uid | String | 某分类主键 |
+|type | String |orders表示查询的订单状态分类，products表示查询商品分类|
 |keyword | String | 查询的关键字 |
 |sort | String | 排序参数，不传或者default-->综合排序，des-->降序，asc-->升序，priceDes-->价格从高到低，priceAsc-->价格从低到高，costDes-->总价从高到低，costAsc-->总价从低到高|
 
@@ -1041,6 +1088,8 @@ Status:200 OK
 | - | -| -|
 |category | String | 种类名称 |
 |uid | String | 种类主键，**外层json中的uid表示其父分类的uid，如果是一级分类，则其父分类uid可以为空字符串** |
+|parentUid | String | 如果没有父分类则可以为空 |
+|children | String数组 | 如果没有子分类则返回为空|
 
 ### 商品（产品）部分
 商品部分接口只需要“增删改查”中的“查”，所以只有GET
@@ -1562,50 +1611,92 @@ Status:200 OK
 ###### 响应
 ```
 {
-    "message": "居然被你查询成功了",
     "code": 200,
-    "page": 0,
-    "pageSize": 20,
-    "first": "https://...",
-    "next": "https://...",
-    "previous": "https://...",
-    "last": "https://...",
     "data": [
         {
-            "title": "巧克力豆",
-            "uid": "45645646545454",
-            "description": "500g/包",
-            "share": "https://item.jd.com/4264502.html",
-            "pay": {
-                "cost": "4.125",
-                "discount": "7.5",
-                "price": "5.5",
-                "currency": "¥"
-            },
+            "products": [
+                {
+                    "count": 2,
+                    "description": "500g/包",
+                    "icon": "https://www.audi.cn/content/dam/nemo/cn/model/a7/rs7_sportback/2015/1680x1050/3q/rs7_sportback_performance_gallery_10.jpg.resize.maxWidth=1180.jpg",
+                    "pay": {
+                        "cost": "4.125",
+                        "currency": "¥",
+                        "discount": "7.5",
+                        "price": "5.5"
+                    },
+                    "share": "https://item.jd.com/4264502.html",
+                    "title": "巧克力豆",
+                    "uid": "45645646545454"
+                },
+                {
+                    "count": 5,
+                    "description": "500g/包",
+                    "icon": "https://www.audi.cn/content/dam/nemo/cn/model/a7/rs7_sportback/2015/1680x1050/3q/rs7_sportback_performance_gallery_10.jpg.resize.maxWidth=1180.jpg",
+                    "pay": {
+                        "cost": "4.125",
+                        "currency": "¥",
+                        "discount": "7.5",
+                        "price": "5.5"
+                    },
+                    "share": "https://item.jd.com/4264502.html",
+                    "title": "大力糖",
+                    "uid": "45645646545454"
+                }
+            ],
             "shop": {
                 "name": "克拉家园店",
+                "serviceType": "快递服务",
                 "type": "shop",
                 "uid": "54545454545"
             }
         },
         {
-            "title": "巧克力豆",
-            "uid": "45645646545454",
-            "description": "500g/包",
-            "share": "https://item.jd.com/4264502.html",
-            "pay": {
-                "cost": "4.125",
-                "discount": "7.5",
-                "price": "5.5",
-                "currency": "¥"
-            },
+            "products": [
+                {
+                    "count": 2,
+                    "description": "500g/包",
+                    "icon": "https://www.audi.cn/content/dam/nemo/cn/model/a7/rs7_sportback/2015/1680x1050/3q/rs7_sportback_performance_gallery_10.jpg.resize.maxWidth=1180.jpg",
+                    "pay": {
+                        "cost": "4.125",
+                        "currency": "¥",
+                        "discount": "7.5",
+                        "price": "5.5"
+                    },
+                    "share": "https://item.jd.com/4264502.html",
+                    "title": "巧克力豆",
+                    "uid": "45645646545454"
+                },
+                {
+                    "count": 5,
+                    "description": "500g/包",
+                    "icon": "https://www.audi.cn/content/dam/nemo/cn/model/a7/rs7_sportback/2015/1680x1050/3q/rs7_sportback_performance_gallery_10.jpg.resize.maxWidth=1180.jpg",
+                    "pay": {
+                        "cost": "4.125",
+                        "currency": "¥",
+                        "discount": "7.5",
+                        "price": "5.5"
+                    },
+                    "share": "https://item.jd.com/4264502.html",
+                    "title": "大力糖",
+                    "uid": "45645646545454"
+                }
+            ],
             "shop": {
-                "name": "克拉家园店",
+                "name": "威斯丹利店",
+                "serviceType": "送货上门",
                 "type": "shop",
-                "uid": "54545454545"
+                "uid": "123412312"
             }
         }
-    ]
+    ],
+    "first": "https://...",
+    "last": "https://...",
+    "message": "居然被你查询成功了",
+    "next": "https://...",
+    "page": 0,
+    "pageSize": 20,
+    "previous": "https://..."
 }
 ```
 |key | 类型 | 描述 |
@@ -1624,7 +1715,7 @@ Status:200 OK
 ### skus部分（最小库存单元集合）
 sku为最小库存单元，这部分概念需要大家自行补习一下。反正要想唯一确定一个库存里的商品，就需要一系列属性来确定，这里的属性包括分类属性+产品属性+其他属性。在详情页中点击放入购物车或购买时，请求该接口来获取商品的详细规格来选择商品。
 
-#### 查询一条或者多条订单
+#### 查询一条或者多条sku
 > 地址：https://xxx.com/ec/v1/skus/{sku的uid}
 
 ###### 请求头
