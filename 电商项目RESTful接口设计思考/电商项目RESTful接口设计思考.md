@@ -1230,7 +1230,7 @@ Status:200 OK
     "data": [
         {
             "imageUrl": "http://ww3.sinaimg.cn/large/0060lm7Tly1fo6vt0p500j30af0ad758.jpg",
-            "detailUrl": "https://item.jd.com/4264502.html",
+            "link": "https://item.jd.com/4264502.html",
             "title": "安防小卫士",
             "description": "wifi/电话双网 您的智能小卫士",
             "uid": "13212133313",
@@ -1240,7 +1240,7 @@ Status:200 OK
         },
         {
             "imageUrl": "http://ww3.sinaimg.cn/large/0060lm7Tly1fo6vt0p500j30af0ad758.jpg",
-            "detailUrl": "https://item.jd.com/4264502.html",
+            "link": "https://item.jd.com/4264502.html",
             "title": "安防小卫士",
             "description": "wifi/电话双网 您的智能小卫士",
             "uid": "13212133313",
@@ -1250,7 +1250,7 @@ Status:200 OK
         },
         {
             "imageUrl": "http://ww3.sinaimg.cn/large/0060lm7Tly1fo6vt0p500j30af0ad758.jpg",
-            "detailUrl": "https://item.jd.com/4264502.html",
+            "link": "https://item.jd.com/4264502.html",
             "title": "安防小卫士",
             "description": "wifi/电话双网 您的智能小卫士",
             "uid": "13212133313",
@@ -1264,8 +1264,7 @@ Status:200 OK
 |key | 类型 | 描述 |
 | - | -| -|
 |imageUrl | String | 该商品缩略图url |
-|detailUrl | String | 跳转到该商品详情页的web url|
-|name | String | 该商品的名称|
+|link | String | 跳转到该商品详情页的web url|
 |description | String | 对商品的简单描述 |
 |uid | String | 该商品唯一识别id |
 |type | String | 表示当前商品的类型：智能家居smarthome、便利店/超市/商场shop |
@@ -1928,6 +1927,205 @@ Status:200 OK
 |shopType | String | 店铺类型 |
 |price | String | 价格，精确到小数点后两位，单元为元 |
 |currency | String | 标识币种，可以是符号，也可以是文字，看前后端的需求，也可以再立一个字段表示 |
+
+### 首页部分
+理论上来说是不需要这个接口的，根据已有的接口是可以拼凑出现在业务需求的数据的，但这样的话需要同时访问的接口数目过多，考虑到性能问题，则合并出一个home接口来。
+
+#### 查询
+> 地址：https://xxx.com/ec/v1/home
+
+###### 请求头
+
+```
+GET /ec/v1/home
+Accept: application/json
+Content-Type: application/json;charset=UTF-8
+```
+
+###### 参数
+无
+
+###### 响应头
+
+```
+Content-Type:application/json; charset=utf-8
+Status:200 OK
+```
+
+###### 响应
+
+```
+{
+    "message": "居然被你查询成功了",
+    "code": 200,
+    "page": 0,
+    "pageSize": 20,
+    "first": "",
+    "next": "",
+    "previous": "",
+    "last": "",
+    "data": {
+        "ads": [
+            {
+                "imageUrl": "http://ww3.sinaimg.cn/large/0060lm7Tly1fo6vt0p500j30af0ad758.jpg",
+                "title": "安防小卫士",
+                "description": "wifi/电话双网 您的智能小卫士",
+                "uid": "13212133313",
+                "type": "web",
+                "price": "589.0",
+                "currency": "¥",
+                "link": "https://www.baidu.com/"
+            },
+            {
+                "imageUrl": "http://ww3.sinaimg.cn/large/0060lm7Tly1fo6vt0p500j30af0ad758.jpg",
+                "title": "安防小卫士",
+                "description": "wifi/电话双网 您的智能小卫士",
+                "uid": "13212133313",
+                "type": "web",
+                "price": "589.0",
+                "currency": "¥",
+                "link": "https://www.baidu.com/"
+            },
+            {
+                "imageUrl": "http://ww3.sinaimg.cn/large/0060lm7Tly1fo6vt0p500j30af0ad758.jpg",
+                "title": "安防小卫士",
+                "description": "wifi/电话双网 您的智能小卫士",
+                "uid": "13212133313",
+                "type": "web",
+                "price": "589.0",
+                "currency": "¥",
+                "link": "https://www.baidu.com/"
+            }
+        ],
+        "recommendations": [
+            {
+                "category": {
+                    "category": "智能主机",
+                    "uid": "516165654656"
+                },
+                "products": [
+                    {
+                        "imageUrl": "http://ww3.sinaimg.cn/large/0060lm7Tly1fo6vt0p500j30af0ad758.jpg",
+                        "title": "安防小卫士",
+                        "description": "wifi/电话双网 您的智能小卫士",
+                        "uid": "13212133313",
+                        "type": "product",
+                        "price": "589.0",
+                        "currency": "¥",
+                        "link": "https://www.baidu.com/"
+                    },
+                    {
+                        "imageUrl": "http://ww3.sinaimg.cn/large/0060lm7Tly1fo6vt0p500j30af0ad758.jpg",
+                        "title": "安防小卫士",
+                        "description": "wifi/电话双网 您的智能小卫士",
+                        "uid": "13212133313",
+                        "type": "product",
+                        "price": "589.0",
+                        "currency": "¥",
+                        "link": "https://www.baidu.com/"
+                    },
+                    {
+                        "imageUrl": "http://ww3.sinaimg.cn/large/0060lm7Tly1fo6vt0p500j30af0ad758.jpg",
+                        "title": "安防小卫士",
+                        "description": "wifi/电话双网 您的智能小卫士",
+                        "uid": "13212133313",
+                        "type": "product",
+                        "price": "589.0",
+                        "currency": "¥",
+                        "link": "https://www.baidu.com/"
+                    }
+                ]
+            },
+            {
+                "category": {
+                    "category": "智能门锁",
+                    "uid": "516165654656"
+                },
+                "products": [
+                    {
+                        "imageUrl": "http://ww3.sinaimg.cn/large/0060lm7Tly1fo6vt0p500j30af0ad758.jpg",
+                        "title": "安防小卫士",
+                        "description": "wifi/电话双网 您的智能小卫士",
+                        "uid": "13212133313",
+                        "type": "product",
+                        "price": "589.0",
+                        "currency": "¥",
+                        "link": "https://www.baidu.com/"
+                    },
+                    {
+                        "imageUrl": "http://ww3.sinaimg.cn/large/0060lm7Tly1fo6vt0p500j30af0ad758.jpg",
+                        "title": "安防小卫士",
+                        "description": "wifi/电话双网 您的智能小卫士",
+                        "uid": "13212133313",
+                        "type": "product",
+                        "price": "589.0",
+                        "currency": "¥",
+                        "link": "https://www.baidu.com/"
+                    },
+                    {
+                        "imageUrl": "http://ww3.sinaimg.cn/large/0060lm7Tly1fo6vt0p500j30af0ad758.jpg",
+                        "title": "安防小卫士",
+                        "description": "wifi/电话双网 您的智能小卫士",
+                        "uid": "13212133313",
+                        "type": "product",
+                        "price": "589.0",
+                        "currency": "¥",
+                        "link": "https://www.baidu.com/"
+                    }
+                ]
+            },
+            {
+                "category": {
+                    "category": "智能配件",
+                    "uid": "516165654656"
+                },
+                "products": [
+                    {
+                        "imageUrl": "http://ww3.sinaimg.cn/large/0060lm7Tly1fo6vt0p500j30af0ad758.jpg",
+                        "title": "安防小卫士",
+                        "description": "wifi/电话双网 您的智能小卫士",
+                        "uid": "13212133313",
+                        "type": "product",
+                        "price": "589.0",
+                        "currency": "¥",
+                        "link": "https://www.baidu.com/"
+                    },
+                    {
+                        "imageUrl": "http://ww3.sinaimg.cn/large/0060lm7Tly1fo6vt0p500j30af0ad758.jpg",
+                        "title": "安防小卫士",
+                        "description": "wifi/电话双网 您的智能小卫士",
+                        "uid": "13212133313",
+                        "type": "product",
+                        "price": "589.0",
+                        "currency": "¥",
+                        "link": "https://www.baidu.com/"
+                    },
+                    {
+                        "imageUrl": "http://ww3.sinaimg.cn/large/0060lm7Tly1fo6vt0p500j30af0ad758.jpg",
+                        "title": "安防小卫士",
+                        "description": "wifi/电话双网 您的智能小卫士",
+                        "uid": "13212133313",
+                        "type": "product",
+                        "price": "589.0",
+                        "currency": "¥",
+                        "link": "https://www.baidu.com/"
+                    }
+                ]
+            }
+        ]
+    }
+}
+```
+|key | 类型 | 描述 |
+| - | -| -|
+|imageUrl | String | 该商品缩略图url |
+|link | String | 跳转到web的url|
+|description | String | 对商品的简单描述 |
+|uid | String | 该商品唯一识别id |
+|type | String | 表示当前商品的类型：智能家居smarthome、便利店/超市/商场shop |
+|price | String | 价格 |
+|currency | String | 标识币种，可以是符号，也可以是文字，看前后端的需求，也可以再立一个字段表示 |
+|type | String | product表示跳转到原生详情页，web表示跳转到web页面 |
 
 ## MQTT部分
 
