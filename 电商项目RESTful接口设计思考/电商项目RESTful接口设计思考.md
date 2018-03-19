@@ -379,7 +379,8 @@ Content-Type: application/json;charset=UTF-8
             "location": "凯宾斯基",
             "address": "C栋801",
             "longitude": "85.66",
-            "latitude": "36.33"
+            "latitude": "36.33",
+			"isDefault": true
         },
         {
             "name": "BeJson",
@@ -388,7 +389,8 @@ Content-Type: application/json;charset=UTF-8
             "location": "凯宾斯基",
             "address": "C栋801",
             "longitude": "85.66",
-            "latitude": "36.33"
+            "latitude": "36.33",
+			"isDefault": true
         },
         {
             "name": "BeJson",
@@ -397,16 +399,8 @@ Content-Type: application/json;charset=UTF-8
             "location": "凯宾斯基",
             "address": "C栋801",
             "longitude": "85.66",
-            "latitude": "36.33"
-        },
-        {
-            "name": "BeJson",
-            "gender": "male",
-            "phoneNumber": "13888888888",
-            "location": "凯宾斯基",
-            "address": "C栋801",
-            "longitude": "85.66",
-            "latitude": "36.33"
+            "latitude": "36.33",
+			"isDefault": true
         }
     ]
 }
@@ -530,14 +524,15 @@ Content-Type: application/json;charset=UTF-8
     "message": "修改这几个递送",
     "data": [
         {
+            "uid": "655656133131313",
             "name": "BeJson",
             "gender": "male",
             "phoneNumber": "13888888888",
             "location": "凯宾斯基",
-            "uid": "655656133131313",
             "address": "C栋801",
             "longitude": "85.66",
-            "latitude": "36.33"
+            "latitude": "36.33",
+            "isDefault": true
         }
     ]
 }
@@ -613,34 +608,37 @@ Status:200 OK
     "last": "https://...",
     "data": [
         {
-            "name": "BeJson",
             "uid": "655656133131313",
+            "name": "BeJson",
             "gender": "male",
             "phoneNumber": "13888888888",
             "location": "凯宾斯基",
             "address": "C栋801",
             "longitude": "85.66",
-            "latitude": "36.33"
+            "latitude": "36.33",
+            "isDefault": true
         },
         {
-            "name": "BeJson",
             "uid": "655656133131313",
+            "name": "BeJson",
             "gender": "male",
             "phoneNumber": "13888888888",
             "location": "凯宾斯基",
             "address": "C栋801",
             "longitude": "85.66",
-            "latitude": "36.33"
+            "latitude": "36.33",
+            "isDefault": false
         },
         {
-            "name": "BeJson",
             "uid": "655656133131313",
+            "name": "BeJson",
             "gender": "male",
             "phoneNumber": "13888888888",
             "location": "凯宾斯基",
             "address": "C栋801",
             "longitude": "85.66",
-            "latitude": "36.33"
+            "latitude": "36.33",
+            "isDefault": false
         }
     ]
 }
@@ -656,7 +654,7 @@ Status:200 OK
 |address | String | 详细地址 |
 |longitude | String | 经度，用于后台搜索店铺使用 |
 |latitude | String | 纬度，用于后台搜索店铺使用 |
-
+|isDefault | boolean | 用于表达是否为默认地址 |
 
 ### 订单部分
 订单部分接口有“增删改查”中的增、删、查。
