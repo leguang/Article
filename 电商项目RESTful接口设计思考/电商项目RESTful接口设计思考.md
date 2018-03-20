@@ -1031,15 +1031,18 @@ Status:200 OK
             "actions": [
                 {
                     "action": "取消订单",
+                    "type": "cancel",
                     "category": "2353552352"
                 },
                 {
                     "action": "去付款",
-                    "category": "2353343535"
+                    "category": "2353343535",
+                    "type": "pay"
                 },
                 {
                     "action": "删除订单",
-                    "category": ""
+                    "category": "",
+                    "type": "delete"
                 }
             ],
             "shop": {
@@ -1105,6 +1108,7 @@ Status:200 OK
 |orderNumber|String|订单号|
 |actions|action数组|用户描述对该订单的操作，对应界面上的每条订单上的“删除订单、去付款、取消订单”等按钮|
 |action|对象|category订单状态的分类uid，表达对应的action操作所需要的参数的值。比如待付款状态要取消这条订单，则在订单的update接口中，category参数传这个uid|
+|type|String|针对订单的操作总共5种，其type值如下：1.去付款--pay；2.取消订单（cancel）；3.确认收货（receipt）；4.查看物流（logistics）；5.删除订单（delete）|
 
 ### 分类部分
 由于这个分类接口是一个抽象的获取字符串的接口，因此我把商品的分类和订单的状态分类都归于这个接口。分类部分接口只需要“增删改查”中的“查”，所以只有GET，其他的我就不设计了。
