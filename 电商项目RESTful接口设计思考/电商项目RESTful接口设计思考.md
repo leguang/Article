@@ -1026,88 +1026,86 @@ Status:200 OK
     "next": "https://...",
     "previous": "https://...",
     "last": "https://...",
-    "data": [
-        {
-            "uid": "43433331313",
-            "deliveryType": "送货上门",
-            "amount": "4",
-            "category": "待付款",
-            "orderNumber": "64614646464",
-            "time": "2018-03-12 15:33:24",
-            "note": "带一包烟上来",
-            "pay": {
-                "cost": "10",
-                "discount": "10",
-                "price": "10",
-                "currency": "¥"
+    "data": {
+        "uid": "43433331313",
+        "deliveryType": "送货上门",
+        "amount": "4",
+        "category": "待付款",
+        "orderNumber": "64614646464",
+        "time": "2018-03-12 15:33:24",
+        "note": "带一包烟上来",
+        "pay": {
+            "cost": "10",
+            "discount": "10",
+            "price": "10",
+            "currency": "¥"
+        },
+        "actions": [
+            {
+                "action": "取消订单",
+                "type": "cancel",
+                "category": "2353552352",
+                "link": ""
             },
-            "actions": [
-                {
-                    "action": "取消订单",
-                    "type": "cancel",
-                    "category": "2353552352",
-                    "link": ""
-                },
-                {
-                    "action": "去付款",
-                    "category": "2353343535",
-                    "type": "pay",
-                    "link": ""
-                },
-                {
-                    "action": "删除订单",
-                    "category": "",
-                    "type": "delete",
-                    "link": ""
+            {
+                "action": "去付款",
+                "category": "2353343535",
+                "type": "pay",
+                "link": ""
+            },
+            {
+                "action": "删除订单",
+                "category": "",
+                "type": "delete",
+                "link": ""
+            }
+        ],
+        "shop": {
+            "name": "克拉家园店",
+            "type": "shop",
+            "cartUid": "235353552352",
+            "uid": "54545454545"
+        },
+        "delivery": {
+            "name": "黄沙",
+            "gender": "male",
+            "phoneNumber": "13888888888",
+            "location": "凯宾斯基",
+            "address": "C栋801",
+            "longitude": "85.66",
+            "latitude": "36.33"
+        },
+        "products": [
+            {
+                "imageUrl": "http://ww3.sinaimg.cn/large/0060lm7Tly1fo6vt0p500j30af0ad758.jpg",
+                "detailUrl": "https://item.jd.com/4264502.html",
+                "title": "优乐美奶茶",
+                "description": "wifi/电话双网 您的智能小卫士",
+                "uid": "13212133313",
+                "amount": "2",
+                "pay": {
+                    "cost": "4.125",
+                    "discount": "7.5",
+                    "price": "5.5",
+                    "currency": "¥"
                 }
-            ],
-            "shop": {
-                "name": "克拉家园店",
-                "type": "shop",
-                "cartUid": "235353552352",
-                "uid": "54545454545"
             },
-            "delivery": {
-                "name": "黄沙",
-                "gender": "male",
-                "phoneNumber": "13888888888",
-                "location": "凯宾斯基",
-                "address": "C栋801",
-                "longitude": "85.66",
-                "latitude": "36.33"
-            },
-            "products": [
-                {
-                    "imageUrl": "http://ww3.sinaimg.cn/large/0060lm7Tly1fo6vt0p500j30af0ad758.jpg",
-                    "detailUrl": "https://item.jd.com/4264502.html",
-                    "title": "优乐美奶茶",
-                    "description": "wifi/电话双网 您的智能小卫士",
-                    "uid": "13212133313",
-                    "amount": "2",
-                    "pay": {
-                        "cost": "4.125",
-                        "discount": "7.5",
-                        "price": "5.5",
-                        "currency": "¥"
-                    }
-                },
-                {
-                    "imageUrl": "http://ww3.sinaimg.cn/large/0060lm7Tly1fo6vt0p500j30af0ad758.jpg",
-                    "detailUrl": "https://item.jd.com/4264502.html",
-                    "title": "优乐美奶茶",
-                    "description": "wifi/电话双网 您的智能小卫士",
-                    "uid": "13212133313",
-                    "amount": "2",
-                    "pay": {
-                        "cost": "4.125",
-                        "discount": "7.5",
-                        "price": "5.5",
-                        "currency": "¥"
-                    }
+            {
+                "imageUrl": "http://ww3.sinaimg.cn/large/0060lm7Tly1fo6vt0p500j30af0ad758.jpg",
+                "detailUrl": "https://item.jd.com/4264502.html",
+                "title": "优乐美奶茶",
+                "description": "wifi/电话双网 您的智能小卫士",
+                "uid": "13212133313",
+                "amount": "2",
+                "pay": {
+                    "cost": "4.125",
+                    "discount": "7.5",
+                    "price": "5.5",
+                    "currency": "¥"
                 }
-            ]
-        }
-    ]
+            }
+        ]
+    }
 }
 ```
 |params | 类型 | 描述 |
