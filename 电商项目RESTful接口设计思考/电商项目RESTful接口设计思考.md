@@ -932,15 +932,18 @@ Status:200 OK
             "actions": [
                 {
                     "action": "取消订单",
+                    "type": "cancel",
                     "category": "2353552352"
                 },
                 {
                     "action": "去付款",
-                    "category": "2353343535"
+                    "category": "2353343535",
+                    "type": "pay"
                 },
                 {
                     "action": "删除订单",
-                    "category": ""
+                    "category": "",
+                    "type": "delete"
                 }
             ],
             "shop": {
@@ -980,6 +983,7 @@ Status:200 OK
 |deliveryType|String|送货上门、快递服务|
 |actions|action数组|用户描述对该订单的操作，对应界面上的每条订单上的“删除订单、去付款、取消订单”等按钮|
 |action|对象|category订单状态的分类uid，表达对应的action操作所需要的参数的值。比如待付款状态要取消这条订单，则在订单的update接口中，category参数传这个uid|
+|type|String|针对订单的操作总共5种，其type值如下：1.去付款--pay；2.取消订单（cancel）；3.确认收货（receipt）；4.查看物流（logistics）；5.删除订单（delete）|
 
 #### 查询一条订单
 > 查询一条https://xxx.com/ec/v1/orders/{订单uid}
@@ -1943,7 +1947,11 @@ Content-Type: application/json;charset=UTF-8
 ```
 
 ###### 参数
-无
+>?params={type=smarthome}
+
+|params | 类型 | 描述 |
+| - | -| - |
+|type | String |表示当前商品的类型：智能家居smarthome、便利店/超市/商场shop|
 
 ###### 响应头
 
