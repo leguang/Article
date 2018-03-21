@@ -113,9 +113,9 @@ https://xxx.com/products/token=token_G34G34G34G34G35G5
 
 ### 个性参数（该方案待定）
 个性参数就是除了公共参数之外的，看能否考虑统一用json浓缩成一个参数，把想要表达的参数通过json中的key-value形式传递。
-> 例如：https://xxx.com/ec/v1/search/products?params={keyword:方便面,order:des}
+> 例如：https://xxx.com/ec/v1/search/products?params={keyword:方便面,sort:des}
 这种方式我暂时还不确定是否合理，或者考虑与业务相关的参数就用json形式包装，而与业务无关的个性参数就还是用传统的方式另立一个参数。
-> 例如：https://xxx.com/ec/v1/search/products?limit=10&offset=10&params={keyword:方便面,order:des}
+> 例如：https://xxx.com/ec/v1/search/products?limit=10&offset=10&params={keyword:方便面,sort:des}
 
 ### 公共响应头
 其中状态码要与公共响应体里的json中的code字段一样。
@@ -200,22 +200,22 @@ https://xxx.com/products/token=token_G34G34G34G34G35G5
 
 |分类|接口|参数|
 | - | -| - |
-|搜索search|https://xxx.com/ec/v1/search/{搜索分类：如products}|keyword、order等|
+|搜索search|https://xxx.com/ec/v1/search/{搜索分类：如products}|keyword、sort等|
 |首页home|https://xxx.com/ec/v1/home|keyword、category等|
-|配送delivery|https://xxx.com/ec/v1/delivery/{配送uid}|keyword、order、name、address、phone等|
-|分类（或者叫“更多”）category|https://xxx.com/ec/v1/category/{种类名称或者id，包括具体的种类和子种类}|keyword、order等|
-|订单order|https://xxx.com/ec/v1/order/{订单uid}|keyword、sort、order、productID等|
-|商品product|https://xxx.com/ec/v1/products/{具体商品uid}|keyword、category、order等
-|店铺shop|https://xxx.com/ec/v1/shop/{店铺uid}|keyword、order等|
-|关键字keyword|https://xxx.com/ec/v1/keyword/{具体关键字}|keyword、order等|
-|购物车cart|https://xxx.com/ec/v1/cart/{购物车id}|keyword、order等|
+|配送delivery|https://xxx.com/ec/v1/delivery/{配送uid}|keyword、sort、name、address、phone等|
+|分类（或者叫“更多”）category|https://xxx.com/ec/v1/category/{种类名称或者id，包括具体的种类和子种类}|keyword、sort等|
+|订单order|https://xxx.com/ec/v1/orders/{订单uid}|keyword、sort、sort、productID等|
+|商品product|https://xxx.com/ec/v1/products/{具体商品uid}|keyword、category、sort等
+|店铺shop|https://xxx.com/ec/v1/shop/{店铺uid}|keyword、sort等|
+|关键字keyword|https://xxx.com/ec/v1/keyword/{具体关键字}|keyword、sort等|
+|购物车cart|https://xxx.com/ec/v1/cart/{购物车id}|keyword、sort等|
 
 ### ~~登录注册部分接口~~
 ~~暂不考虑~~
 
 ### 关键字部分
 提取关键字只需要“增删改查”中的“查”，所以只有GET
-> 例如：https://xxx.com/ec/v1/keyword?params={keyword:方便面,order:des}
+> 例如：https://xxx.com/ec/v1/keyword?params={keyword:方便面,sort:des}
 不传参数则获取热门搜索，或者推荐搜索，这个由于界面上限制的是最多9个，所以不需要分页操作。
 
 ###### 请求头
@@ -228,7 +228,7 @@ Content-Type: application/json;charset=UTF-8
 
 ###### 参数
 
->?params={keyword:方便面,order:des}
+>?params={keyword:方便面,sort:des}
 
 |params | 类型 | 描述 |
 | - | -| -|
@@ -285,7 +285,7 @@ Status:200 OK
 ### 搜索部分
 提取关键字只需要“增删改查”中的“查”，所以只有GET
 由于智能硬件和便利店搜索的内容不一样，但是数据格式一样，因此只需一个接口。我们是搜索店铺里面的东西，所以只需要shopUid这个参数来区分。
->地址：https://xxx.com/ec/v1/search/products?params={keyword:方便面,shopUid=234234232,shopType=smarthome,order:des}
+>地址：https://xxx.com/ec/v1/search/products?params={keyword:方便面,shopUid=234234232,shopType=smarthome,sort:des}
 
 如果未来需要扩展，比如搜索用户https://xxx.com/ec/v1/search/user，比如搜索店铺https://xxx.com/ec/v1/search/shop
 
@@ -606,6 +606,9 @@ Content-Type: application/json;charset=UTF-8
 ###### 参数
 >?params={keyword:方便面,sort:des}
 如果是查询某一条递送时，由于uid已经在url上，所以返回一条指定递送数据。
+
+|params | 类型 | 描述 |
+| - | -| -|
 |sort | String | 排序参数，不传或者default-->综合排序，des-->降序，asc-->升序，priceDes-->价格从高到低，priceAsc-->价格从低到高，costDes-->总价从高到低，costAsc-->总价从低到高|
 
 ###### 响应头
@@ -1169,7 +1172,7 @@ Content-Type: application/json;charset=UTF-8
 
 ###### 参数
 不传参数则默认是返回一级分类。
->?params={type:orders,uid:1313113,keyword:方便面,order:des}
+>?params={type:orders,uid:1313113,keyword:方便面,sort:des}
 
 |params | 类型 | 描述 |
 | - | -| - |
