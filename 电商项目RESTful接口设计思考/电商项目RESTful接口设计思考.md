@@ -1006,7 +1006,7 @@ Status:200 OK
 |type|String|针对订单的操作总共5种，其type值如下：1.去付款--pay；2.取消订单（cancel）；3.确认收货（receipt）；4.查看物流（logistics）；5.删除订单（delete）|
 |type|String|如果是点击“查看物流”，则需要用到这个字段，跳转网页|
 
-#### 查询一条订单
+#### 查询一条订单（订单详情）
 > 查询一条https://xxx.com/ec/v1/orders/{订单uid}
 
 ###### 请求头
@@ -1117,7 +1117,13 @@ Status:200 OK
                     "currency": "¥"
                 }
             }
-        ]
+        ],
+        "express": {
+            "name": "小明同志",
+            "phoneNumber": "13811112222",
+            "imageUrl": "http://ww3.sinaimg.cn/large/0060lm7Tly1fo6vt0p500j30af0ad758.jpg",
+            "identity": "派送员"
+        }
     }
 }
 ```
