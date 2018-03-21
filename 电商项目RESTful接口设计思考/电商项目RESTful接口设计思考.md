@@ -84,6 +84,7 @@ https://xxx.com/products/token=token_G34G34G34G34G35G5
 ```
 {
     "token": "token_G34G34G34G34G35G5",
+	"fromPoint": "YsqApp"
 	其他参数……
 }
 ```
@@ -91,12 +92,24 @@ https://xxx.com/products/token=token_G34G34G34G34G35G5
 
 ```
     token: token_G34G34G34G34G35G5
+	"fromPoint": "YsqApp"
 	其他参数……
 ```
 
 |params | 类型 | 描述 |
 | - | -| - |
 |token | String | 检测权限、标识登录状态 |
+|fromPoint|String|用于区分该次请求到底是从哪个App发起的，以方便后台区分|
+
+|fromPoint |  对应项目 |
+| - | - |
+|亿社区 |  YsqApp |
+|宅宜购 |  MallApp |
+|美好生活 |  YsqMeilunApp |
+|威士丹利社区 |  YsqVensiApp |
+|高诚智能家居 |  SmartApp |
+|美伦安保 |  SmartMeilunApp |
+|猫眼 | SmartCateyeApp |
 
 ### 个性参数（该方案待定）
 个性参数就是除了公共参数之外的，看能否考虑统一用json浓缩成一个参数，把想要表达的参数通过json中的key-value形式传递。
