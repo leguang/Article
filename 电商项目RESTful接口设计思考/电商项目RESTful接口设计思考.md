@@ -189,7 +189,7 @@ https://xxx.com/products/token=token_G34G34G34G34G35G5
 | params | 类型 | 描述 |
 | - | -| -|
 | page | int | 页码 |
-| pageSize | int | 每一个的个数，该值固定 |
+| pageSize | int | 每一页的个数，该值固定 |
 
 ### 电商项目url预览
 ![url预览](https://i.imgur.com/3VKI6Oy.png)
