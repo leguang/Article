@@ -276,12 +276,10 @@ Status:200 OK
 
 ### 搜索部分
 提取关键字只需要“增删改查”中的“查”，所以只有GET
->由于智能硬件和便利店搜索的内容不一样，但是数据格式一样，所以：
-智能硬件：https://xxx.com/ec/v1/search/smarthome?params={keyword:方便面,order:des}
-便利店/商场/超市：https://xxx.com/ec/v1/search/shop?params={keyword:方便面,order:des}
+由于智能硬件和便利店搜索的内容不一样，但是数据格式一样，因此只需一个接口。我们是搜索店铺里面的东西，所以只需要shopUid这个参数来区分。
+>地址：https://xxx.com/ec/v1/search/products?params={keyword:方便面,shopUid=234234232,order:des}
 
-如果未来统一的搜索是商品，那接口应为：https://xxx.com/ec/v1/search/products?params={keyword:方便面,order:des}
-还可以扩展一下，比如搜索用户，搜索店铺等。不传参数是不允许的。
+如果未来需要扩展，比如搜索用户https://xxx.com/ec/v1/search/user，比如搜索店铺https://xxx.com/ec/v1/search/shop
 
 ###### 请求头
 
@@ -1245,11 +1243,13 @@ Content-Type: application/json;charset=UTF-8
 
 ###### 参数
 不传参数则默认返回的是根据系统推荐的产品，对应的业务是“为您推荐”。
->?params={category:1313113}
+>?params={category:1313113,shopType=smarthome,shopUid=23535325}
 
 |params | 类型 | 描述 |
 | - | - | - |
 |category | String | 某分类主键 |
+|shoptype | String | 表示当前店铺的类型，智能家居：smarthome；便利店/超市/商场：shop |
+|shopUid | String | 店铺主键 |
 |sort | String | 排序参数，不传或者default-->综合排序，des-->降序，asc-->升序，priceDes-->价格从高到低，priceAsc-->价格从低到高，costDes-->总价从高到低，costAsc-->总价从低到高|
 
 ###### 响应头
@@ -1988,11 +1988,12 @@ Content-Type: application/json;charset=UTF-8
 ###### 参数
 不同的店铺首页内容不一样，因为我们是以店铺为单位显示首页，而智能家居部分就相当于一个特殊的店铺，因此只需要通过传入店铺的uid来区分。不传参数就表达是默认获取智能家居这一特殊店铺中的首页内容。
 
->?params={shopUid=252345235235}
+>?params={shopUid=252345235235,shopType=smarthome}
 
 |params | 类型 | 描述 |
 | - | -| - |
 |shopUid | String |店铺uid，在定位选择的时候获取周边店铺信息，其中有包含店铺uid|
+|shopType | String |表示当前店铺的类型，智能家居：smarthome；便利店/超市/商场：shop|
 
 ###### 响应头
 
