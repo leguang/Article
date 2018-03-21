@@ -1731,7 +1731,7 @@ Status:200 OK
 |uid | String | 表示已修改商品的主键 |
 
 #### 查询购物车商品信息
-> 地址：https://xxx.com/ec/v1/carts/{cartUID}/products
+> 地址：https://xxx.com/ec/v1/carts/{cartUid}/products
 
 ###### 请求头
 
@@ -1742,13 +1742,11 @@ Content-Type: application/json;charset=UTF-8
 ```
 
 ###### 参数
->?params={shopUid=2562352352,sort:des}
-
-如果是查询某一条递送时，由于uid已经在url上，所以返回一条指定递送数据。
+>?params={cartUid=2562352352,sort:des}
 
 |params | 类型 | 描述 |
 | - | -| -|
-|shopUid | String |通过shopUid来筛选出每一个店铺对应的购物车中的产品列表|
+|cartUid | String |通过cartUid来筛选出每一个店铺对应的购物车中的产品列表|
 |sort | String | 排序参数，不传或者default-->综合排序，des-->降序，asc-->升序，priceDes-->价格从高到低，priceAsc-->价格从低到高，costDes-->总价从高到低，costAsc-->总价从低到高|
 
 ###### 响应头
