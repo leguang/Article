@@ -183,6 +183,14 @@ https://xxx.com/products/token=token_G34G34G34G34G35G5
 |415|不支持的媒体类型 , 请求的格式不受请求页面的支持。|
 |500|内部服务器错误。|
 
+### 分页
+分页适用于GET类型且返回集合数据的请求，根据如下参数进行分页操作。分页返回的数据见公共响应体。
+
+| params | 类型 | 描述 |
+| - | -| -|
+| page | int | 页码 |
+| pageSize | int | 每一个的个数，该值固定 |
+
 ### 电商项目url预览
 ![url预览](https://i.imgur.com/3VKI6Oy.png)
 
@@ -829,8 +837,9 @@ Status:200 OK
 
 #### 修改一条或者多条订单
 **由于订单是不能修改内容，只能修改状态分类的，即由一种状态修改成另一种状态，比如从“待付款”状态修改成“已取消”状态，因此只传这个category字段即可**
-> 修改一条订单：https://xxx.com/ec/v1/orders
-> 修改多条订单：https://xxx.com/ec/v1/orders/{订单uid}
+> 修改多条订单：https://xxx.com/ec/v1/orders
+
+> 修改一条订单：https://xxx.com/ec/v1/orders/{订单uid}
 
 ###### 请求头
 
@@ -841,7 +850,7 @@ Content-Type: application/json;charset=UTF-8
 ```
 
 ###### 参数
-如果是修改某一个，只需要接口改成https://xxx.com/ec/v1/orders/{订单uid}即可。
+如果是修改某一个，只需要接口改成https://xxx.com/ec/v1/orders/{订单uid}即可，其中uid参数就不需要再传了。
 ```
 {
     "message": "修改这几个订单的状态",
