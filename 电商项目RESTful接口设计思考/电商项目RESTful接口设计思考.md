@@ -1985,11 +1985,13 @@ Content-Type: application/json;charset=UTF-8
 ```
 
 ###### 参数
->?params={type=smarthome}
+不同的店铺首页内容不一样，因为我们是以店铺为单位显示首页，而智能家居部分就相当于一个特殊的店铺，因此只需要通过传入店铺的uid来区分。不传参数就表达是默认获取智能家居这一特殊店铺中的首页内容。
+
+>?params={shopUid=252345235235}
 
 |params | 类型 | 描述 |
 | - | -| - |
-|type | String |表示当前商品的类型：智能家居smarthome、便利店/超市/商场shop|
+|shopUid | String |店铺uid，在定位选择的时候获取周边店铺信息，其中有包含店铺uid|
 
 ###### 响应头
 
