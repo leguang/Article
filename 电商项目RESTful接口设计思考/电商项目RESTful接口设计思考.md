@@ -277,7 +277,7 @@ Status:200 OK
 ### 搜索部分
 提取关键字只需要“增删改查”中的“查”，所以只有GET
 由于智能硬件和便利店搜索的内容不一样，但是数据格式一样，因此只需一个接口。我们是搜索店铺里面的东西，所以只需要shopUid这个参数来区分。
->地址：https://xxx.com/ec/v1/search/products?params={keyword:方便面,shopUid=234234232,order:des}
+>地址：https://xxx.com/ec/v1/search/products?params={keyword:方便面,shopUid=234234232,shopType=smarthome,order:des}
 
 如果未来需要扩展，比如搜索用户https://xxx.com/ec/v1/search/user，比如搜索店铺https://xxx.com/ec/v1/search/shop
 
@@ -297,6 +297,7 @@ Content-Type: application/json;charset=UTF-8
 | - | -| -|
 |keyword | String | 查询的关键字 |
 |shopUid | String | 店铺主键 |
+|shoptype | String | 表示当前店铺的类型，智能家居：smarthome；便利店/超市/商场：shop |
 
 ###### 响应头
 
