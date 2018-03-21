@@ -296,7 +296,7 @@ Content-Type: application/json;charset=UTF-8
 |params | 类型 | 描述 |
 | - | -| -|
 |keyword | String | 查询的关键字 |
-
+|shopUid | String | 店铺主键 |
 
 ###### 响应头
 
