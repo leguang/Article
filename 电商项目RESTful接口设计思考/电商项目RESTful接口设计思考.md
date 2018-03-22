@@ -1896,12 +1896,63 @@ Status:200 OK
                 "attribute": "性别",
                 "values": [
                     {
-                        "stockQuantity": 30,
-                        "value": "男"
+                        "stockQuantity": 600,
+                        "value": "男",
+                        "skus": [
+                            "2",
+                            "3",
+                            "4",
+                            "6",
+                            "7",
+                            "8"
+                        ]
                     },
                     {
-                        "stockQuantity": 10,
-                        "value": "女"
+                        "stockQuantity": 600,
+                        "value": "女",
+                        "skus": [
+                            "10",
+                            "11",
+                            "13",
+                            "15",
+                            "17",
+                            "18"
+                        ]
+                    }
+                ]
+            },
+            {
+                "attribute": "颜色",
+                "values": [
+                    {
+                        "stockQuantity": 400,
+                        "value": "红色",
+                        "skus": [
+                            "2",
+                            "3",
+                            "10",
+                            "11"
+                        ]
+                    },
+                    {
+                        "stockQuantity": 400,
+                        "value": "黄色",
+                        "skus": [
+                            "4",
+                            "6",
+                            "13",
+                            "15"
+                        ]
+                    },
+                    {
+                        "stockQuantity": 400,
+                        "value": "蓝色",
+                        "skus": [
+                            "7",
+                            "8",
+                            "17",
+                            "18"
+                        ]
                     }
                 ]
             },
@@ -1909,63 +1960,145 @@ Status:200 OK
                 "attribute": "尺码",
                 "values": [
                     {
-                        "stockQuantity": 30,
-                        "value": "红色"
+                        "stockQuantity": 400,
+                        "value": "X码",
+                        "skus": [
+                            "4",
+                            "7",
+                            "10",
+                            "13"
+                        ]
                     },
                     {
-                        "stockQuantity": 10,
-                        "value": "黄色"
+                        "stockQuantity": 400,
+                        "value": "L码",
+                        "skus": [
+                            "3",
+                            "6",
+                            "15",
+                            "18"
+                        ]
                     },
                     {
-                        "stockQuantity": 0,
-                        "value": "蓝色"
-                    }
-                ]
-            },
-            {
-                "attribute": "尺码",
-                "values": [
-                    {
-                        "stockQuantity": 30,
-                        "value": "X码"
-                    },
-                    {
-                        "stockQuantity": 10,
-                        "value": "L码"
-                    },
-                    {
-                        "stockQuantity": 0,
-                        "value": "M码"
+                        "stockQuantity": 400,
+                        "value": "M码",
+                        "skus": [
+                            "2",
+                            "8",
+                            "11",
+                            "17"
+                        ]
                     }
                 ]
             }
         ],
         "skus": [
             {
-                "sku": "男+红色+X码",
-                "stockQuantity": 30,
+                "sku": "男+红色+M码",
+                "stockQuantity": 100,
                 "price": 50,
                 "currency": "¥",
                 "note": "备注：该商品XXX",
-                "uid": "34646464464",
+                "uid": "2",
+                "imageUrl": "http://ww3.sinaimg.cn/large/0060lm7Tly1fo6vt0p500j30af0ad758.jpg"
+            },
+            {
+                "sku": "男+红色+L码",
+                "stockQuantity": 100,
+                "price": 50,
+                "currency": "¥",
+                "note": "备注：该商品XXX",
+                "uid": "3",
                 "imageUrl": "http://ww3.sinaimg.cn/large/0060lm7Tly1fo6vt0p500j30af0ad758.jpg"
             },
             {
                 "sku": "男+黄色+X码",
-                "stockQuantity": 30,
+                "stockQuantity": 100,
                 "price": 50,
                 "currency": "¥",
                 "note": "备注：该商品XXX",
-                "uid": "34646464464",
+                "uid": "4",
                 "imageUrl": "http://ww3.sinaimg.cn/large/0060lm7Tly1fo6vt0p500j30af0ad758.jpg"
             },
             {
-                "sku": "男+黄色+M码",
-                "stockQuantity": 30,
+                "sku": "男+黄色+L码",
+                "stockQuantity": 100,
                 "price": 50,
                 "currency": "¥",
                 "note": "备注：该商品XXX",
-                "uid": "34646464464",
+                "uid": "6",
+                "imageUrl": "http://ww3.sinaimg.cn/large/0060lm7Tly1fo6vt0p500j30af0ad758.jpg"
+            },
+            {
+                "sku": "男+蓝色+X码",
+                "stockQuantity": 100,
+                "price": 50,
+                "currency": "¥",
+                "note": "备注：该商品XXX",
+                "uid": "7",
+                "imageUrl": "http://ww3.sinaimg.cn/large/0060lm7Tly1fo6vt0p500j30af0ad758.jpg"
+            },
+            {
+                "sku": "男+蓝色+M码",
+                "stockQuantity": 100,
+                "price": 50,
+                "currency": "¥",
+                "note": "备注：该商品XXX",
+                "uid": "8",
+                "imageUrl": "http://ww3.sinaimg.cn/large/0060lm7Tly1fo6vt0p500j30af0ad758.jpg"
+            },
+            {
+                "sku": "女+红色+X码",
+                "stockQuantity": 100,
+                "price": 50,
+                "currency": "¥",
+                "note": "备注：该商品XXX",
+                "uid": "10",
+                "imageUrl": "http://ww3.sinaimg.cn/large/0060lm7Tly1fo6vt0p500j30af0ad758.jpg"
+            },
+            {
+                "sku": "女+红色+M码",
+                "stockQuantity": 100,
+                "price": 50,
+                "currency": "¥",
+                "note": "备注：该商品XXX",
+                "uid": "11",
+                "imageUrl": "http://ww3.sinaimg.cn/large/0060lm7Tly1fo6vt0p500j30af0ad758.jpg"
+            },
+            {
+                "sku": "女+黄色+X码",
+                "stockQuantity": 100,
+                "price": 50,
+                "currency": "¥",
+                "note": "备注：该商品XXX",
+                "uid": "13",
+                "imageUrl": "http://ww3.sinaimg.cn/large/0060lm7Tly1fo6vt0p500j30af0ad758.jpg"
+            },
+            {
+                "sku": "女+黄色+L码",
+                "stockQuantity": 100,
+                "price": 50,
+                "currency": "¥",
+                "note": "备注：该商品XXX",
+                "uid": "15",
+                "imageUrl": "http://ww3.sinaimg.cn/large/0060lm7Tly1fo6vt0p500j30af0ad758.jpg"
+            },
+            {
+                "sku": "女+蓝色+M码",
+                "stockQuantity": 100,
+                "price": 50,
+                "currency": "¥",
+                "note": "备注：该商品XXX",
+                "uid": "17",
+                "imageUrl": "http://ww3.sinaimg.cn/large/0060lm7Tly1fo6vt0p500j30af0ad758.jpg"
+            },
+            {
+                "sku": "女+蓝色+L码",
+                "stockQuantity": 100,
+                "price": 50,
+                "currency": "¥",
+                "note": "备注：该商品XXX",
+                "uid": "18",
                 "imageUrl": "http://ww3.sinaimg.cn/large/0060lm7Tly1fo6vt0p500j30af0ad758.jpg"
             }
         ]
@@ -2183,7 +2316,6 @@ Status:200 OK
 |link | String | 跳转到web的url|
 |description | String | 对商品的简单描述 |
 |uid | String | 该商品唯一识别id |
-|type | String | 表示当前商品的类型：智能家居smarthome、便利店/超市/商场shop |
 |price | String | 价格 |
 |currency | String | 标识币种，可以是符号，也可以是文字，看前后端的需求，也可以再立一个字段表示 |
 |type | String | product表示跳转到原生详情页，web表示跳转到web页面 |
