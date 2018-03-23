@@ -1752,6 +1752,13 @@ Status:200 OK
 ```
 {
     "code": 200,
+    "first": "https://...",
+    "last": "https://...",
+    "message": "居然被你查询成功了",
+    "next": "https://...",
+    "page": 0,
+    "pageSize": 20,
+    "previous": "https://...",
     "data": [
         {
             "products": [
@@ -1767,7 +1774,8 @@ Status:200 OK
                     },
                     "share": "https://item.jd.com/4264502.html",
                     "title": "巧克力豆",
-                    "uid": "45645646545454"
+                    "uid": "45645646545454",
+                    "sku": "343463463463"
                 },
                 {
                     "count": 5,
@@ -1781,7 +1789,8 @@ Status:200 OK
                     },
                     "share": "https://item.jd.com/4264502.html",
                     "title": "大力糖",
-                    "uid": "45645646545454"
+                    "uid": "45645646545454",
+                    "sku": "25235235235"
                 }
             ],
             "shop": {
@@ -1805,7 +1814,8 @@ Status:200 OK
                     },
                     "share": "https://item.jd.com/4264502.html",
                     "title": "巧克力豆",
-                    "uid": "45645646545454"
+                    "uid": "45645646545454",
+                    "sku": "42523523523"
                 },
                 {
                     "count": 5,
@@ -1819,7 +1829,8 @@ Status:200 OK
                     },
                     "share": "https://item.jd.com/4264502.html",
                     "title": "大力糖",
-                    "uid": "45645646545454"
+                    "uid": "45645646545454",
+                    "sku": "5235235235"
                 }
             ],
             "shop": {
@@ -1829,14 +1840,7 @@ Status:200 OK
                 "uid": "123412312"
             }
         }
-    ],
-    "first": "https://...",
-    "last": "https://...",
-    "message": "居然被你查询成功了",
-    "next": "https://...",
-    "page": 0,
-    "pageSize": 20,
-    "previous": "https://..."
+    ]
 }
 ```
 |key | 类型 | 描述 |
@@ -1856,7 +1860,7 @@ Status:200 OK
 sku为最小库存单元，这部分概念需要大家自行补习一下。反正要想唯一确定一个库存里的商品，就需要一系列属性来确定，这里的属性包括分类属性+产品属性+其他属性。在详情页中点击放入购物车或购买时，请求该接口来获取商品的详细规格来选择商品。
 
 #### 查询一条或者多条sku
-> 地址：https://xxx.com/ec/v1/skusets/{skuset的uid}
+> 地址：https://xxx.com/ec/v1/skusets
 
 ###### 请求头
 
@@ -1867,7 +1871,12 @@ Content-Type: application/json;charset=UTF-8
 ```
 
 ###### 参数
-无
+>?params={product:2353532532,sku:12441412}
+
+|params | 类型 | 描述 |
+| - | -| - |
+|product | String | 产品的uid，以此区分不同产品的sku集合 |
+|sku | String | sku的uid，以此来告诉后台，是否选中某个sku的值 |
 
 ###### 响应头
 
