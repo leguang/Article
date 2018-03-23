@@ -1898,6 +1898,7 @@ Status:200 OK
                     {
                         "stockQuantity": 600,
                         "value": "男",
+                        "isSelected": true,
                         "skus": [
                             "2",
                             "3",
@@ -1910,6 +1911,7 @@ Status:200 OK
                     {
                         "stockQuantity": 600,
                         "value": "女",
+                        "isSelected": false,
                         "skus": [
                             "10",
                             "11",
@@ -1927,6 +1929,7 @@ Status:200 OK
                     {
                         "stockQuantity": 400,
                         "value": "红色",
+                        "isSelected": true,
                         "skus": [
                             "2",
                             "3",
@@ -1937,6 +1940,7 @@ Status:200 OK
                     {
                         "stockQuantity": 400,
                         "value": "黄色",
+                        "isSelected": false,
                         "skus": [
                             "4",
                             "6",
@@ -1947,6 +1951,7 @@ Status:200 OK
                     {
                         "stockQuantity": 400,
                         "value": "蓝色",
+                        "isSelected": false,
                         "skus": [
                             "7",
                             "8",
@@ -1962,6 +1967,7 @@ Status:200 OK
                     {
                         "stockQuantity": 400,
                         "value": "X码",
+                        "isSelected": true,
                         "skus": [
                             "4",
                             "7",
@@ -1972,6 +1978,7 @@ Status:200 OK
                     {
                         "stockQuantity": 400,
                         "value": "L码",
+                        "isSelected": false,
                         "skus": [
                             "3",
                             "6",
@@ -1982,6 +1989,7 @@ Status:200 OK
                     {
                         "stockQuantity": 400,
                         "value": "M码",
+                        "isSelected": false,
                         "skus": [
                             "2",
                             "8",
@@ -2110,6 +2118,7 @@ Status:200 OK
 |attributes | 数组 | 该产品的属性集合 |
 |attribute | String | 属性类型，对应着一系列值values |
 |values | 数组 | 对应的属性值的集合 |
+|isSelected | boolean | 是否选中，这个只有商品出现在购物车中的时候，才有会用到这个值，并且实际是true还是false要看购物车中选的是什么 |
 |stockQuantity | 整型 | 库存数量 |
 |shopType | String | 店铺类型 |
 |price | String | 价格，精确到小数点后两位，单元为元 |
