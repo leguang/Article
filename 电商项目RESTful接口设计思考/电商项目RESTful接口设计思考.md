@@ -1775,7 +1775,8 @@ Status:200 OK
                     "share": "https://item.jd.com/4264502.html",
                     "title": "巧克力豆",
                     "uid": "45645646545454",
-                    "sku": "343463463463"
+                    "skuID": "343463463463",
+                    "sku": "男+红色+X码"
                 },
                 {
                     "count": 5,
@@ -1790,7 +1791,8 @@ Status:200 OK
                     "share": "https://item.jd.com/4264502.html",
                     "title": "大力糖",
                     "uid": "45645646545454",
-                    "sku": "25235235235"
+                    "sku": "男+红色+X码",
+                    "skuID": "23523523523"
                 }
             ],
             "shop": {
@@ -1815,7 +1817,8 @@ Status:200 OK
                     "share": "https://item.jd.com/4264502.html",
                     "title": "巧克力豆",
                     "uid": "45645646545454",
-                    "sku": "42523523523"
+                    "sku": "男+红色+X码",
+                    "skuID": "4124124124"
                 },
                 {
                     "count": 5,
@@ -1830,7 +1833,8 @@ Status:200 OK
                     "share": "https://item.jd.com/4264502.html",
                     "title": "大力糖",
                     "uid": "45645646545454",
-                    "sku": "5235235235"
+                    "sku": "男+红色+X码",
+                    "skuID": "23523523532"
                 }
             ],
             "shop": {
