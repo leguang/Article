@@ -1353,6 +1353,11 @@ Status:200 OK
     "message": "居然被你查询成功了",
     "code": 200,
     "data": {
+        "title": "巧克力豆",
+        "uid": "45645646545454",
+        "description": "500g/包",
+        "share": "https://item.jd.com/4264502.html",
+        "stockQuantity": 600,
         "images": [
             {
                 "image": "http://ww3.sinaimg.cn/large/0060lm7Tly1fo6vt0p500j30af0ad758.jpg",
@@ -1367,10 +1372,6 @@ Status:200 OK
                 "discription": "500g/包"
             }
         ],
-        "title": "巧克力豆",
-        "uid": "45645646545454",
-        "description": "500g/包",
-        "share": "https://item.jd.com/4264502.html",
         "pay": {
             "cost": "4.125",
             "discount": "7.5",
@@ -1447,6 +1448,7 @@ Status:200 OK
 |shop | 对象 | 该商品所属的商店信息，不过多解释 |
 |detail | 对象 | 其中的images是详情图片列表 |
 |attributes | 数组 | 包含该商品的一系列附加属性，比如服务，优惠等 |
+|stockQuantity | String | 该商品的总库存 |
 
 ## 店铺部分
 店铺接口只需要“增删改查”中的“查”，所以只有GET
@@ -1557,10 +1559,12 @@ Content-Type: application/json;charset=UTF-8
     "data": [
         {
             "uid": "13212133313",
+            "sku": "35325325235",
             "amount": "5"
         },
         {
             "uid": "13212133313",
+            "sku": "456464654654",
             "amount": "5"
         }
     ]
@@ -1571,6 +1575,7 @@ Content-Type: application/json;charset=UTF-8
 |params | 类型 | 描述 |
 | - | -| -|
 |uid | String | 商品主键 |
+|sku | String | 最后选中的某个sku的uid |
 |amount | String | 商品个数 |
 
 ###### 响应头
@@ -1657,9 +1662,10 @@ Status:200 OK
 | - | -| -|
 |uid | String | 表示已删除的商品主键 |
 
-#### 修改购物车一个或者多个商品
-> 修改购物车一个商品：https://xxx.com/ec/v1/carts/{cartUID}/products/{productUID}
-> 修改购物车多个商品：https://xxx.com/ec/v1/carts/{cartUID}/products
+#### 修改购物车中一个或者多个商品
+> 修改购物车中多个商品：https://xxx.com/ec/v1/carts/{cartUID}/products
+> 修改购物车中一个商品：https://xxx.com/ec/v1/carts/{cartUID}/products/{productUID}
+
 ###### 请求头
 
 ```
@@ -1675,37 +1681,23 @@ Content-Type: application/json;charset=UTF-8
     "message": "修改这几个商品",
     "data": [
         {
-            "title": "巧克力豆",
-            "uid": "45645646545454",
-            "description": "500g/包",
-            "share": "https://item.jd.com/4264502.html",
-            "pay": {
-                "cost": "4.125",
-                "discount": "7.5",
-                "price": "5.5",
-                "currency": "¥"
-            },
-            "shop": {
-                "name": "克拉家园店",
-                "type": "shop",
-                "uid": "54545454545"
-            }
+            "uid": "13212133313",
+            "sku": "35325325235",
+            "amount": "5"
+        },
+        {
+            "uid": "13212133313",
+            "sku": "456464654654",
+            "amount": "5"
         }
     ]
 }
 ```
-|key | 类型 | 描述 |
+|params | 类型 | 描述 |
 | - | -| -|
-|share | String | 跳转到该商品详情页的web url|
-|title | String | 该商品的名称|
-|description | String | 对商品的简单描述 |
-|uid | String | 最外层为该商品主键，shop内的uid为店铺uid |
-|pay | 对象 | 描述在该商品的价格展示，cost是最终价格，price是打折前的价格，discount是折扣，currency是币种 |
-|cost | String | 最终价格 |
-|price | String | 打折前的价格 |
-|discount | String | 折扣 |
-|currency | String | 标识币种，可以是符号，也可以是文字，看前后端的需求，也可以再立一个字段表示 |
-|shop | 对象 | 该商品所属的商店信息，不过多解释 |
+|uid | String | 商品主键 |
+|sku | String | 最后选中的某个sku的uid |
+|amount | String | 商品个数 |
 
 ###### 响应头
 
@@ -1891,6 +1883,13 @@ Status:200 OK
     "code": "200",
     "message": "居然被你查询成功了",
     "data": {
+        "stockQuantity": 600,
+        "pay": {
+            "cost": "4.125",
+            "discount": "7.5",
+            "price": "5.5",
+            "currency": "¥"
+        },
         "attributes": [
             {
                 "attribute": "性别",
@@ -2123,6 +2122,8 @@ Status:200 OK
 |shopType | String | 店铺类型 |
 |price | String | 价格，精确到小数点后两位，单元为元 |
 |currency | String | 标识币种，可以是符号，也可以是文字，看前后端的需求，也可以再立一个字段表示 |
+|stockQuantity|String|库存总数量|
+|pay|对象|总价格，有可能是个区间|
 
 ### 首页部分
 理论上来说是不需要这个接口的，根据已有的接口是可以拼凑出现在业务需求的数据的，但这样的话需要同时访问的接口数目过多，考虑到性能问题，则合并出一个home接口来。
