@@ -1852,16 +1852,16 @@ Status:200 OK
 |currency | String | 标识币种，可以是符号，也可以是文字，看前后端的需求，也可以再立一个字段表示 |
 |shop | 对象 | 该商品所属的商店信息，不过多解释 |
 
-### skus部分（最小库存单元集合）
+### skusets部分（最小库存单元集合）
 sku为最小库存单元，这部分概念需要大家自行补习一下。反正要想唯一确定一个库存里的商品，就需要一系列属性来确定，这里的属性包括分类属性+产品属性+其他属性。在详情页中点击放入购物车或购买时，请求该接口来获取商品的详细规格来选择商品。
 
 #### 查询一条或者多条sku
-> 地址：https://xxx.com/ec/v1/skus/{sku的uid}
+> 地址：https://xxx.com/ec/v1/skusets/{skuset的uid}
 
 ###### 请求头
 
 ```
-GET /ec/v1/skus/566646464
+GET /ec/v1/skusets/566646464
 Accept: application/json
 Content-Type: application/json;charset=UTF-8
 ```
