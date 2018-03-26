@@ -684,8 +684,7 @@ Status:200 OK
 > 地址：https://xxx.com/ec/v1/orders/{订单uid}
 
 #### 新增一条或者多条订单
-> 新增一条订单：https://xxx.com/ec/v1/orders
-> 新增多条订单：https://xxx.com/ec/v1/orders/{订单uid}
+> 地址：https://xxx.com/ec/v1/orders
 
 ###### 请求头
 
