@@ -708,11 +708,13 @@ Content-Type: application/json;charset=UTF-8
             "products": [
                 {
                     "uid": "13212133313",
-                    "amount": "5"
+                    "amount": "5",
+                    "sku": "525235"
                 },
                 {
                     "uid": "13212133313",
-                    "amount": "5"
+                    "amount": "5",
+                    "sku": "525235"
                 }
             ]
         },
@@ -722,11 +724,13 @@ Content-Type: application/json;charset=UTF-8
             "products": [
                 {
                     "uid": "13212133313",
-                    "amount": "5"
+                    "amount": "5",
+                    "sku": "525235"
                 },
                 {
                     "uid": "13212133313",
-                    "amount": "5"
+                    "amount": "5",
+                    "sku": "525235"
                 }
             ]
         }
