@@ -1175,11 +1175,12 @@ Content-Type: application/json;charset=UTF-8
 
 ###### 参数
 不传参数则默认是返回一级分类。
->?params={type:orders,uid:1313113,keyword:方便面,sort:des}
+>?params={type:orders,uid:1313113,shopUid:64646464,keyword:方便面,sort:des}
 
 |params | 类型 | 描述 |
 | - | -| - |
-|uid | String | 某分类主键 |
+|uid | String | 某分类主键，不传则表示一级分类 |
+|shopUid | String | 某某店铺的主键，因为每一个店铺的分类不一样，如果这个参数不传则默认表示智能家居的 |
 |type | String |orders表示查询的订单状态分类，products表示查询商品分类|
 |keyword | String | 查询的关键字 |
 |sort | String | 排序参数，不传或者default-->综合排序，des-->降序，asc-->升序，priceDes-->价格从高到低，priceAsc-->价格从低到高，costDes-->总价从高到低，costAsc-->总价从低到高|
