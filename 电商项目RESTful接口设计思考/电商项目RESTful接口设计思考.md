@@ -1248,6 +1248,7 @@ Status:200 OK
 |category | String | 种类名称 |
 |uid | String | 种类主键，**外层json中的uid表示其父分类的uid，如果是一级分类，则其父分类uid可以为空字符串** |
 |parentUid | String | 如果没有父分类则可以为空 |
+|url | String | 该分类的图片地址，应对某些分类需要显示图片的需求 |
 |children | String数组 | 如果没有子分类则返回为空|
 
 ### 商品（产品）部分
