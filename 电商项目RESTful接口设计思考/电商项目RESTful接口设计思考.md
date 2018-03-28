@@ -1208,14 +1208,17 @@ Status:200 OK
             "parentUid": "25235235235235",
             "category": "智能主机",
             "uid": "516165654656",
+            "url": "http://ww3.sinaimg.cn/large/0060lm7Tly1fo6vt0p500j30af0ad758.jpg",
             "children": [
                 {
                     "category": "智能门锁",
-                    "uid": "516165654656"
+                    "uid": "516165654656",
+                    "url": "http://ww3.sinaimg.cn/large/0060lm7Tly1fo6vt0p500j30af0ad758.jpg"
                 },
                 {
                     "category": "智能门锁",
-                    "uid": "516165654656"
+                    "uid": "516165654656",
+                    "url": "http://ww3.sinaimg.cn/large/0060lm7Tly1fo6vt0p500j30af0ad758.jpg"
                 }
             ]
         },
@@ -1223,14 +1226,17 @@ Status:200 OK
             "parentUid": "25235235235235",
             "category": "智能主机",
             "uid": "516165654656",
+            "url": "http://ww3.sinaimg.cn/large/0060lm7Tly1fo6vt0p500j30af0ad758.jpg",
             "children": [
                 {
                     "category": "智能门锁",
-                    "uid": "516165654656"
+                    "uid": "516165654656",
+                    "url": "http://ww3.sinaimg.cn/large/0060lm7Tly1fo6vt0p500j30af0ad758.jpg"
                 },
                 {
                     "category": "智能门锁",
-                    "uid": "516165654656"
+                    "uid": "516165654656",
+                    "url": "http://ww3.sinaimg.cn/large/0060lm7Tly1fo6vt0p500j30af0ad758.jpg"
                 }
             ]
         }
