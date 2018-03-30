@@ -202,7 +202,7 @@ https://xxx.com/products/token=token_G34G34G34G34G35G5
 | - | -| - |
 |搜索search|https://xxx.com/ec/v1/search/{搜索分类：如products}|keyword、sort等|
 |首页home|https://xxx.com/ec/v1/home|keyword、category等|
-|配送delivery|https://xxx.com/ec/v1/delivery/{配送uid}|keyword、sort、name、address、phone等|
+|配送delivery|https://xxx.com/ec/v1/deliveries/{配送uid}|keyword、sort、name、address、phone等|
 |分类（或者叫“更多”）category|https://xxx.com/ec/v1/category/{种类名称或者id，包括具体的种类和子种类}|keyword、sort等|
 |订单order|https://xxx.com/ec/v1/orders/{订单uid}|keyword、sort、sort、productID等|
 |商品product|https://xxx.com/ec/v1/products/{具体商品uid}|keyword、category、sort等
