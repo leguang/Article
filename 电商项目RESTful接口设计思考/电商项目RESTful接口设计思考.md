@@ -743,7 +743,8 @@ Content-Type: application/json;charset=UTF-8
 | - | -| -|
 |外层uid | String | 递送信息的主键，由这个ID可以查询递送信息，包括人的信息和地址信息 |
 |note | String | 留言 |
-|uid | String | 商品主键 |
+|from | String | 留言 |
+|uid | String | detail表示从详情页中的立即购买生成的订单，cart表示在购物车中生成的订单 |
 |amount | String | 商品个数 |
 
 ###### 响应头
