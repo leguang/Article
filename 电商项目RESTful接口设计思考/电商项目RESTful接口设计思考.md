@@ -704,6 +704,7 @@ Content-Type: application/json;charset=UTF-8
         {
             "uid": "6666565656",
             "note": "带一个勺子",
+            "from": "detail",
             "products": [
                 {
                     "uid": "13212133313",
@@ -720,6 +721,7 @@ Content-Type: application/json;charset=UTF-8
         {
             "uid": "6666565656",
             "note": "带一个勺子",
+            "from": "detail",
             "products": [
                 {
                     "uid": "13212133313",
