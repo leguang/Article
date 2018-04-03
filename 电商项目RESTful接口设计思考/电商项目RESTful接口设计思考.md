@@ -1698,13 +1698,19 @@ Content-Type: application/json;charset=UTF-8
     "data": [
         {
             "uid": "13212133313",
-            "sku": "35325325235",
-            "amount": "5"
+            "amount": "5",
+            "skus": [
+                "35325325235",
+                "35325325235"
+            ]
         },
         {
             "uid": "13212133313",
-            "sku": "456464654654",
-            "amount": "5"
+            "amount": "5",
+            "skus": [
+                "35325325235",
+                "35325325235"
+            ]
         }
     ]
 }
@@ -1712,7 +1718,7 @@ Content-Type: application/json;charset=UTF-8
 |params | 类型 | 描述 |
 | - | -| -|
 |uid | String | 商品主键 |
-|sku | String | 最后选中的某个sku的uid |
+|skus | String数组 | 第0个表示旧的sku的uid，第1个表示新的sku的uid |
 |amount | String | 商品个数 |
 
 ###### 响应头
