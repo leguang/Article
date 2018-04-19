@@ -14,7 +14,7 @@
 * [ 其他的一些规范](#10-其他的一些规范)
 
 
-# 一声笑Android端架构和技术选型
+# 一声笑Android端架构与技术选型
 这份文档可看做我司Android部分项目简介和技术简介。由于时间紧凑，若有遗漏可通过QQ/微信666233联系我询问。
 
 ### 前言
@@ -25,12 +25,11 @@
 ### IDE
 Android Studio在3.0这一版本改动比较大，功能上增强了不少，起码可以原生使用lambda，也可以使用Stream流操作集合，这些在数据处理上都是很好的。
 
-### 插件
-工欲善其事必先利其器
-
+### 工具插件
+工欲善其事必先利其器，配合好插件事半功倍，具体请参考，[Android 开发者工具](http://www.jcodecraeer.com/a/anzhuokaifa/androidkaifa/2017/0526/7973.html)。
 
 ## 规范
-无规矩不成方圆，为了有利于项目维护、增强代码可读性、提升 Code Review 效率以及规范团队协作开发，应当遵守一定的规范，具体参考
+无规矩不成方圆，为了有利于项目维护、增强代码可读性、提升 Code Review 效率以及规范团队协作开发，应当遵守一定的规范，具体请参考[Android 开发者工具](http://www.jcodecraeer.com/a/anzhuokaifa/androidkaifa/2017/0526/7973.html)。
 
 ## Android部分技术栈
 
