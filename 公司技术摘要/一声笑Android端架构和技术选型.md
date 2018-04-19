@@ -47,7 +47,7 @@ Android Studio在3.0这一版本改动比较大，功能上增强了不少，起
 - folding-plugin
 - Android Studio Prettify
 
-更多详情，请参考，[Android 开发者工具](http://www.jcodecraeer.com/a/anzhuokaifa/androidkaifa/2017/0526/7973.html)。
+更多详情请参考：[Android 开发者工具](http://www.jcodecraeer.com/a/anzhuokaifa/androidkaifa/2017/0526/7973.html)。
 
 ## 规范
 一名二姓三风水，四积阴德五读书，名不正则言不顺，言不顺则事难成。软件开发其实就是门命名的艺术，所以首先定义一些规范，提出一些硬性要求，大家在命名的时候尽量多花点心思，多参考优秀的命名风格（强烈推荐参考：[阿里巴巴Java开发手册](https://github.com/leguang/Article/blob/master/阿里巴巴Android开发手册.pdf)），以利于项目维护、增强代码可读性、提升 Code Review 效率以及规范团队协作开发，让我们按照规范自成方圆，具体请参考：[Android 开发者工具](https://github.com/leguang/Article/blob/master/Android开发规范/Android开发规范.md)。同时开源配合阿里巴巴开源的java代码规范检测插件，尽量做到各个维度的规范。
