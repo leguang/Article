@@ -36,7 +36,7 @@
 ## 开发环境
 
 ### IDE
-Android Studio在3.0这一版本改动比较大，功能上增强了不少，起码可以原生使用Lambda，也可以使用Stream流操作集合，这些在数据处理上都是很好的。
+使用Android Studio3.0及以上版本，Android Studio在3.0这一版本改动比较大，功能上增强了不少，起码可以原生使用Lambda，也可以使用Stream流操作集合，这些在数据处理上都是很好的。
 
 ### 工具插件
 工欲善其事必先利其器，配合好插件事半功倍，以下是几个最常用的，需要安装一下。
@@ -78,14 +78,16 @@ Android Studio在3.0这一版本改动比较大，功能上增强了不少，起
 
 ### MVP模式
 MVC/MVP/MVVM模式有很多，这里所说的也不是纯粹的MVP，应该是MVP和MVVM混合体的改造版，目的还是为了充分解耦和方便调试。同时为了方便调试，各层之间完全依赖接口，如下图所示：
+
 ![MVP模式](https://i.imgur.com/UgFvZJg.jpg)
+
 同时由于我们强调组件化、模块化，可以总结为按业务分模块，按功能分组件，按MVP分层。
 
 ### UI框架
 为了取得更好的性能，页面更好的管理，整体UI框架以多Activity+多Fragment的形式搭建，界面经历优先选择使用Fragment，Activity只做Fragment的容器，同时Fragment做为MVP模式中的View层。使用了Fragmentation这个框架来操作Fragment，这样合理的控制Activity个数，也使得界面更轻量级。
 
 ### 依赖
-公共依赖配置在ABse module的build.gradle里，其他特殊需求的依赖配置在main module的build.gradle中，可自行到github上查看学习。
+公共依赖配置在abse module的build.gradle里，其他特殊需求的依赖配置在main module的build.gradle中，可自行到Github上查看学习。
 - 网络访问框架：OkHttp、Retrofit配合RxJava2。
 - 图片加载框架：Glide、Fresco、Picasso。
 - 缓存框架：DiskLruCache、 Robospice。
@@ -106,7 +108,7 @@ MVC/MVP/MVVM模式有很多，这里所说的也不是纯粹的MVP，应该是MV
 统一使用git进行管理。
 
 ## 前后端分离
-理论上在立项之后，由于前面的充分准备，加上模块化的开发，前期在UI图还没拿到手之前，就能将一个App的最初期的任务如项目搭建、闪屏页、欢迎页、注册登录、个人信息、设置等常规模块通过引人的方式全部完成。之后再根据接口约束开发，不需要等着后台接口做好再动手。
+理论上在立项之后，由于前面的充分准备，加上模块化的开发，前期在UI图还没拿到手之前，就能将一个App最初期的任务如项目搭建、闪屏页、欢迎页、注册登录、个人信息、设置等常规模块通过引人的方式快速完成。之后再根据接口约束开发，不需要等着后台接口做好再动手。
 
 ### RESTful接口
 RESTful接口是时下流行接口规范，前后端都有很多优秀的框架完成这种规范，这样大家都能减少沟通成本。提前定义好接口和数据内容，可以使用Swagger来管理（配合Postman）接口，前端基于假数据开发，只要符合规范即可，最后正式版也只需要改基地址而已。同时也有一些要求如下：
@@ -146,9 +148,10 @@ https://{serviceRoot}/{collection}/{id}
 
 ### 公共请求头
 通过Content-Type指定请求与返回的数据格式有json和xml,暂时我们只管json的。其中请求数据还要指定Accept。
->Accept: application/json
->Content-Type: application/json;charset=UTF-8
-
+```
+Accept: application/json
+Content-Type: application/json;charset=UTF-8
+```
 ### 公共参数
 公共参数是指每一个接口应该传的参数，同时后端要指定公共参数的默认值，**且要保证没有传公共参数不会报错，所以需要一定的容错性，比如priceDes这个参数值，如果是用的是全部小写的，只要是不冲突，则可认为是准确的参数并且表达了按价格降序排列这个语意**。建议公共参数放到请求头里。
 
@@ -163,7 +166,7 @@ https://xxx.com/products/token=token_G34G34G34G34G35G5
 
 ```
 {
-    "token": "token_G34G34G34G34G35G5",
+	"token": "token_G34G34G34G34G35G5",
 	其他参数……
 }
 ```
