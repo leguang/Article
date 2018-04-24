@@ -1405,8 +1405,6 @@ Content-Type:application/json; charset=utf-8
 
 ### 发现页部分接口
 本来该接口是不需要的，可以通过多个接口拼凑出我们想要的数据，但是考虑到性能问题，设计出一个集合接口来。
-
-#### 获取交易记录列表
 地址：https://api.xxx.com/both/v1/discovery
 
 ###### 请求头
@@ -1418,18 +1416,7 @@ Content-Type: application/json;charset=UTF-8
 ```
 
 ###### 参数
-?params={"extra":"你想填什么就填什么","token":"token_2432344","keyword":"摩尔币","sort":"des","page":0,"pageSize":20,"data":{"category":"invitation"}}
-
-| key | 类型 | 描述 |
-| - | - | - |
-| extra | String | 额外扩展字段 |
-| token | String | 此处传空或者不传 |
-| keyword | string | 用于过滤的关键字 |
-| sort | 枚举 | 排序，des：降序，asc:升序 |
-| page | int | 页码，不传则默认为0 |
-| pageSize | int | 要求每一页返回最大个数，不传则默认为20 |
-| data | Object | 请求参数Json对象 |
-| data.category | String | 交易记录的类型，默认或者不传则表示获取全部，invitation0：邀请好友的奖励（其中0表示自己这一级，同理1表示自己的好友邀请好友注册的奖励），register：自己注册奖励，signin：自己签到奖励 |
+无
 
 ###### 响应头
 
