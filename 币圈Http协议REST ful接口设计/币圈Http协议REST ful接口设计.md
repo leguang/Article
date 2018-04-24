@@ -1575,6 +1575,85 @@ Content-Type:application/json; charset=utf-8
 
 ---
 
+#### 代理服务器部分接口
+该接口用于获取sokcs5服务器列表
+地址：https://api.xxx.com/both/v1/servers 
+
+###### 请求头
+
+```
+GET /both/v1/servers
+Accept: application/json
+Content-Type: application/json;charset=UTF-8
+```
+
+###### 参数
+?params={"extra":"你想填什么就填什么","token":"token_2432344"}
+
+| key | 类型 | 描述 |
+| - | - | - |
+| extra | String | 额外扩展字段 |
+| token | String | 此处传空或者不传 |
+
+###### 响应头
+
+```
+HTTP/1.1 200 OK
+Content-Type:application/json; charset=utf-8
+```
+
+###### 响应
+```
+{
+    "message": "居然被你查询成功了",
+    "code": 200,
+    "page": 0,
+    "pageSize": 20,
+    "first": "https://...",
+    "next": "https://...",
+    "previous": "https://...",
+    "last": "https://...",
+    "data": [
+        {
+            "password": "",
+            "port": "10497",
+            "ip": "13.251.28.110",
+            "username": ""
+        },
+        {
+            "password": "",
+            "port": "10497",
+            "ip": "13.251.28.110",
+            "username": ""
+        },
+        {
+            "password": "",
+            "port": "10497",
+            "ip": "13.251.28.110",
+            "username": ""
+        }
+    ]
+}
+```
+
+|key | 类型 | 描述 |
+| - | - | - |
+| message | String | 随便写，也可以作为服务器给前端固定提示的内容 |
+| code | int | 与响应头里的Status一样 |
+| page | int | 分页请求中请求的当前页的页码 |
+| pageSize | int | 分页请求中一页的个数，默认为20 |
+| first | String | 分页请求中第一页的url ，如果没有则返回空字符串|
+| next | String | 分页请求中下一页的url，如果没有则返回空字符串 |
+| previous | String | 分页请求中上一页的url，如果没有则返回空字符串 |
+| last | String | 分页请求中最后一页的url，如果没有则返回空字符串 |
+| data | object | 当前接口的具体数据由该json对象承载 |
+| data.password | String | 代理服务器密码 |
+| data.port | String | 代理服务器端口号 |
+| data.ip | String | 代理服务器IP地址 |
+| data.user | String | 代理服务器用户名 |
+
+---
+
 ## 错误/异常处理
 
 * 不要发生了错误但给2XX响应，客户端可能会缓存成功的http请求；
