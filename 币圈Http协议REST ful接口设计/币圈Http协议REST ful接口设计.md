@@ -15,7 +15,7 @@ E-mail:666233@qq.com
 * 强烈推荐参考：[阿里巴巴Java开发手册](https://github.com/leguang/Article/blob/master/阿里巴巴Android开发手册.pdf)，[iOS开发手册](https://www.baidu.com/s?ie=utf-8&f=3&rsv_bp=1&ch=3&tn=98010089_dg&wd=iOS%E5%BC%80%E5%8F%91%E7%BC%96%E7%A0%81%E5%8F%8A%E5%91%BD%E5%90%8D%E8%A7%84%E8%8C%83&oq=ios%25E5%25BC%2580%25E5%258F%2591%25E5%2591%25BD%25E5%2590%258D%25E8%25A7%2584%25E8%258C%2583&rsv_pq=861604950004ebc0&rsv_t=58c07RTbI99q5XYs9eJyxgRtHHUk%2FLDHkwLo0Z86N1kK3GeDd1ktZqvYuIIsSazuXxg&rqlang=cn&rsv_enter=1&inputT=3905&rsv_sug3=17&rsv_sug1=16&rsv_sug7=100&rsv_n=2&bs=ios%E5%BC%80%E5%8F%91%E5%91%BD%E5%90%8D%E8%A7%84%E8%8C%83 "iOS开发编码及命名规范")。
 * 一个单词尽量选择5--7个字母的，这样才最优美。
 * 首字母缩写的单词尽量每个字母都用大写，例如ID。用个小写，人家还以为是一个单词。当然uri、url、urn这种除外，因为大家都知道这个是什么。
-* 规范我们公司的基础包名与项目的关系，看需不需要前后端统一一下，现在的亿社区是：com.aglhz.yicommunity，智能家居还是用美伦安保为蓝本：com.meilun.security.smart。还有很多细节需要完善啊，现在不改等到后面引用的地方越来越多，比如地图，支付、社会化分享等，这些虽然改不改无所谓，但是会让后来人引起不必要的误会，尤其是像我这种有强迫症的人，完全难以忍受。
+* 规范并统一公司的基础包名与项目的关系。
 * 前后端的某些名称概念要统一用某一个单词，比如支付的统一订单，支付宝用的是order，微信用的是unifiedorder，那我们统一对订单这个概念用order这个词。再比如主机：后台用gateway，现在我们统一用host。这单词不统一很容易分裂。
 
 ### URI规范
@@ -306,6 +306,8 @@ Pragma: no-cache
 | data.token | String | 获取的token |
 | data.expires | int | 期限 |
 
+---
+
 #### 登出
 地址：https://api.xxx.com/both/v1/tokens
 
@@ -354,6 +356,8 @@ Pragma: no-cache
 | message | String | 随便写，也可以作为服务器给前端固定提示的内容 |
 | code | int | 与响应头里的Status一样 |
 | data.token | String | 这一次请求成功被删除掉的token |
+
+---
 
 #### 刷新token
 对token的期限进行刷新等
@@ -408,6 +412,8 @@ Pragma: no-cache
 | data.token | String | 获取的token |
 | data.expires | int | 期限 |
 
+---
+
 #### 查询token状态
 地址：https://api.xxx.com/both/v1/tokens/token_255235235
 
@@ -452,6 +458,7 @@ Pragma: no-cache
 | data.token | String | 获取的token |
 | data.expires | int | 期限 |
 
+---
 
 ### 用户部分接口
 注册（新增或者创建用户）、查询用户信息和修改用户信息。
@@ -518,6 +525,8 @@ Pragma: no-cache
 | code | int | 与响应头里的Status一样 |
 | uid | String | 新增/或者修改的这条用户的主键 |
 
+---
+
 #### 查询用户信息
 地址：https://api.xxx.com/both/v1/users/324553534534
 
@@ -563,6 +572,8 @@ Pragma: no-cache
 | data.userID | String | 用户唯一ID |
 | data.firstname | String | 用户姓 |
 | data.lastname | String | 用户名 |
+
+---
 
 ### 密码管理部分接口
 该接口对用户的密码进行管理，包括修改账户密码和支付密码,由于密码与用户是一对一的关系，新增密码和更新密码是一个语义，因此需要一个接口即可，也就是创建于修改统一用POST。
@@ -736,6 +747,7 @@ Content-Type:application/json; charset=utf-8
 | data.value | String | 奖励值 |
 
 ---
+
 ### 类型部分接口
 该接口用于描述一些分类字段，比如新闻资讯的分类；奖励类型等，由于是只获取，所以只列举了GET。
 地址：https://api.xxx.com/both/v1/types
@@ -829,7 +841,7 @@ Content-Type: application/json;charset=UTF-8
 | extra | String | 额外扩展字段 |
 | token | String | 此处传空或者不传 |
 | keyword | string | 用于过滤的关键字 |
-| sort | 枚举 | 排序，des：降序，asc:升序，hot：热度，new：新旧 |
+| sort | 枚举 | 排序，des：降序，asc:升序 |
 | page | int | 页码，不传则默认为0 |
 | pageSize | int | 要求每一页返回最大个数，不传则默认为20 |
 | data | Object | 请求参数Json对象 |
@@ -913,6 +925,7 @@ Content-Type:application/json; charset=utf-8
 | data.image | String | 文章配图 |
 
 ---
+
 #### 获取资讯详情
 地址：https://api.xxx.com/both/v1/news/34636436
 ###### 请求头
@@ -1018,7 +1031,7 @@ Content-Type:application/json; charset=utf-8
     "data": [
         {
             "uid": "2342423233",
-            "type": "hot",
+            "type": "recommend",
             "weight": "9999",
             "time": "2018-04-23 15:12:05",
             "image": "http://a3.peoplecdn.cn/fbcba40035ae5f2ad90c19abe58560a2.jpg",
@@ -1027,6 +1040,10 @@ Content-Type:application/json; charset=utf-8
             "memberAmount": "1000",
             "state": "已删除",
             "groupLink": "t.me/molmol",
+            "action": {
+                "type": "group",
+                "param": "https://www.baidu.com/"
+            },
             "reward": {
                 "isReward": true,
                 "remainder": "56322",
@@ -1037,7 +1054,7 @@ Content-Type:application/json; charset=utf-8
         },
         {
             "uid": "2342423233",
-            "type": "hot",
+            "type": "recommend",
             "weight": "9999",
             "time": "2018-04-23 15:12:05",
             "image": "http://a3.peoplecdn.cn/fbcba40035ae5f2ad90c19abe58560a2.jpg",
@@ -1045,7 +1062,10 @@ Content-Type:application/json; charset=utf-8
             "description": "MOL链官方群是个牛B哄哄的群",
             "memberAmount": "1000",
             "state": "已删除",
-            "groupLink": "t.me/molmol",
+            "action": {
+                "type": "group",
+                "param": "https://www.baidu.com/"
+            },
             "reward": {
                 "isReward": true,
                 "remainder": "56322",
@@ -1070,14 +1090,17 @@ Content-Type:application/json; charset=utf-8
 | last | String | 分页请求中最后一页的url，如果没有则返回空字符串 |
 | data | object | 当前接口的具体数据由该json对象承载 |
 | data.uid | String | 该群组的主键 |
-| data.type | 枚举 | hot：热门推荐，new：新推荐 |
+| data.type | 枚举 | recommend：热度，newest：新旧  |
 | data.weight | String | 权重 |
 | data.time | String | 申请时间 |
 | data.image | String | 群头像 |
 | data.name | String | 群名称 |
+| data.description | String | 群描述 |
 | data.memberAmount | String | 群成员总数 |
 | data.state | 枚举 | deleted：已删除 |
-| data.groupLink | String | 文章配图 |
+| data.action | Object | 跳转动作 |
+| data.action.type | String | 跳转类型，group：加群，web：跳转到网页 |
+| data.action.param | String | 跳转所需参数，如加群连接，web连接 |
 | data.reward.isReward | String | 是否奖励 |
 | data.reward.remainder | String | 剩余奖励总数 |
 | data.reward.deadline | String | 奖励截止时间 |
@@ -1372,10 +1395,198 @@ Content-Type:application/json; charset=utf-8
 | data.image | String | 交易图标 |
 | data.currency | String | 交易币种 |
 | data.time | String | 交易时间 |
+
 ---
 #### 获取交易记录详情
 地址：https://api.xxx.com/both/v1/trades/234324
 后面省略
+
+---
+
+### 发现页部分接口
+本来该接口是不需要的，可以通过多个接口拼凑出我们想要的数据，但是考虑到性能问题，设计出一个集合接口来。
+
+#### 获取交易记录列表
+地址：https://api.xxx.com/both/v1/discovery
+
+###### 请求头
+
+```
+GET /both/v1/discovery
+Accept: application/json
+Content-Type: application/json;charset=UTF-8
+```
+
+###### 参数
+?params={"extra":"你想填什么就填什么","token":"token_2432344","keyword":"摩尔币","sort":"des","page":0,"pageSize":20,"data":{"category":"invitation"}}
+
+| key | 类型 | 描述 |
+| - | - | - |
+| extra | String | 额外扩展字段 |
+| token | String | 此处传空或者不传 |
+| keyword | string | 用于过滤的关键字 |
+| sort | 枚举 | 排序，des：降序，asc:升序 |
+| page | int | 页码，不传则默认为0 |
+| pageSize | int | 要求每一页返回最大个数，不传则默认为20 |
+| data | Object | 请求参数Json对象 |
+| data.category | String | 交易记录的类型，默认或者不传则表示获取全部，invitation0：邀请好友的奖励（其中0表示自己这一级，同理1表示自己的好友邀请好友注册的奖励），register：自己注册奖励，signin：自己签到奖励 |
+
+###### 响应头
+
+```
+HTTP/1.1 200 OK
+Content-Type:application/json; charset=utf-8
+```
+
+###### 响应
+```
+{
+    "message": "居然被你查询成功了",
+    "code": 200,
+    "data": {
+        "ads": [
+            {
+                "image": "http://ww3.sinaimg.cn/large/0060lm7Tly1fo6vt0p500j30af0ad758.jpg",
+                "title": "安防小卫士",
+                "uid": "13212133313",
+                "action": {
+                    "type": "web",
+                    "param": "https://www.baidu.com/"
+                }
+            },
+            {
+                "image": "http://ww3.sinaimg.cn/large/0060lm7Tly1fo6vt0p500j30af0ad758.jpg",
+                "title": "安防小卫士",
+                "uid": "13212133313",
+                "action": {
+                    "type": "web",
+                    "param": "https://www.baidu.com/"
+                }
+            },
+            {
+                "image": "http://ww3.sinaimg.cn/large/0060lm7Tly1fo6vt0p500j30af0ad758.jpg",
+                "title": "安防小卫士",
+                "uid": "13212133313",
+                "action": {
+                    "type": "web",
+                    "param": "https://www.baidu.com/"
+                }
+            }
+        ],
+        "recommendations": {
+            "title": "热门推荐群",
+            "groups": [
+                {
+                    "uid": "2342423233",
+                    "type": "recommend",
+                    "weight": "9999",
+                    "time": "2018-04-23 15:12:05",
+                    "image": "http://a3.peoplecdn.cn/fbcba40035ae5f2ad90c19abe58560a2.jpg",
+                    "name": "MOL链官方群",
+                    "description": "MOL链官方群是个牛B哄哄的群",
+                    "memberAmount": "1000",
+                    "state": "已删除",
+                    "reward": {
+                        "isReward": true,
+                        "remainder": "56322",
+                        "deadline": "2018-04-23 15:12:05",
+                        "once": "10",
+                        "currency": "mol"
+                    },
+                    "action": {
+                        "type": "web",
+                        "param": "t.me/molmol"
+                    }
+                },
+                {
+                    "uid": "2342423233",
+                    "type": "recommend",
+                    "weight": "9999",
+                    "time": "2018-04-23 15:12:05",
+                    "image": "http://a3.peoplecdn.cn/fbcba40035ae5f2ad90c19abe58560a2.jpg",
+                    "name": "MOL链官方群",
+                    "description": "MOL链官方群是个牛B哄哄的群",
+                    "memberAmount": "1000",
+                    "state": "已删除",
+                    "reward": {
+                        "isReward": true,
+                        "remainder": "56322",
+                        "deadline": "2018-04-23 15:12:05",
+                        "once": "10",
+                        "currency": "mol"
+                    },
+                    "action": {
+                        "type": "web",
+                        "param": "t.me/molmol"
+                    }
+                }
+            ]
+        },
+        "items": [
+            {
+                "uid": "32523523",
+                "image": "http://a3.peoplecdn.cn/fbcba40035ae5f2ad90c19abe58560a2.jpg",
+                "title": "币圈咨询",
+                "action": {
+                    "type": "web",
+                    "param": "https://www.baidu.com/"
+                }
+            },
+            {
+                "uid": "32523523",
+                "image": "http://a3.peoplecdn.cn/fbcba40035ae5f2ad90c19abe58560a2.jpg",
+                "title": "币圈咨询",
+                "action": {
+                    "type": "web",
+                    "param": "https://www.baidu.com/"
+                }
+            }
+        ]
+    }
+}
+```
+
+|key | 类型 | 描述 |
+| - | - | - |
+| message | String | 随便写，也可以作为服务器给前端固定提示的内容 |
+| code | int | 与响应头里的Status一样 |
+| data | object | 当前接口的具体数据由该json对象承载 |
+| data.ads | Object数组 | 广告对象 |
+| data.ads.image | String | 轮播图图片链接 |
+| data.ads.title | String | 轮播图描述 |
+| data.ads.uid | String | 该广告主键 |
+| data.ads.action | Object | 动作对象，用于描述跳转这类的动作 |
+| data.ads.action.type | String | 动作类型，web：跳转到web |
+| data.ads.action.param | String | 执行该动作所需要的参数，例如跳转web的链接 |
+| data.recommendations | Object | 广告对象 |
+| data.recommendations.title | String | 该分类的标题，比如此处的“热门群推荐” |
+| data.recommendations.groups | Object数组 | 描述推荐的群列表 |
+| data.recommendations.groups.uid | String | 该群组的主键 |
+| data.recommendations.groups.type | 枚举 | recommend：热度，newest：新旧 |
+| data.recommendations.groups.weight | String | 权重 |
+| data.recommendations.groups.time | String | 申请时间 |
+| data.recommendations.groups.image | String | 群头像 |
+| data.recommendations.groups.name | String | 群名称 |
+| data.recommendations.groups.description | String | 群描述 |
+| data.recommendations.groups.memberAmount | String | 群成员总数 |
+| data.recommendations.groups.state | 枚举 | deleted：已删除 |
+| data.recommendations.groups.action | Object | 跳转动作 |
+| data.recommendations.groups.action.type | String | 跳转类型，group：加群，web：跳转到网页 |
+| data.recommendations.groups.action.param | String | 跳转所需参数，如加群连接，web连接 |
+| data.recommendations.groups.reward.isReward | String | 是否奖励 |
+| data.recommendations.groups.reward.remainder | String | 剩余奖励总数 |
+| data.recommendations.groups.reward.deadline | String | 奖励截止时间 |
+| data.recommendations.groups.reward.once | String | 单个奖励币数量 |
+| data.recommendations.groups.reward.currency | String | 奖励币种 |
+| data.items | Object数组 | 功能项数组 |
+| data.items.uid | String | 该功能项的主键 |
+| data.items.image | String | 该功能项的图标 |
+| data.items.title | String | 该功能项的标题 |
+| data.items.groups.action | Object | 跳转动作 |
+| data.items.groups.action.type | String | 跳转类型，group：加群，web：跳转到网页 |
+| data.items.groups.action.param | String | 跳转所需参数，如加群连接，web连接 |
+
+---
 
 ## 错误/异常处理
 
@@ -1430,7 +1641,7 @@ Java 服务器端一般用异常表示 RESTful API 的错误。API 可能抛出�
 ```
 
 ## 接口版本（Versioning）
-个人倾向于将版本号放在HTTP头信息中，虽然不如放入URL中更直观，但是不方便我们统一管理，因为在前端URL是拼出来的String，请求头是统一个对象去设置，除非有特殊情况，某一个接口需1.0版本，某一个接口需2.0版本，这就另当别论，到时候统一商量，在拼这个URL的时候，放到固定目录（位置），如：api.xxx.com:8080<u>**/版本（一般用v1、v2）/**</u>user  统一放在一级目录，这样的前端在拼接的时候，统一放到某个位置，也就方便管理了。
+个人倾向于将版本号放在HTTP头信息中，虽然不如放入URL中更直观，但是不方便我们统一管理，因为在前端URL是拼出来的String，请求头是统一个对象去设置，除非有特殊情况，某一个接口需1.0版本，某一个接口需2.0版本，这就另当别论，到时候统一商量，在拼这个URL的时候，放到固定目录（位置），如：api.xxx.com:8080/both<u>**/版本（一般用v1、v2）/**</u>user  统一放在一级目录，这样的前端在拼接的时候，统一放到某个位置，也就方便管理了。
 
 ## URL失效
 随着系统发展，总有一些API失效或者迁移，对失效的API，返回404 not found 或 410 gone；对迁移的API，返回 301 重定向。
