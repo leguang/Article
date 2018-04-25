@@ -761,13 +761,13 @@ Content-Type: application/json;charset=UTF-8
 ```
 
 ###### 参数
-?params={"extra":"你想填什么就填什么","token":"token_2432344","keyword":"方便面","sort":"des","page":0,"pageSize":20}
+?params={"extra":"你想填什么就填什么","token":"token_2432344","keyword":"group","sort":"des","page":0,"pageSize":20}
 
 | key | 类型 | 描述 |
 | - | - | - |
 | extra | String | 额外扩展字段 |
 | token | String | 此处传空或者不传 |
-| keyword | string | 用于过滤的关键字，如果是获取资讯的分类就填news |
+| keyword | string | 用于过滤的关键字，news:资讯的分类，group:群组分类 |
 | sort | 枚举 | 排序，des：降序，asc升序 |
 | page | int | 页码，不传则默认为0 |
 | pageSize | int | 要求每一页返回最大个数，不传则默认为20 |
@@ -1509,7 +1509,7 @@ Content-Type:application/json; charset=utf-8
                 }
             ]
         },
-        "items": [
+        "discoverys": [
             {
                 "uid": "32523523",
                 "image": "http://a3.peoplecdn.cn/fbcba40035ae5f2ad90c19abe58560a2.jpg",
