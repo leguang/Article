@@ -796,11 +796,11 @@ Content-Type:application/json; charset=utf-8
             "uid": "2342423233"
         },
         {
-            "key": "区块链知识",
+            "type": "区块链知识",
             "uid": "3646346434"
         },
         {
-            "key": "新闻资讯",
+            "type": "新闻资讯",
             "uid": "3634634633"
         }
     ]
