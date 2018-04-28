@@ -1048,7 +1048,7 @@ Content-Type:application/json; charset=utf-8
                 "isReward": true,
                 "remainder": "56322",
                 "deadline": "2018-04-23 15:12:05",
-                "once": "10",
+                "reward": "10",
                 "currency": "mol"
             }
         },
@@ -1070,7 +1070,7 @@ Content-Type:application/json; charset=utf-8
                 "isReward": true,
                 "remainder": "56322",
                 "deadline": "2018-04-23 15:12:05",
-                "once": "10",
+                "reward": "10",
                 "currency": "mol"
             }
         }
@@ -1104,7 +1104,7 @@ Content-Type:application/json; charset=utf-8
 | data.reward.isReward | String | 是否奖励 |
 | data.reward.remainder | String | 剩余奖励总数 |
 | data.reward.deadline | String | 奖励截止时间 |
-| data.reward.once | String | 单个奖励币数量 |
+| data.reward.reward | String | 单个奖励币数量 |
 | data.reward.currency | String | 奖励币种 |
 
 ---
@@ -1141,7 +1141,7 @@ Content-Type: application/json;charset=UTF-8
             "reward": {
                 "remainder": "56322",
                 "deadline": "2018-04-23 15:12:05",
-                "once": "10",
+                "reward": "10",
                 "currency": "mol"
             }
         },
@@ -1154,7 +1154,7 @@ Content-Type: application/json;charset=UTF-8
             "reward": {
                 "remainder": "56322",
                 "deadline": "2018-04-23 15:12:05",
-                "once": "10",
+                "reward": "10",
                 "currency": "mol"
             }
         }
@@ -1175,7 +1175,7 @@ Content-Type: application/json;charset=UTF-8
 | data.groupLink | String | 文章配图 |
 | data.reward.remainder | String | 剩余奖励总数 |
 | data.reward.deadline | String | 奖励截止时间 |
-| data.reward.once | String | 单个奖励币数量 |
+| data.reward.reward | String | 单个奖励币数量 |
 | data.reward.currency | String | 奖励币种 |
 
 ###### 响应头
@@ -1477,7 +1477,7 @@ Content-Type:application/json; charset=utf-8
                         "isReward": true,
                         "remainder": "56322",
                         "deadline": "2018-04-23 15:12:05",
-                        "once": "10",
+                        "reward": "10",
                         "currency": "mol"
                     },
                     "action": {
@@ -1499,7 +1499,7 @@ Content-Type:application/json; charset=utf-8
                         "isReward": true,
                         "remainder": "56322",
                         "deadline": "2018-04-23 15:12:05",
-                        "once": "10",
+                        "reward": "10",
                         "currency": "mol"
                     },
                     "action": {
@@ -1563,7 +1563,7 @@ Content-Type:application/json; charset=utf-8
 | data.recommendations.groups.reward.isReward | String | 是否奖励 |
 | data.recommendations.groups.reward.remainder | String | 剩余奖励总数 |
 | data.recommendations.groups.reward.deadline | String | 奖励截止时间 |
-| data.recommendations.groups.reward.once | String | 单个奖励币数量 |
+| data.recommendations.groups.reward.reward | String | 单个奖励币数量 |
 | data.recommendations.groups.reward.currency | String | 奖励币种 |
 | data.items | Object数组 | 功能项数组 |
 | data.items.uid | String | 该功能项的主键 |
