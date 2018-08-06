@@ -16,7 +16,7 @@
 
 总体功能模块划分如下图所示：
 
-![模块](https://i.imgur.com/Z2YhGu0.png) 
+![模块](https://i.imgur.com/CZ971KO.png) 
 
 ### URL结构
 
@@ -149,7 +149,7 @@ Status:200 OK
 
 ### 项目url预览
 
-![预览](https://i.imgur.com/bSinRhq.png) 
+![预览](https://i.imgur.com/TyXrDQd.png) 
 
 站在数据的角度，若想满足各大模块的功能需求，可以将接口分成如下几类：
 > base url：https://api.xxx.com/path/
@@ -390,11 +390,12 @@ Platform: Android
 
 ##### 参数
 
-?uid=13r13rt1312412er12r1
+?newsUid=13r13rt1312412er12r1&isLike=true
 
-| params | 类型   | 是否必须 | 描述          |
-| ------ | ------ | -------- | ------------- |
-| uid    | String | 是       | 新闻item的uid |
+| params | 类型    | 是否必须 | 描述                                                         |
+| ------ | ------- | -------- | ------------------------------------------------------------ |
+| uid    | String  | 是       | 新闻item的uid                                                |
+| isLike | boolean | 否       | 不传表示默认，默认表示点赞，值为true表示点赞，false表示取消点赞 |
 
 ##### 响应头
 
@@ -729,7 +730,7 @@ Pragma: no-cache
 
 ---
 
-### 广告advertisement
+### 广告advertisements
 
 这个接口可以被设计成一个通用的、独立的模块，以后所有业务中的撒给用户的币都以积分形式表达，用该接口来查询余额状态。
 
