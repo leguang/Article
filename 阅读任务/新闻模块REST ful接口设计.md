@@ -310,7 +310,7 @@ Pragma: no-cache
                 "http://a3.peoplecdn.cn/fbcba40035ae5f2ad90c19abe58560a2.jpg",
                 "http://a3.peoplecdn.cn/fbcba40035ae5f2ad90c19abe58560a2.jpg"
             ],
-            "share": "【请复制文案，打开摩尔钱包】邀请你前往摩尔钱包来围观《****》，看新闻赚MOL，新用户进来还可领红包。https://app.mol.one/newsid=hjhjshk/userid=sjhhkkkk",
+            "share": "https://app.mol.one/news/qfr23r23r23r2r3?url=http://toutiao.com/group/6536299962081214990/",
             "like": {
                 "isLike": true,
                 "number": "200"
@@ -331,7 +331,7 @@ Pragma: no-cache
                 "http://a3.peoplecdn.cn/fbcba40035ae5f2ad90c19abe58560a2.jpg",
                 "http://a3.peoplecdn.cn/fbcba40035ae5f2ad90c19abe58560a2.jpg"
             ],
-            "share": "【请复制文案，打开摩尔钱包】邀请你前往摩尔钱包来围观《****》，看新闻赚MOL，新用户进来还可领红包。https://app.mol.one/newsid=hjhjshk/userid=sjhhkkkk",
+            "share": "https://app.mol.one/news/qfr23r23r23r2r3?url=http://toutiao.com/group/6536299962081214990/",
             "like": {
                 "isLike": true,
                 "number": "200"
@@ -362,7 +362,7 @@ Pragma: no-cache
 | data.url         | String   | 是       | 该条资讯web连接                                              |
 | data.type        | String   | 是       | 所属的类型名称，对应着类型接口中的名称                       |
 | data.images      | JSON数组 | 是       | 文章配图，图片个数与type这个类型规定的一致                   |
-| data.share       | String   | 是       | 邀请围观（分享）时所用到的文案，其中的url建议放最后，这样方便前端解析，前端在App被打开时就模仿淘宝的形式，考虑通过正则解析剪切板中的内容，然后跳转到该新闻详情页。 |
+| data.share       | String   | 是       | 分享的url，url=https://www.baidu.com/ 参数是真实的今日头条对应的url。 |
 | data.like        | JSON对象 | 是       | 用于表示点赞数和点赞状态                                     |
 | data.like.isLike | boolean  | 是       | true表示已点赞，false表示未点赞                              |
 | data.like.number | String   | 是       | 点赞数                                                       |
@@ -743,3 +743,10 @@ Pragma: no-cache
     }
 }
 ```
+### 分享的链接实现
+
+由于我们分享的链接中的数据本质不是我们自己的，连HTML都是别人写好了的，但是想嵌入我们自己的业务逻辑代码，因此分享给用户点击的url必须是mol.one域名下的：
+
+> https://mol.one/news/grwefgwq423t2t23?url=https://www.baidu.com
+
+该url中news路径下对应的是熊老师写的程序，将 https://www.baidu.com 的内容显示在里面，同时底部加一个领取红包的按钮。
