@@ -161,8 +161,6 @@ Status:200 OK
 | 收益profit                            | https://api.xxx.com/path/v1/profit         |            |
 | MOL（积分形式）收益记录profit/records | https://api.xxx.com/path/v1/profit/records |            |
 | 摩尔币的记录mol/records               | https://api.xxx.com/path/v1/mol/record     |            |
-| FOMO奖金池fomo                        | https://api.xxx.com/path/v1/fomo           |            |
-| 红包redPacket                         | https://api.xxx.com/path/v1/redPacket      |            |
 
 ### 主题（分类）topics
 
@@ -572,164 +570,6 @@ Pragma: no-cache
 
 ---
 
-### 红包redPackets
-
-我们计划设计一套统一、通用的、独立的模块的红包接口，包括发红包和抢红包，发红包用POST方法，抢红包用GET方法，以后红包相关业务都以MOL币积分形式体现，发红包消耗的是积分形式的MOL币，抢到的也是积分形式MOL币。
-
-#### 抢红包
-
-针对抢红包，我们抢到的随机数是红包生成时已经预设好的，抢红包就成了一个消费者，消耗生产者（红包）个数，这样效率会高一点。
-
-> 地址：https://api.xxx.com/path/v1/redPackets/UIDXXXXXX
-
-##### 请求头
-
-```
-GET /path/v1/redPackets/UIDXXXXXX
-Accept: application/json
-Content-Type: application/json;charset=UTF-8
-Token: token_G34G34G34G34G35G5
-AppVersion: 1.1.1
-Platform: Android
-```
-
-##### 参数
-
-由于在url上指定了uid，因此不需要其他参数就可以定位到某个红包。
-
-##### 响应头
-
-```
-HTTP/1.1 200 OK
-Content-Type:application/json; charset=utf-8
-Cache-Control: no-store
-Pragma: no-cache
-```
-
-##### 响应
-
-对于正常情况下，返回如下：
-
-```
-{
-    "message": "居然被你查询成功了",
-    "code": 200,
-    "data": {
-        "amount": "12356",
-        "number": "100",
-        "currency": "MOL",
-        "note": "恭喜发财！",
-        "my": "151.56",
-        "uid": "2502556122546465421",
-        "type": "random",
-        "records": [
-            {
-                "uid": "naiofiufaoif99wf09213r3rj",
-                "image": "http://a3.peoplecdn.cn/fbcba40035ae5f2ad90c19abe58560a2.jpg",
-                "user": "180****5555",
-                "amount": "12356",
-                "time": "2018-07-22 16:39:03"
-            },
-            {
-                "uid": "naiofiufaoif99wf09213r3rj",
-                "image": "http://a3.peoplecdn.cn/fbcba40035ae5f2ad90c19abe58560a2.jpg",
-                "user": "180****5555",
-                "amount": "12356",
-                "time": "2018-07-22 16:39:03"
-            },
-            {
-                "uid": "naiofiufaoif99wf09213r3rj",
-                "image": "http://a3.peoplecdn.cn/fbcba40035ae5f2ad90c19abe58560a2.jpg",
-                "user": "180****5555",
-                "amount": "12356",
-                "time": "2018-07-22 16:39:03"
-            }
-        ]
-    }
-}
-```
-
-| key                 | 类型   | 是否必须 | 描述                                                         |
-| ------------------- | ------ | -------- | ------------------------------------------------------------ |
-| message             | String | 是       | 同上                                                         |
-| code                | int    | 是       | 同上                                                         |
-| data                | object | 是       | 当前接口的具体数据由该JSON对象承载                           |
-| data.uid            | String | 是       | 该用户抢到的红包记录的唯一标识                               |
-| data.amount         | String | 是       | 该红包的总金额，即发出红包时所填总额，对应现实中的摩尔币的个数，非raw类型 |
-| data.number         | String | 是       | 该红包的可被领取的个数                                       |
-| data.currency       | String | 是       | 该红包使用的币种，当前填MOL即可                              |
-| data.note           | String | 是       | 发红包的备注语言                                             |
-| data.my             | String | 是       | 我（当前token所代表的用户）领取到的红包金额                  |
-| data.type           | String | 是       | random表示随机红包（对应是微信群里的随机红包），average表示平均红包（对应的是微信和支付宝中的普通红包） |
-| data.records        | object | 是       | 抢到的红包记录用户列表                                       |
-| data.records.uid    | String | 是       | 该记录的唯一标识                                             |
-| data.records.image  | String | 是       | 该记录的icon，可能是用户头像                                 |
-| data.records.user   | String | 是       | 该记录的用户名称，可能是电话号码，可能是昵称                 |
-| data.records.amount | String | 是       | 该用户抢到的金额                                             |
-| data.records.time   | String | 是       | 该用户抢到的红包的时间                                       |
-
-对于红包过期则返回如下：
-
-```
-{
-    "message": "居然被你查询成功了",
-    "code": 200,
-    "data": {
-        "amount": "12356",
-        "number": "100",
-        "currency": "MOL",
-        "note": "恭喜发财！",
-        "my": "红包已经过期",
-        "uid": "2502556122546465421",
-        "type": "random",
-        "records": [
-            {
-                "uid": "naiofiufaoif99wf09213r3rj",
-                "image": "http://a3.peoplecdn.cn/fbcba40035ae5f2ad90c19abe58560a2.jpg",
-                "user": "180****5555",
-                "amount": "12356",
-                "time": "2018-07-22 16:39:03"
-            },
-            {
-                "uid": "naiofiufaoif99wf09213r3rj",
-                "image": "http://a3.peoplecdn.cn/fbcba40035ae5f2ad90c19abe58560a2.jpg",
-                "user": "180****5555",
-                "amount": "12356",
-                "time": "2018-07-22 16:39:03"
-            },
-            {
-                "uid": "naiofiufaoif99wf09213r3rj",
-                "image": "http://a3.peoplecdn.cn/fbcba40035ae5f2ad90c19abe58560a2.jpg",
-                "user": "180****5555",
-                "amount": "12356",
-                "time": "2018-07-22 16:39:03"
-            }
-        ]
-    }
-}
-```
-
-| key                 | 类型   | 是否必须 | 描述                                                         |
-| ------------------- | ------ | -------- | ------------------------------------------------------------ |
-| message             | String | 是       | 同上                                                         |
-| code                | int    | 是       | 同上                                                         |
-| data                | object | 是       | 当前接口的具体数据由该JSON对象承载                           |
-| data.uid            | String | 是       | 该用户抢到的红包记录的唯一标识                               |
-| data.amount         | String | 是       | 该红包的总金额，即发出红包时所填总额，对应现实中的摩尔币的个数，非raw类型 |
-| data.number         | String | 是       | 该红包的可被领取的个数                                       |
-| data.currency       | String | 是       | 该红包使用的币种，当前填MOL即可                              |
-| data.note           | String | 是       | 发红包的备注语言                                             |
-| data.my             | String | 是       | 我（当前token所代表的用户）领取到的红包金额                  |
-| data.type           | String | 是       | random表示随机红包（对应是微信群里的随机红包），average表示平均红包（对应的是微信和支付宝中的普通红包） |
-| data.records        | object | 是       | 抢到的红包记录用户列表                                       |
-| data.records.uid    | String | 是       | 该记录的唯一标识                                             |
-| data.records.image  | String | 是       | 该记录的icon，可能是用户头像                                 |
-| data.records.user   | String | 是       | 该记录的用户名称，可能是电话号码，可能是昵称                 |
-| data.records.amount | String | 是       | 该用户抢到的金额                                             |
-| data.records.time   | String | 是       | 该用户抢到的红包的时间                                       |
-
----
-
 ### 广告advertisements
 
 这个接口可以被设计成一个通用的、独立的模块，以后所有业务中的撒给用户的币都以积分形式表达，用该接口来查询余额状态。
@@ -887,7 +727,7 @@ Pragma: no-cache
 }
 ```
 
-同时后台要限制一个用户一天能通过阅读获取的MOL币的个数。本来想将这种消息类型做成通用的，即请求多少奖励通过参数传给后台，这样未来其他项目就只要直接改奖励的MOL的个数，但是考虑到安全和可控等因素，还是独立一个uri类型了。
+同时一个用户一天能通过阅读获取的MOL币的个数是有上限的，以及本人针对该文章能获取的币也是有上限的，这两个上限是配置化。本来想将这种消息类型做成通用的，即请求多少奖励通过参数传给后台，这样未来其他项目就只要直接改奖励的MOL的个数，但是考虑到安全和可控等因素，还是独立一个uri类型了。
 
 ##### 响应
 
