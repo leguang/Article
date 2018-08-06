@@ -729,6 +729,74 @@ Pragma: no-cache
 
 ---
 
+### 广告advertisement
+
+这个接口可以被设计成一个通用的、独立的模块，以后所有业务中的撒给用户的币都以积分形式表达，用该接口来查询余额状态。
+
+> 地址：https://api.xxx.com/path/v1/advertisements
+
+##### 请求头
+
+```
+GET /path/v1/advertisements
+Accept: application/json
+Content-Type: application/json;charset=UTF-8
+Token: token_G34G34G34G34G35G5
+AppVersion: 1.1.1
+Platform: Android
+```
+
+##### 参数
+
+?newsUid=2saegweihf82h83qfw
+
+| params   | 类型   | 是否必须 | 描述                                    |
+| -------- | ------ | -------- | --------------------------------------- |
+| keyword  | String | 否       | 同上                                    |
+| sort     | String | 否       | 同上                                    |
+| page     | int    | 否       | 同上                                    |
+| pageSize | int    | 否       | 同上                                    |
+| newsUid  | String | 是       | 通过news的uid来获取广告并显示在新闻头部 |
+
+##### 响应头
+
+```
+HTTP/1.1 200 OK
+Content-Type:application/json; charset=utf-8
+Cache-Control: no-store
+Pragma: no-cache
+```
+
+##### 响应
+
+```
+{
+    "message": "居然被你查询成功了",
+    "code": 200,
+    "data": {
+        "uid": "22t2g23g2t24qt4y43y",
+        "title": "牛市要来了，赶紧上车",
+        "type": "广告类型的uid",
+        "abstract": "还有什么比这更好",
+        "time": "2018-04-23 20:00",
+        "url": "https://www.baidu.com/"
+    }
+}
+```
+
+| key           | 类型   | 是否必须 | 描述                                       |
+| ------------- | ------ | -------- | ------------------------------------------ |
+| message       | String | 是       | 同上                                       |
+| code          | int    | 是       | 同上                                       |
+| data.uid      | String | 是       | 该广告的唯一标识                           |
+| data.title    | String | 是       | 该广告标题                                 |
+| data.type     | String | 是       | 该广告类型（暂时无用处）                   |
+| data.abstract | String | 是       | 该广告摘要                                 |
+| data.time     | String | 是       | 该广告投放时间                             |
+| data.url      | String | 是       | 广告所要跳转的url（广告详情是跳转一个web） |
+
+------
+
 ## 实现方案
 
 ### 新闻来源
@@ -804,22 +872,6 @@ Pragma: no-cache
 2. 后台拿到数据后转成新闻列表接口中要求的格式，然后返回给前端。
 
 这么做的原因是需要做容错机制，因为考虑到该接口不是永远都能用，也没有经过检验，因此我们还要考虑其他方案，万一不能用了，起码不至于强制前端更新App。
-
-### FOMO奖金池的更新问题
-
-现在要求只要有人点赞就会刷新奖金池，并告诉前端的一个倒计时的控件重置到10:00，因此需要后台主动推送到前端来，此时就借助我们的长连接功能，因此要多一个消息类型（即uri），如下所示：
-
-```
-{
-    "uid": "A3BA3BA3BA3BC",
-    "uri": "v1/joinFomo",
-    "data": {
-        一起商议，看是否还需要一些额外的信息给前端，比如点赞的用户信息
-    }
-}
-```
-
-前端通过这个类型的消息就可以刷新界面了。
 
 ### 阅读奖励的请求
 
