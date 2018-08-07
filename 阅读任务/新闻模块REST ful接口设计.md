@@ -463,17 +463,19 @@ Pragma: no-cache
     "code": 200,
     "data": {
         "accumulation": "11124525",
-        "balance": "95885"
+        "balance": "95885",
+        "currency": "MOL"
     }
 }
 ```
 
-| key               | 类型   | 是否必须 | 描述                     |
-| ----------------- | ------ | -------- | ------------------------ |
-| message           | String | 是       | 同上                     |
-| code              | int    | 是       | 同上                     |
-| data.accumulation | String | 是       | 该账户历史累积收益       |
-| data.balance      | String | 是       | 该账户上可用于提现的收益 |
+| key               | 类型   | 是否必须 | 描述                                    |
+| ----------------- | ------ | -------- | --------------------------------------- |
+| message           | String | 是       | 同上                                    |
+| code              | int    | 是       | 同上                                    |
+| data.accumulation | String | 是       | 该账户历史累积收益，非raw类型的值       |
+| data.balance      | String | 是       | 该账户上可用于提现的收益，非raw类型的值 |
+| data.currency     | String | 是       | 对应的币种的单位                        |
 
 ---
 
