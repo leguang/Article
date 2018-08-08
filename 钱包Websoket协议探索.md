@@ -258,7 +258,7 @@ uri 表示资源，资源一般对应服务器端领域模型中的实体类，�
 
 ##### 默认通知
 ![默认通知](https://i.imgur.com/QklBKdG.png)
- 
+
 这一类通知只需要提醒用户我们有发一个消息给他，有可能是广告，有可能是升级通知等。
 样式：一般都只要基本的默认样式，即图标，标题，内容，时间。其中时间是到达前端的时间，后台不需要设置。
 动作：只需要打开App即可。
@@ -336,7 +336,12 @@ pushRequest.setAndroidOpenType("APPLICATION");
 |type | String | web表示web弹窗，native表示native弹窗 |
 |url | String | type为web是，url表示连接，为native时，如果是native图片弹框就表示图片的url |
 
+强调：由于考虑到后期的扩展，比如熊老师做了一个调查的H5，推送到用户，参加完调查的用户在提交后可以得到摩尔奖励，这个就必须依赖到token了，因此我们在打开这个url对应的WebView/UIWebView的时候，默认将token传过去，就通过拼在url后面传过去就可以了，如下：
+
+> 接收到的是： https://www.baidu.com/ ，拼参后：https://www.baidu.com/?token=1r13rqwr132r1r
+
 ### 登出/注销
+
 考虑到账户的安全性和开发的便利性（比如原生与H5交互时，有这个功能则可避免在Web里token失效时还要弹出登录界面）需要这个功能来提示用户。
 
 #### 响应
