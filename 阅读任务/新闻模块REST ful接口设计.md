@@ -570,74 +570,6 @@ Pragma: no-cache
 | data.currency    | String | 是       | 交易记录币种                       |
 | data.time        | String | 是       | 交易记录时间                       |
 
----
-
-### 广告advertisements
-
-这个接口可以被设计成一个通用的、独立的模块，以后所有业务中的撒给用户的币都以积分形式表达，用该接口来查询余额状态。
-
-> 地址：https://api.xxx.com/path/v1/advertisements
-
-##### 请求头
-
-```
-GET /path/v1/advertisements
-Accept: application/json
-Content-Type: application/json;charset=UTF-8
-Token: token_G34G34G34G34G35G5
-AppVersion: 1.1.1
-Platform: Android
-```
-
-##### 参数
-
-?newsUid=2saegweihf82h83qfw
-
-| params   | 类型   | 是否必须 | 描述                                    |
-| -------- | ------ | -------- | --------------------------------------- |
-| keyword  | String | 否       | 同上                                    |
-| sort     | String | 否       | 同上                                    |
-| page     | int    | 否       | 同上                                    |
-| pageSize | int    | 否       | 同上                                    |
-| newsUid  | String | 是       | 通过news的uid来获取广告并显示在新闻头部 |
-
-##### 响应头
-
-```
-HTTP/1.1 200 OK
-Content-Type:application/json; charset=utf-8
-Cache-Control: no-store
-Pragma: no-cache
-```
-
-##### 响应
-
-```
-{
-    "message": "居然被你查询成功了",
-    "code": 200,
-    "data": {
-        "uid": "22t2g23g2t24qt4y43y",
-        "title": "牛市要来了，赶紧上车",
-        "type": "广告类型的uid",
-        "abstract": "还有什么比这更好",
-        "time": "2018-04-23 20:00",
-        "url": "https://www.baidu.com/"
-    }
-}
-```
-
-| key           | 类型   | 是否必须 | 描述                                       |
-| ------------- | ------ | -------- | ------------------------------------------ |
-| message       | String | 是       | 同上                                       |
-| code          | int    | 是       | 同上                                       |
-| data.uid      | String | 是       | 该广告的唯一标识                           |
-| data.title    | String | 是       | 该广告标题                                 |
-| data.type     | String | 是       | 该广告类型（暂时无用处）                   |
-| data.abstract | String | 是       | 该广告摘要                                 |
-| data.time     | String | 是       | 该广告投放时间                             |
-| data.url      | String | 是       | 广告所要跳转的url（广告详情是跳转一个web） |
-
 ------
 
 ## 实现方案
@@ -725,9 +657,18 @@ Pragma: no-cache
 ```
 {
     "uid": "A3BA3BA3BA3BC",
-    "uri": "v1/requestNewsAwards"
+    "uri": "v1/requestNewsAwards",
+    "data": {
+        "uid": "3r213r23r23r142151234"
+    }
 }
 ```
+
+| params   | 类型   | 是否必须 | 描述                                      |
+| -------- | ------ | -------- | ----------------------------------------- |
+| uid      | String | 是       | 该条消息的uid                             |
+| uri      | String | 是       | 该消息类型的标识                          |
+| data.uid | String | 是       | 该条新闻的uid，告诉后台是对哪条新闻的奖励 |
 
 同时一个用户一天能通过阅读获取的MOL币的个数是有上限的，以及本人针对该文章能获取的币也是有上限的，这两个上限是配置化。本来想将这种消息类型做成通用的，即请求多少奖励通过参数传给后台，这样未来其他项目就只要直接改奖励的MOL的个数，但是考虑到安全和可控等因素，还是独立一个uri类型了。
 
