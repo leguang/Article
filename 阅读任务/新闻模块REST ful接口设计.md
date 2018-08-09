@@ -298,7 +298,8 @@ Pragma: no-cache
         {
             "uid": "2342423233",
             "title": "牛市要来了，赶紧上车",
-            "type": "image=0",
+            "type": "advertisement",
+            "style": "0",
             "abstract": "牛牛牛，你牛什么牛，牛牛牛，你牛什么牛，牛牛牛，你牛什么牛",
             "source": "币世界",
             "author": "币老爷",
@@ -319,7 +320,8 @@ Pragma: no-cache
         {
             "uid": "2342423233",
             "title": "牛市要来了，赶紧上车",
-            "type": "image=0",
+            "type": "news",
+            "style": "0",
             "abstract": "牛牛牛，你牛什么牛，牛牛牛，你牛什么牛，牛牛牛，你牛什么牛",
             "source": "币世界",
             "author": "币老爷",
@@ -354,7 +356,8 @@ Pragma: no-cache
 | data             | object   | 是       | 当前接口的具体数据由该json对象承载                           |
 | data.uid         | String   | 是       | 该条资讯的唯一标示，可用于获取详情                           |
 | data.title       | String   | 是       | 文章标题                                                     |
-| data.type        | String   | 是       | 表达该item的类型，其实是标记样式类型的，我们规定每一个item都有且只有4中样式，详细查看设计稿。值为0表示无图片的形式，值为1表示左边只有一张图片的形式，值为2表示只有一张大图片形式（通常为video的预览图），值为3表示3张小图片形式 |
+| data.type        | String   | 是       | 表达该item的类型，分两种，值为news表示新闻，值为advertisement表示广告 |
+| data.style       | String   | 是       | 标记样式类型的，我们规定每一个item都有且只有4中样式，无论是广告还是news，详细查看设计稿。值为0表示无图片的形式，值为1表示左边只有一张图片的形式，值为2表示只有一张大图片形式（通常为video的预览图），值为3表示3张小图片形式 |
 | data.description | String   | 是       | 文章描述                                                     |
 | data.source      | String   | 是       | 文章来源                                                     |
 | data.author      | String   | 是       | 文章作者                                                     |
