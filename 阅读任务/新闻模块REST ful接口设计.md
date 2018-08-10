@@ -343,32 +343,32 @@ Pragma: no-cache
 }
 ```
 
-| key              | 类型     | 是否必须 | 描述                                                         |
-| ---------------- | -------- | -------- | ------------------------------------------------------------ |
-| message          | String   | 是       | 同上                                                         |
-| code             | int      | 是       | 同上                                                         |
-| page             | int      | 否       | 同上                                                         |
-| pageSize         | int      | 否       | 同上                                                         |
-| first            | String   | 否       | 同上                                                         |
-| next             | String   | 否       | 同上                                                         |
-| previous         | String   | 否       | 同上                                                         |
-| last             | String   | 否       | 同上                                                         |
-| data             | object   | 是       | 当前接口的具体数据由该json对象承载                           |
-| data.uid         | String   | 是       | 该条资讯的唯一标示，可用于获取详情                           |
-| data.title       | String   | 是       | 文章标题                                                     |
-| data.type        | String   | 是       | 表达该item的类型，分两种，值为news表示新闻，值为advertisement表示广告 |
-| data.style       | String   | 是       | 标记样式类型的，我们规定每一个item都有且只有4中样式，无论是广告还是news，详细查看设计稿。值为0表示无图片的形式，值为1表示左边只有一张图片的形式，值为2表示只有一张大图片形式（通常为video的预览图），值为3表示3张小图片形式 |
-| data.description | String   | 是       | 文章描述                                                     |
-| data.source      | String   | 是       | 文章来源                                                     |
-| data.author      | String   | 是       | 文章作者                                                     |
-| data.time        | String   | 是       | 时间                                                         |
-| data.url         | String   | 是       | 该条资讯web连接                                              |
-| data.topic       | String   | 是       | 所属的类型名称，对应着类型接口中的名称                       |
-| data.images      | JSON数组 | 是       | 文章配图，图片个数与type这个类型规定的一致                   |
-| data.share       | String   | 是       | 分享的url，url=https://www.baidu.com/ 参数是真实的今日头条对应的url。 |
-| data.like        | JSON对象 | 是       | 用于表示点赞数和点赞状态                                     |
-| data.like.state  | String   | 是       | like表示已点赞，unlike表示未点赞                             |
-| data.like.number | String   | 是       | 点赞数                                                       |
+| key              | 类型       | 是否必须 | 描述                                                         |
+| ---------------- | ---------- | -------- | ------------------------------------------------------------ |
+| message          | String     | 是       | 同上                                                         |
+| code             | int        | 是       | 同上                                                         |
+| page             | int        | 否       | 同上                                                         |
+| pageSize         | int        | 否       | 同上                                                         |
+| first            | String     | 否       | 同上                                                         |
+| next             | String     | 否       | 同上                                                         |
+| previous         | String     | 否       | 同上                                                         |
+| last             | String     | 否       | 同上                                                         |
+| data             | object     | 是       | 当前接口的具体数据由该json对象承载                           |
+| data.uid         | String     | 是       | 该条资讯的唯一标示，可用于获取详情                           |
+| data.title       | String     | 是       | 文章标题                                                     |
+| data.type        | String     | 是       | 表达该item的类型，分两种，值为news表示新闻，值为advertisement表示广告 |
+| data.style       | String     | 是       | 标记样式类型的，我们规定每一个item都有且只有4中样式，无论是广告还是news，详细查看设计稿。值为0表示无图片的形式，值为1表示左边只有一张图片的形式，值为2表示只有一张大图片形式（通常为video的预览图），值为3表示3张小图片形式 |
+| data.description | String     | 是       | 文章描述                                                     |
+| data.source      | String     | 是       | 文章来源                                                     |
+| data.author      | String     | 是       | 文章作者                                                     |
+| data.time        | String     | 是       | 时间                                                         |
+| data.url         | String     | 是       | 该条资讯web连接                                              |
+| data.topic       | String     | 是       | 所属的类型名称，对应着类型接口中的名称                       |
+| data.images      | JSON数组   | 是       | 文章配图，图片个数与style这个类型规定的一致                  |
+| ~~data.share~~   | ~~String~~ | ~~是~~   | ~~分享的url，url=https://www.baidu.com/ 参数是真实的今日头条对应的url。~~ |
+| data.like        | JSON对象   | 是       | 用于表示点赞数和点赞状态                                     |
+| data.like.state  | String     | 是       | like表示已点赞，unlike表示未点赞                             |
+| data.like.number | String     | 是       | 点赞数                                                       |
 
 ---
 
