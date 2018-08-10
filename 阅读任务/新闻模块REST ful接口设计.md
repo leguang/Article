@@ -300,7 +300,7 @@ Pragma: no-cache
             "title": "牛市要来了，赶紧上车",
             "type": "advertisement",
             "style": "0",
-            "abstract": "牛牛牛，你牛什么牛，牛牛牛，你牛什么牛，牛牛牛，你牛什么牛",
+            "description": "牛牛牛，你牛什么牛，牛牛牛，你牛什么牛，牛牛牛，你牛什么牛",
             "source": "币世界",
             "author": "币老爷",
             "time": "2018-04-23 20:00",
@@ -313,7 +313,7 @@ Pragma: no-cache
             ],
             "share": "https://app.mol.one/news/qfr23r23r23r2r3?url=http://toutiao.com/group/6536299962081214990/",
             "like": {
-                "isLike": true,
+                "state": "like",
                 "number": "200"
             }
         },
@@ -322,7 +322,7 @@ Pragma: no-cache
             "title": "牛市要来了，赶紧上车",
             "type": "news",
             "style": "0",
-            "abstract": "牛牛牛，你牛什么牛，牛牛牛，你牛什么牛，牛牛牛，你牛什么牛",
+            "description": "牛牛牛，你牛什么牛，牛牛牛，你牛什么牛，牛牛牛，你牛什么牛",
             "source": "币世界",
             "author": "币老爷",
             "time": "2018-04-23 20:00",
@@ -335,7 +335,7 @@ Pragma: no-cache
             ],
             "share": "https://app.mol.one/news/qfr23r23r23r2r3?url=http://toutiao.com/group/6536299962081214990/",
             "like": {
-                "isLike": true,
+                "state": "like",
                 "number": "200"
             }
         }
@@ -363,11 +363,11 @@ Pragma: no-cache
 | data.author      | String   | 是       | 文章作者                                                     |
 | data.time        | String   | 是       | 时间                                                         |
 | data.url         | String   | 是       | 该条资讯web连接                                              |
-| data.type        | String   | 是       | 所属的类型名称，对应着类型接口中的名称                       |
+| data.topic       | String   | 是       | 所属的类型名称，对应着类型接口中的名称                       |
 | data.images      | JSON数组 | 是       | 文章配图，图片个数与type这个类型规定的一致                   |
 | data.share       | String   | 是       | 分享的url，url=https://www.baidu.com/ 参数是真实的今日头条对应的url。 |
 | data.like        | JSON对象 | 是       | 用于表示点赞数和点赞状态                                     |
-| data.like.isLike | boolean  | 是       | true表示已点赞，false表示未点赞                              |
+| data.like.state  | String   | 是       | like表示已点赞，unlike表示未点赞                             |
 | data.like.number | String   | 是       | 点赞数                                                       |
 
 ---
