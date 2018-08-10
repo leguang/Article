@@ -305,7 +305,7 @@ Pragma: no-cache
             "author": "币老爷",
             "time": "2018-04-23 20:00",
             "url": "https://www.baidu.com/",
-            "topic": "课程",
+            "topic": "34y34y34t3t34t432t4",
             "images": [
                 "http://a3.peoplecdn.cn/fbcba40035ae5f2ad90c19abe58560a2.jpg",
                 "http://a3.peoplecdn.cn/fbcba40035ae5f2ad90c19abe58560a2.jpg",
@@ -327,7 +327,7 @@ Pragma: no-cache
             "author": "币老爷",
             "time": "2018-04-23 20:00",
             "url": "https://www.baidu.com/",
-            "topic": "课程",
+            "topic": "34y34y34t3t34t432t4",
             "images": [
                 "http://a3.peoplecdn.cn/fbcba40035ae5f2ad90c19abe58560a2.jpg",
                 "http://a3.peoplecdn.cn/fbcba40035ae5f2ad90c19abe58560a2.jpg",
@@ -363,7 +363,7 @@ Pragma: no-cache
 | data.author      | String     | 是       | 文章作者                                                     |
 | data.time        | String     | 是       | 时间                                                         |
 | data.url         | String     | 是       | 该条资讯web连接                                              |
-| data.topic       | String     | 是       | 所属的类型名称，对应着类型接口中的名称                       |
+| data.topic       | String     | 是       | 所属的topic（类型）的uid                                     |
 | data.images      | JSON数组   | 是       | 文章配图，图片个数与style这个类型规定的一致                  |
 | ~~data.share~~   | ~~String~~ | ~~是~~   | ~~分享的url，url=https://www.baidu.com/ 参数是真实的今日头条对应的url。~~ |
 | data.like        | JSON对象   | 是       | 用于表示点赞数和点赞状态                                     |
@@ -564,7 +564,7 @@ Pragma: no-cache
 | next             | String | 否       | 同上                               |
 | previous         | String | 否       | 同上                               |
 | last             | String | 否       | 同上                               |
-| data             | object | 是       | 当前接口的具体数据由该json对象承载 |
+| data             | object | 是       | 当前接口的具体数据由该JSON对象承载 |
 | data.uid         | String | 是       | 交易记录主键                       |
 | data.title       | String | 是       | 交易记录标题名称                   |
 | data.description | String | 是       | 交易记录描述                       |
