@@ -601,7 +601,7 @@ Platform: Android
 
 ```
 {
-    "amount": 50,
+    "amount": "50",
     "currency": "MOL"
 }
 ```
@@ -640,7 +640,7 @@ Pragma: no-cache
 
 ---
 
-### MOL（积分形式）收益记录withdraw/records
+### MOL（积分形式）提现记录withdraw/records
 
 这个接口可以被设计成一个通用的、独立的模块，以后所有业务中的撒给用户的币都以积分形式表达，用该接口查询提现记录。
 
