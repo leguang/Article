@@ -391,7 +391,12 @@ Platform: Android
 
 ##### 参数
 
-?newsUid=13r13rt1312412er12r1&isLike=true
+```
+{
+    "itemId": "13r13rt1312412er12r1",
+    "action": "like"
+}
+```
 
 | params | 类型   | 是否必须 | 描述                                                         |
 | ------ | ------ | -------- | ------------------------------------------------------------ |
@@ -574,6 +579,159 @@ Pragma: no-cache
 | data.time        | String | 是       | 交易记录时间                       |
 
 ------
+
+### 提现（从MOL积分币到MOL链）withdraw
+
+这个接口可以被设计成一个通用的、独立的模块，以后所有业务中的撒给用户的币都以积分形式表达，用该接口让用户提现，从MOL积分币换成MOL链上的真实币。
+
+> 地址：https://api.xxx.com/path/v1/withdraw
+
+##### 请求头
+
+```
+POST /path/v1/withdraw
+Accept: application/json
+Content-Type: application/json;charset=UTF-8
+Token: token_G34G34G34G34G35G5
+AppVersion: 1.1.1
+Platform: Android
+```
+
+##### 参数
+
+```
+{
+    "amount": 50,
+    "currency": "MOL"
+}
+```
+
+| params   | 类型   | 是否必须 | 描述                                                         |
+| -------- | ------ | -------- | ------------------------------------------------------------ |
+| amount   | String | 否       | 提现额度，允许从积分币到MOL链上的币提现多少通过该参数控制，非raw类型，不传表示默认，默认表示全部提现 |
+| currency | String | 否       | 默认传MOL（大写）                                            |
+
+##### 响应头
+
+```
+HTTP/1.1 200 OK
+Content-Type:application/json; charset=utf-8
+Cache-Control: no-store
+Pragma: no-cache
+```
+
+##### 响应
+
+```
+{
+    "message": "居然被你提现成功了",
+    "code": 200,
+    "data": {
+        "uid": "235235235"
+    }
+}
+```
+
+| key      | 类型   | 是否必须 | 描述                                                    |
+| -------- | ------ | -------- | ------------------------------------------------------- |
+| message  | String | 是       | 同上                                                    |
+| code     | int    | 是       | 同上                                                    |
+| data.uid | String | 是       | 该次提现生成的提现记录uid，可通过这个查询到该条提现记录 |
+
+---
+
+### MOL（积分形式）收益记录withdraw/records
+
+这个接口可以被设计成一个通用的、独立的模块，以后所有业务中的撒给用户的币都以积分形式表达，用该接口查询提现记录。
+
+> 地址：https://api.xxx.com/path/v1/withdraw/records
+
+##### 请求头
+
+```
+GET /path/v1/withdraw/records
+Accept: application/json
+Content-Type: application/json;charset=UTF-8
+Token: token_G34G34G34G34G35G5
+AppVersion: 1.1.1
+Platform: Android
+```
+
+##### 参数
+
+?keyword=热点&sort=des&page=0&pageSize=20
+
+| params   | 类型   | 是否必须 | 描述 |
+| -------- | ------ | -------- | ---- |
+| keyword  | String | 否       | 同上 |
+| sort     | String | 否       | 同上 |
+| page     | int    | 否       | 同上 |
+| pageSize | int    | 否       | 同上 |
+
+##### 响应头
+
+```
+HTTP/1.1 200 OK
+Content-Type:application/json; charset=utf-8
+Cache-Control: no-store
+Pragma: no-cache
+```
+
+##### 响应
+
+```
+{
+    "message": "居然被你查询成功了",
+    "code": 200,
+    "page": 0,
+    "pageSize": 20,
+    "first": "https://...",
+    "next": "https://...",
+    "previous": "https://...",
+    "last": "https://...",
+    "data": [
+        {
+            "uid": "235235235",
+            "title": "邀请好友",
+            "description": "二级好友邀请好友一根韭菜",
+            "amount": "-50",
+            "image": "http://a3.peoplecdn.cn/fbcba40035ae5f2ad90c19abe58560a2.jpg",
+            "currency": "MOL",
+            "time": "2018-04-23 17:38:44"
+        },
+        {
+            "uid": "235235235",
+            "title": "邀请好友",
+            "description": "二级好友邀请好友一根韭菜",
+            "amount": "-50",
+            "image": "http://a3.peoplecdn.cn/fbcba40035ae5f2ad90c19abe58560a2.jpg",
+            "currency": "MOL",
+            "time": "2018-04-23 17:38:44"
+        }
+    ]
+}
+```
+
+| key              | 类型   | 是否必须 | 描述                               |
+| ---------------- | ------ | -------- | ---------------------------------- |
+| message          | String | 是       | 同上                               |
+| code             | int    | 是       | 同上                               |
+| page             | int    | 否       | 同上                               |
+| pageSize         | int    | 否       | 同上                               |
+| first            | String | 否       | 同上                               |
+| next             | String | 否       | 同上                               |
+| previous         | String | 否       | 同上                               |
+| last             | String | 否       | 同上                               |
+| data             | object | 是       | 当前接口的具体数据由该JSON对象承载 |
+| data.uid         | String | 是       | 交易记录主键                       |
+| data.title       | String | 是       | 交易记录标题名称                   |
+| data.description | String | 是       | 交易记录描述                       |
+| data.amount      | String | 是       | 交易记录金额                       |
+| data.image       | String | 是       | 交易记录图标                       |
+| data.currency    | String | 是       | 交易记录币种                       |
+| data.time        | String | 是       | 交易记录时间                       |
+
+---
 
 ## 实现方案
 
