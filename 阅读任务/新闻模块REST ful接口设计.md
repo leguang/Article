@@ -697,9 +697,9 @@ Pragma: no-cache
             "image": "http://a3.peoplecdn.cn/fbcba40035ae5f2ad90c19abe58560a2.jpg",
             "currency": "MOL",
             "time": "2018-04-23 17:38:44",
-            "state": "已到账",
+            "state": "申请中",
             "address": "mol_15tcgzxmwg1d7rs91gc58um8y5jpz85g7iikdemnzimyrm5w6rw7krpeuxec",
-            "type": "0"
+            "type": "applying"
         },
         {
             "uid": "235235235",
@@ -710,7 +710,7 @@ Pragma: no-cache
             "time": "2018-04-23 17:38:44",
             "state": "已到账",
             "address": "mol_15tcgzxmwg1d7rs91gc58um8y5jpz85g7iikdemnzimyrm5w6rw7krpeuxec",
-            "type": "0"
+            "type": "received"
         }
     ]
 }
