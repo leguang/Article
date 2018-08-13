@@ -692,44 +692,50 @@ Pragma: no-cache
     "data": [
         {
             "uid": "235235235",
-            "title": "邀请好友",
-            "description": "二级好友邀请好友一根韭菜",
-            "amount": "-50",
+            "content": "提现到钱包",
+            "amount": "+50",
             "image": "http://a3.peoplecdn.cn/fbcba40035ae5f2ad90c19abe58560a2.jpg",
             "currency": "MOL",
-            "time": "2018-04-23 17:38:44"
+            "time": "2018-04-23 17:38:44",
+            "state": "已到账",
+            "address": "mol_15tcgzxmwg1d7rs91gc58um8y5jpz85g7iikdemnzimyrm5w6rw7krpeuxec",
+            "type": "0"
         },
         {
             "uid": "235235235",
-            "title": "邀请好友",
-            "description": "二级好友邀请好友一根韭菜",
-            "amount": "-50",
+            "content": "提现到钱包",
+            "amount": "+50",
             "image": "http://a3.peoplecdn.cn/fbcba40035ae5f2ad90c19abe58560a2.jpg",
             "currency": "MOL",
-            "time": "2018-04-23 17:38:44"
+            "time": "2018-04-23 17:38:44",
+            "state": "已到账",
+            "address": "mol_15tcgzxmwg1d7rs91gc58um8y5jpz85g7iikdemnzimyrm5w6rw7krpeuxec",
+            "type": "0"
         }
     ]
 }
 ```
 
-| key              | 类型   | 是否必须 | 描述                               |
-| ---------------- | ------ | -------- | ---------------------------------- |
-| message          | String | 是       | 同上                               |
-| code             | int    | 是       | 同上                               |
-| page             | int    | 否       | 同上                               |
-| pageSize         | int    | 否       | 同上                               |
-| first            | String | 否       | 同上                               |
-| next             | String | 否       | 同上                               |
-| previous         | String | 否       | 同上                               |
-| last             | String | 否       | 同上                               |
-| data             | object | 是       | 当前接口的具体数据由该JSON对象承载 |
-| data.uid         | String | 是       | 交易记录主键                       |
-| data.title       | String | 是       | 交易记录标题名称                   |
-| data.description | String | 是       | 交易记录描述                       |
-| data.amount      | String | 是       | 交易记录金额                       |
-| data.image       | String | 是       | 交易记录图标                       |
-| data.currency    | String | 是       | 交易记录币种                       |
-| data.time        | String | 是       | 交易记录时间                       |
+| key           | 类型   | 是否必须 | 描述                                                         |
+| ------------- | ------ | -------- | ------------------------------------------------------------ |
+| message       | String | 是       | 同上                                                         |
+| code          | int    | 是       | 同上                                                         |
+| page          | int    | 否       | 同上                                                         |
+| pageSize      | int    | 否       | 同上                                                         |
+| first         | String | 否       | 同上                                                         |
+| next          | String | 否       | 同上                                                         |
+| previous      | String | 否       | 同上                                                         |
+| last          | String | 否       | 同上                                                         |
+| data          | object | 是       | 当前接口的具体数据由该JSON对象承载                           |
+| data.uid      | String | 是       | 提现记录主键                                                 |
+| data.content  | String | 是       | 提现记录标题名称                                             |
+| data.amount   | String | 是       | 提现记录总额                                                 |
+| data.image    | String | 否       | 提现记录图标，可以不用这个                                   |
+| data.currency | String | 是       | 提现记录币种标识                                             |
+| data.time     | String | 是       | 提现记录时间                                                 |
+| data.state    | String | 是       | 提现记录状态，数据库改积分数值几乎的秒级的，而从积分到链上，会有一段确认时间，因此需要设计一个状态来给用户展示，两种状态：申请中，已到账 |
+| data.address  | String | 是       | 提现地址（提现的收款地址）                                   |
+| data.type     | String | 是       | 提现记录状态判断值，根据这个参数来判断当前状态，值为applying表示申请中，值为received表示已到账 |
 
 ---
 
