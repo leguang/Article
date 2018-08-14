@@ -1,6 +1,15 @@
 # 钱包Websoket协议探索
 
+>Version：beta
+>
+>Author：李勇
+>
+>E-mail:666233@qq.com
+>
+>Time:2018.08.01
+
 ## 前言
+
 由于单纯的Http协议无法满足钱包某些主动推送业务（如主动推送更新、广告、提示等），因此需借助soket来弥补。在传统长连接业务可选普通Soket和WebSoket，考虑到浏览器也能支持WebSoket，所以优先选择WebSoket。
 
 ## 要求
