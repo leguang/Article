@@ -1,4 +1,4 @@
-# MOL积分系统接口
+# MOL交易系统接口
 
 >Version：beta
 >
@@ -10,7 +10,7 @@
 
 ## 业务简介
 
-本模块设计成一个通用的、独立的模块，以后所有业务中的撒给用户的币都以积分形式表达，用接口对数据进行增删改查。
+本模块设计成一个通用的、独立的模块，以后所有业务中与链进行交互都使用该模块完成，用户提现实际上是我们从链上某个地址打币给用户的地址，充值实际上是用户的地址打币到链上指定账户。
 
 ### 项目url预览
 
@@ -29,16 +29,18 @@
 
 ------
 
-### 收益profit
+#### 充值deposit
 
-这个接口可以被设计成一个通用的、独立的模块，以后所有业务中的撒给用户的币都以积分形式表达，用该接口来查询余额状态。
+~~该接口用于告诉后台用户已经打币给官方指定地址了，让官方去确认，后台就可以利用hash这个参数结合blocks_info这个action去查询后对比。~~
 
-> 地址：https://api.xxx.com/path/v1/profit
+之后大家一起商议后，认为该方案不合理，有双花风险，因为看了nano的链的代码逻辑：双花的块都会放到链上，但是最后有一个会失效，然后从链上删除。因为考虑到在短时间内是无法通过hash块来确定一定是支付成功的，所以还是得后台收账后，并且5分钟内无误则可认为是真实转账。因此相应界面也得更改：客户端存入成功界面得提示5分钟后确认等字样。
+
+> 地址：https://api.xxx.com/path/v1/chain/deposit
 
 ##### 请求头
 
 ```
-GET /path/v1/profit
+POST /path/v1/chain/deposit
 Accept: application/json
 Content-Type: application/json;charset=UTF-8
 Token: token_G34G34G34G34G35G5
@@ -47,132 +49,40 @@ Platform: Android
 ```
 
 ##### 参数
-
-无
+```
+{
+    "amount": "50",
+    "fromAccount": "mol_114x611xyehnj767bmxia1d67m3kqrtukxtdxkcptf4mzj8sea4ru779i78h",
+    "toAccount": "mol_34qdk454gaxhic3w3a9i7pzn3hhkhxpaqgqg7gp3syupyf5gp9mmdsqg5zca",
+    "currency": "MOL",
+    "block": "{\"type\":\"state\",\"account\":\"mol_15tcgzxmwg1d7rs91gc58um8y5jpz85g7iikdemnzimyrm5w6rw7krpeuxec\",\"previous\":\"65FA210BF9578C8CA0C1F5BECAF2EAE70C2D6B8CFDC839F897E11C6DB6CAE8F3\",\"representative\":\"mol_3ytentj15q44he4c778317r868wdttwufp96fsccjux4tuqc59ojgrwn6d4w\",\"balance\":\"1731194500000000000000000000000\",\"link\":\"0F4A77FB3E380B2E3270394336E66F0E36F986E2C2125B274FC27EC4C7C26385\",\"signature\":\"7310F2E1C0BB32F668796C92CDD564CE88214F6C065615EC821CEE1CFA124A1CFBEE4F0584FD488CCF8AC0AC1EA0E5574FA4D137CB0E2A433956C7839EEB0B04\",\"work\":\"5bdbe26964c621d0\"}"
+}
+```
+| params   | 类型   | 描述                                                         |
+| -------- | ------ | ------------------------------------------------------------ |
+| amount   | String | 充值总额                                                     |
+| from     | String | 用户的打款地址                                               |
+| to       | String | 官方的收款地址                                               |
+| currency | String | 单位或币种，暂时固定填MOL                                    |
+| block    | String | 就是平时转账时，使用process这个action来处理block块时所需要的参数 |
 
 ##### 响应头
 
 ```
 HTTP/1.1 200 OK
 Content-Type:application/json; charset=utf-8
-Cache-Control: no-store
-Pragma: no-cache
 ```
 
 ##### 响应
-
 ```
 {
-    "message": "居然被你查询成功了",
-    "code": 200,
-    "data": {
-        "accumulation": "11124525",
-        "balance": "95885",
-        "currency": "MOL"
-    }
+    "message": "居然被你充值成功了",
+    "code": 200
 }
 ```
-
-| key               | 类型   | 是否必须 | 描述                                    |
-| ----------------- | ------ | -------- | --------------------------------------- |
-| message           | String | 是       | 同上                                    |
-| code              | int    | 是       | 同上                                    |
-| data.accumulation | String | 是       | 该账户历史累积收益，非raw类型的值       |
-| data.balance      | String | 是       | 该账户上可用于提现的收益，非raw类型的值 |
-| data.currency     | String | 是       | 对应的币种的单位                        |
-
----
-
-### MOL（积分形式）收益记录profit/records
-
-这个接口可以被设计成一个通用的、独立的模块，以后所有业务中的撒给用户的币都以积分形式表达，用该接口查询收益记录。
-
-> 地址：https://api.xxx.com/path/v1/profit/records
-
-##### 请求头
-
-```
-GET /path/v1/profit/records
-Accept: application/json
-Content-Type: application/json;charset=UTF-8
-Token: token_G34G34G34G34G35G5
-AppVersion: 1.1.1
-Platform: Android
-```
-
-##### 参数
-
-?keyword=热点&sort=des&page=0&pageSize=20
-
-| params   | 类型   | 是否必须 | 描述 |
-| -------- | ------ | -------- | ---- |
-| keyword  | String | 否       | 同上 |
-| sort     | String | 否       | 同上 |
-| page     | int    | 否       | 同上 |
-| pageSize | int    | 否       | 同上 |
-
-##### 响应头
-
-```
-HTTP/1.1 200 OK
-Content-Type:application/json; charset=utf-8
-Cache-Control: no-store
-Pragma: no-cache
-```
-
-##### 响应
-
-```
-{
-    "message": "居然被你查询成功了",
-    "code": 200,
-    "page": 0,
-    "pageSize": 20,
-    "first": "https://...",
-    "next": "https://...",
-    "previous": "https://...",
-    "last": "https://...",
-    "data": [
-        {
-            "uid": "235235235",
-            "title": "邀请好友",
-            "description": "二级好友邀请好友一根韭菜",
-            "amount": "-50",
-            "image": "http://a3.peoplecdn.cn/fbcba40035ae5f2ad90c19abe58560a2.jpg",
-            "currency": "MOL",
-            "time": "2018-04-23 17:38:44"
-        },
-        {
-            "uid": "235235235",
-            "title": "邀请好友",
-            "description": "二级好友邀请好友一根韭菜",
-            "amount": "-50",
-            "image": "http://a3.peoplecdn.cn/fbcba40035ae5f2ad90c19abe58560a2.jpg",
-            "currency": "MOL",
-            "time": "2018-04-23 17:38:44"
-        }
-    ]
-}
-```
-
-| key              | 类型   | 是否必须 | 描述                               |
-| ---------------- | ------ | -------- | ---------------------------------- |
-| message          | String | 是       | 同上                               |
-| code             | int    | 是       | 同上                               |
-| page             | int    | 否       | 同上                               |
-| pageSize         | int    | 否       | 同上                               |
-| first            | String | 否       | 同上                               |
-| next             | String | 否       | 同上                               |
-| previous         | String | 否       | 同上                               |
-| last             | String | 否       | 同上                               |
-| data             | object | 是       | 当前接口的具体数据由该JSON对象承载 |
-| data.uid         | String | 是       | 交易记录主键                       |
-| data.title       | String | 是       | 交易记录标题名称                   |
-| data.description | String | 是       | 交易记录描述                       |
-| data.amount      | String | 是       | 交易记录金额                       |
-| data.image       | String | 是       | 交易记录图标                       |
-| data.currency    | String | 是       | 交易记录币种                       |
-| data.time        | String | 是       | 交易记录时间                       |
+| key  | 类型   | 描述             |
+| ---- | ------ | ---------------- |
+| uid  | String | 该条数据的唯一ID |
 
 ------
 
@@ -180,12 +90,12 @@ Pragma: no-cache
 
 这个接口可以被设计成一个通用的、独立的模块，以后所有业务中的撒给用户的币都以积分形式表达，用该接口让用户提现，从MOL积分币换成MOL链上的真实币。
 
-> 地址：https://api.xxx.com/path/v1/withdraw
+> 地址：https://api.xxx.com/path/v1/chain/withdraw
 
 ##### 请求头
 
 ```
-POST /path/v1/withdraw
+POST /path/v1/chain/withdraw
 Accept: application/json
 Content-Type: application/json;charset=UTF-8
 Token: token_G34G34G34G34G35G5
@@ -236,7 +146,7 @@ Pragma: no-cache
 
 ---
 
-### MOL（积分形式）提现记录withdraw/records
+### MOL（积分形式）提现记录chain/records
 
 这个接口可以被设计成一个通用的、独立的模块，以后所有业务中的撒给用户的币都以积分形式表达，用该接口查询提现记录。
 
