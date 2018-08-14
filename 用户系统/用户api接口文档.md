@@ -1,0 +1,718 @@
+# 用户api接口设计
+
+>Version：beta
+Author：何流远
+E-mail:563248161@qq.com
+
+
+---
+
+#### 发送短信验证码
+该接口是手机发送验证码的接口。
+
+> 地址：https://api.xxx.com/sendsms
+
+###### 请求头
+
+```
+POST /sendsms
+Accept: application/json
+Content-Type: application/json;charset=UTF-8
+Token: token_G34G34G34G34G35G5
+AppVersion: 1.1.1
+Platform: Android
+```
+
+###### 参数
+```
+{
+    "countryCode": "0086",
+    "phoneNumber": "15297838217"
+}
+```
+| params | 类型 | 是否必须 |描述 |
+| - | - | - |- |
+| countryCode | String | Y| 国家区号 |
+| phoneNumber | String | Y|手机号码 |
+
+###### 响应头
+
+```
+HTTP/1.1 200 OK
+Content-Type:application/json; charset=utf-8
+```
+
+###### 响应
+```
+{
+    "message": "成功",
+    "code": 200
+}
+```
+
+
+---
+
+#### 创建Token
+该接口是返回的是一个状态码,每次请求的时候在请求头带上toke,token表示的是用户的信息。
+
+> 地址：https://api.xxx.com/tokens
+
+###### 请求头
+
+```
+POST /tokens
+Accept: application/json
+Content-Type: application/json;charset=UTF-8
+Token: token_G34G34G34G34G35G5
+AppVersion: 1.1.1
+Platform: Android
+```
+
+###### 参数
+```
+{
+    "countryCode": "0086",
+    "phoneNumber": "15297838217",
+    "password": "111111"
+}
+```
+| params | 类型 | 是否必须| 描述 |
+| - | - | - | - |
+| countryCode | String |Y| 国家区号 |
+| phoneNumber | String |Y| 手机号码 |
+| password | String |Y| 密码 |
+
+###### 响应头
+
+```
+HTTP/1.1 200 OK
+Content-Type:application/json; charset=utf-8
+```
+
+###### 响应
+```
+{
+    "message": "成功",
+    "code": 200,
+     "data":{
+         "token":"qqfsafasffsadadasfas"
+     }
+}
+```
+|key | 类型 | 描述 |
+| - | - | - |
+| message | String | 随便写，也可以作为服务器给前端固定提示的内容 |
+| code | int | 与响应头里的Status一样 |
+| data.token | String | token值 |
+
+---
+#### 刷新Token
+该接口是重新获取新的token。
+
+> 地址：https://api.xxx.com/tokens
+
+###### 请求头
+
+```
+PUT /tokens
+Accept: application/json
+Content-Type: application/json;charset=UTF-8
+Token: token_G34G34G34G34G35G5
+AppVersion: 1.1.1
+Platform: Android
+```
+
+###### 参数
+```
+{
+    "countryCode": "0086",
+    "phoneNumber": "15297838217",
+    "password": "111111"
+}
+```
+| params | 类型 |是否必须| 描述 |
+| - | - | - |- |
+| countryCode | String | Y | 国家区号 |
+| phoneNumber | String | Y | 手机号码 |
+| password | String | Y | 密码 |
+
+###### 响应头
+
+```
+HTTP/1.1 200 OK
+Content-Type:application/json; charset=utf-8
+```
+
+###### 响应
+```
+{
+    "message": "成功",
+    "code": 200,
+    "data":{
+         "token":"SDGSDGSGDSSDGSD"
+    }
+   
+}
+```
+|key | 类型 | 描述 |
+| - | - | - |
+| message | String | 随便写，也可以作为服务器给前端固定提示的内容 |
+| code | int | 与响应头里的Status一样 |
+| data.token | String | token值 |
+
+---
+#### 退出Token
+该接口是退出token,让token立马失效。
+
+> 地址：https://api.xxx.com/tokens
+
+###### 请求头
+
+```
+DELETE /tokens
+Accept: application/json
+Content-Type: application/json;charset=UTF-8
+Token: token_G34G34G34G34G35G5
+AppVersion: 1.1.1
+Platform: Android
+```
+
+###### 参数
+```
+{
+    "countryCode": "0086",
+    "phoneNnumber": "15297838217",
+    "password": "111111"
+}
+```
+| params | 类型 | 是否必须 |描述 |
+| - | - | - | - |
+| countryCode | String | Y | 国家区号 |
+| phoneNumber | String | Y | 手机号码 |
+| password | String | Y | 密码 |
+
+###### 响应头
+
+```
+HTTP/1.1 200 OK
+Content-Type:application/json; charset=utf-8
+```
+
+###### 响应
+```
+{
+    "message": "成功",
+    "code": 200
+   
+}
+```
+---
+#### 注册(添加用户)
+
+> 地址：https://api.xxx.com/users
+
+###### 请求头
+
+```
+POST /users
+Accept: application/json
+Content-Type: application/json;charset=UTF-8
+Token: token_G34G34G34G34G35G5
+AppVersion: 1.1.1
+Platform: Android
+```
+
+###### 参数
+```
+{
+    "countryCode": "0086",
+    "phoneNumber": "15297838217",
+    "password": "111111",
+    "smsCode": "732837"
+}
+```
+| params | 类型 | 是否必须 | 描述 |
+| - | - | - | - |
+| countryCode | String | Y | 国家区号 |
+| phoneNumber | String | Y | 手机号码 |
+| password | String | Y | 密码 |
+| smsCode | String | Y | 短信验证码 |
+
+###### 响应头
+
+```
+HTTP/1.1 200 OK
+Content-Type:application/json; charset=utf-8
+```
+
+###### 响应
+```
+{
+    "message": "成功",
+    "code": 200,
+    "data":{
+          "uid":"dec26723c4324bdb91cead673f8b77ab"
+          }
+}
+```
+
+|key | 类型 | 描述 |
+| - | - | - |
+| message | String | 随便写，也可以作为服务器给前端固定提示的内容 |
+| code | int | 与响应头里的Status一样 |
+| data.uid | String | 返回用户创建的uid值 |
+
+---
+#### 登录(用手机号码登录)
+> 地址：https://api.xxx.com/user
+
+###### 请求头
+
+```
+POST /user
+Accept: application/json
+Content-Type: application/json;charset=UTF-8
+Token: token_G34G34G34G34G35G5
+AppVersion: 1.1.1
+Platform: Android
+```
+
+###### 参数
+①手机号 密码登录
+```
+{
+    "countryCode": "0086",
+    "phoneNumber": "15297838217",
+    "password": "111111",
+}
+```
+②手机号 验证码登录
+```
+{
+    "countryCode": "0086",
+    "phoneNumber": "15297838217",
+    "smsCode": "732837"
+}
+```
+
+| params | 类型 |是否必须| 描述 |
+| - | - | - |- |
+| countryCode | String |Y| 国家区号 |
+| phoneNumber | String |Y| 手机号码 |
+| password | String |N| 密码 |
+| smsCode | String |N| 短信验证码 |
+
+###### 响应头
+
+```
+HTTP/1.1 200 OK
+Content-Type:application/json; charset=utf-8
+```
+
+###### 响应
+```
+{
+    "message": "成功",
+    "code": 200,
+}
+```
+---
+#### 查询用户
+> 地址：https://api.xxx.com/user
+
+###### 请求头
+
+```
+GET /user
+Accept: application/json
+Content-Type: application/json;charset=UTF-8
+Token: token_G34G34G34G34G35G5
+AppVersion: 1.1.1
+Platform: Android
+```
+
+###### 参数
+```
+{
+    "uid": "0086",
+    "userName": "用户名",
+    "nickName": "昵称",
+    "countryCode": "0086",
+    "phoneNumber": "15297838217",
+     "avatar": "头像"
+}
+```
+| params | 类型 |是否必须|描述 |
+| - | - | - |- |
+| uid | String |N| 用户id |
+| userName | String |N| 用户名 |
+| nickName | String |N| 昵称    |
+| countryCode | String |N| 国家区号 |
+| phoneNumber | String |N| 手机号码 |
+| avatar | String |N| 头像 |
+
+###### 响应头
+
+```
+HTTP/1.1 200 OK
+Content-Type:application/json; charset=utf-8
+```
+
+###### 响应
+```
+{
+    "message": "成功",
+    "code": 200,
+    "data":{
+              "uid":"2",
+              "userName":"用户名",
+              "password":"121244",
+              "nickName":"昵称",
+              "avatar":"用户头像",
+              "latestLogin":"最后登录时间",
+              "loginTimes":"登录次数",
+              "token":"最新token",
+              "source":"来源",
+              "createTime":"创建时间",
+              "enabled":"是否有效",
+              "countryCode":"国家区号",
+              "phoneNumber":"手机号码"
+           }
+}
+```
+
+|key | 类型 | 描述 |
+| - | - | - |
+| message | String | 随便写，也可以作为服务器给前端固定提示的内容 |
+| code | int | 与响应头里的Status一样 |
+| data.uid | String | uid值 |
+| data.userName | String | 用户名 |
+| data.password | String | 密码 |
+| data.nickName | String | 昵称 |
+| data.avatar | String | 用户头像 |
+| data.latestLogin | String | 最后登录时间 |
+| data.loginTimes | String | 登录次数 |
+| data.token | String | 最新token |
+| data.source | String | 来源 |
+| data.createTime | String | 创建时间 |
+| data.enabled | int | 是否有效 |
+| data.countryCode | String | 国家区号 |
+| data.phoneNumber | String | 手机号码 |
+
+
+---
+#### 修改用户
+> 地址：https://api.xxx.com/users/{uid}
+
+###### 请求头
+
+```
+PUT /users/{uid}
+Accept: application/json
+Content-Type: application/json;charset=UTF-8
+Token: token_G34G34G34G34G35G5
+AppVersion: 1.1.1
+Platform: Android
+```
+
+###### 参数
+```
+{
+    "userName": "用户名",
+    "nickName": "昵称",
+    "avatar": "用户头像"
+}
+```
+| params | 类型 |是否必须| 描述 |
+| - | - | - |- |
+| userName | String |N | 用户名 |
+| nickName | String |N | 昵称    |
+| avatar | String |N | 用户头像 |
+
+###### 响应头
+
+```
+HTTP/1.1 200 OK
+Content-Type:application/json; charset=utf-8
+```
+
+###### 响应
+```
+{
+    "message": "成功",
+    "code": 200,
+}
+```
+---
+#### 查询用户设备信息
+> 地址：https://api.xxx.com/v1.0/users/{uid}/devices
+
+###### 请求头
+
+```
+GET /users/{uid}/devices
+Accept: application/json
+Content-Type: application/json;charset=UTF-8
+Token: token_G34G34G34G34G35G5
+AppVersion: 1.1.1
+Platform: Android
+```
+
+###### 参数
+```
+ 无
+```
+###### 响应头
+
+```
+HTTP/1.1 200 OK
+Content-Type:application/json; charset=utf-8
+```
+
+###### 响应
+```
+{
+    "message": "成功",
+    "code": 200,
+    "data":{
+       [ 
+         {
+            "uid": "uid",
+            "appDebug": "是否为debug版本",
+            "appVersioncode": "版本号",
+            "appVersionname": "版本名称（iOS中称为版本号），例如1.0.1",
+            "deviceDisplay": "系统屏幕信息",
+            "deviceDisplayheight": "屏幕像素高度",
+            "deviceDisplaywidth": "屏幕像素宽度",
+            "deviceDrand": "品牌信息，如小米、华为",
+            "deviceFingerprint": "设备指纹，一个综合的，唯一的关于设备的描述",
+            "deviceManufacturer": "生产厂商信息",
+            "deviceModel": "型号信息",
+            "deviceProduct": "G750-T01",
+            "deviceid": "根据综合信息生成的一个设备唯一ID",
+            "osHost": "本机ip地址",
+            "osIsroot": "手机系统是否有Root过",
+            "osVersion": "系统版本号，如19代表4.4",
+            "networkIp": "外网ip" 
+            "createTime": "创建时间" 
+             "enabled": "是否有效" 
+          }
+        ] 
+     }
+}
+```
+|key | 类型 | 描述 |
+| - | - | - |
+| message | String | 随便写，也可以作为服务器给前端固定提示的内容 |
+| code | int | 与响应头里的Status一样 |
+| data.uid | String | uid值 |
+| data.appDebug | String | 是否为debug版本 |
+| data.appVersioncode | String | 版本号 |
+| data.appVersionname | String | 版本名称（iOS中称为版本号），例如1.0.1 |
+| data.deviceDisplay | String | 系统屏幕信息 |
+| data.deviceDisplayheight | String | 屏幕像素高度 |
+| data.deviceDisplaywidth | String | 屏幕像素宽度 |
+| data.deviceDrand | String | 品牌信息，如小米、华为 |
+| data.deviceFingerprint | String | 设备指纹，一个综合的，唯一的关于设备的描述 |
+| data.deviceManufacturer | String | 生产厂商信息 |
+| data.deviceModel | int | 型号信息 |
+| data.deviceProduct | String | G750-T01 |
+| data.deviceid | String | 根据综合信息生成的一个设备唯一ID |
+| data.osHost | String | 手机系统是否有Root过 |
+| data.osVersion | String | 系统版本号，如19代表4.4 |
+| data.networkIp | String | 外网ip |
+| data.osVersion | String | 创建时间 |
+| data.osVersion | String | 是否有效 |
+
+
+---
+#### 添加用户设备信息
+> 地址：https://api.xxx.com/v1.0/users/{uid}/devices
+
+###### 请求头
+
+```
+POST /users/{uid}/devices
+Accept: application/json
+Content-Type: application/json;charset=UTF-8
+Token: token_G34G34G34G34G35G5
+AppVersion: 1.1.1
+Platform: Android
+```
+
+###### 参数
+```
+ {
+        "appDebug": "是否为debug版本",
+        "appVersioncode": "版本号",
+        "appVersionname": "版本名称（iOS中称为版本号），例如1.0.1",
+        "deviceDisplay": "系统屏幕信息",
+        "deviceDisplayheight": "屏幕像素高度",
+        "deviceDisplaywidth": "屏幕像素宽度",
+        "deviceDrand": "品牌信息，如小米、华为",
+        "deviceFingerprint": "设备指纹，一个综合的，唯一的关于设备的描述",
+        "deviceManufacturer": "生产厂商信息",
+        "deviceModel": "型号信息",
+        "deviceProduct": "G750-T01",
+        "deviceid": "根据综合信息生成的一个设备唯一ID",
+        "osHost": "本机ip地址",
+        "osIsroot": "手机系统是否有Root过",
+        "osVersion": "系统版本号，如19代表4.4" 
+}
+```
+|params | 类型 |是否必须| 描述 |
+| - | - | - | - |
+| appDebug | String |Y| 是否为debug版本 |
+| appVersioncode | String |Y| 版本号 |
+| appVersionname | String |Y| 版本名称（iOS中称为版本号），例如1.0.1 |
+| deviceDisplay | String |Y| 系统屏幕信息 |
+| deviceDisplayheight | String |Y| 屏幕像素高度 |
+| deviceDisplaywidth | String |Y| 屏幕像素宽度 |
+| deviceDrand | String |Y| 品牌信息，如小米、华为 |
+| deviceFingerprint | String |Y| 设备指纹，一个综合的，唯一的关于设备的描述 |
+| deviceManufacturer | String |Y| 生产厂商信息 |
+| deviceModel | String |Y| 型号信息 |
+| deviceProduct | String |Y| G750-T01 |
+| deviceid | String |Y| 根据综合信息生成的一个设备唯一ID |
+| osHost | String |Y| 手机系统是否有Root过 |
+| osVersion | String |Y| 系统版本号，如19代表4.4 |
+| networkIp | String |Y| 外网ip |
+| osVersion | String |Y| 创建时间 |
+| osVersion | String |Y| 是否有效 |
+###### 响应头
+
+```
+HTTP/1.1 200 OK
+Content-Type:application/json; charset=utf-8
+```
+
+###### 响应
+```
+{
+    "message": "成功",
+    "code": 200,
+}
+```
+---
+#### 添加用户黑名单
+> 地址：https://api.xxx.com/v1.0/blacks
+
+###### 请求头
+
+```
+POST /v1.0/blacks
+Accept: application/json
+Content-Type: application/json;charset=UTF-8
+Token: token_G34G34G34G34G35G5
+AppVersion: 1.1.1
+Platform: Android
+```
+
+###### 参数
+```
+ {
+   "cause": "加入黑名单原因",
+   "uid": "uid"
+}
+```
+| params | 类型 |是否必须| 描述 |
+| - | - | - |- |
+| cause | String |Y | 用户名 |
+| uid | String |Y | 昵称    |
+###### 响应头
+
+```
+HTTP/1.1 200 OK
+Content-Type:application/json; charset=utf-8
+```
+
+###### 响应
+```
+{
+    "message": "成功",
+    "code": 200
+}
+```
+---
+#### 查询用户黑名单
+> 地址：https://api.xxx.com/v1.0/blacks/{uid}
+###### 请求头
+
+```
+GET /v1.0/blacks/{uid}
+Accept: application/json
+Content-Type: application/json;charset=UTF-8
+Token: token_G34G34G34G34G35G5
+AppVersion: 1.1.1
+Platform: Android
+```
+
+###### 参数
+```
+无
+```
+###### 响应头
+
+```
+HTTP/1.1 200 OK
+Content-Type:application/json; charset=utf-8
+```
+
+###### 响应
+```
+{
+    "message": "成功",
+    "code": 200,
+    "data":{
+        [
+          {
+            "cause": "加入黑名单原因",
+             "uid": "uid",
+             "createTime":"2018-08-06 14:52 "
+          }
+        ]
+    }
+}
+```
+|key | 类型 | 描述 |
+| - | - | - |
+| message | String | 随便写，也可以作为服务器给前端固定提示的内容 |
+| code | int | 与响应头里的Status一样 |
+| data.uid | String | uid值 |
+| data.cause | String | 加入黑名单原因 |
+| data.createTime | String | 创建时间 |
+
+---
+#### 删除用户黑名单
+
+> 地址：https://api.xxx.com/v1.0/blacks/{uid}
+###### 请求头
+
+```
+DELETE /v1.0/blacks/{uid}
+Accept: application/json
+Content-Type: application/json;charset=UTF-8
+Token: token_G34G34G34G34G35G5
+AppVersion: 1.1.1
+Platform: Android
+```
+
+###### 参数
+```
+无
+```
+###### 响应头
+
+```
+HTTP/1.1 200 OK
+Content-Type:application/json; charset=utf-8
+```
+
+###### 响应
+```
+{
+    "message": "成功",
+    "code": 200,
+}
+```
