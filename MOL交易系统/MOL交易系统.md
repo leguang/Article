@@ -14,22 +14,20 @@
 
 ### 项目url预览
 
-![预览](https://i.imgur.com/TyXrDQd.png) 
+![](https://i.imgur.com/PHCHX6N.png) 
 
 站在数据的角度，若想满足各大模块的功能需求，可以将接口分成如下几类：
 > base url：https://api.xxx.com/path/
 
-| 分类                                  | 接口地址                                   | 参数       |
-| :------------------------------------ | ------------------------------------------ | ---------- |
-| 新闻主题（分类）topics                | https://api.xxx.com/path/v1/topics         |            |
-| 新闻列表+广告news                     | https://api.xxx.com/path/v1/news           | topic的uid |
-| 收益profit                            | https://api.xxx.com/path/v1/profit         |            |
-| MOL（积分形式）收益记录profit/records | https://api.xxx.com/path/v1/profit/records |            |
-| 摩尔币的记录mol/records               | https://api.xxx.com/path/v1/mol/record     |            |
+| 分类                         | 接口地址                                   | 参数                                            |
+| :--------------------------- | ------------------------------------------ | ----------------------------------------------- |
+| 充值chain/deposit            | https://api.xxx.com/path/v1/c              | amount、fromAccount、toAccount、currency、block |
+| 提现chain/withdraw           | https://api.xxx.com/path/v1/chain/withdraw | currency、amount                                |
+| MOL（积分）记录chain/records | https://api.xxx.com/path/v1/chain/records  | type                                            |
 
 ------
 
-#### 充值deposit
+#### 充值chain/deposit（从MOL链到MOL积分）
 
 ~~该接口用于告诉后台用户已经打币给官方指定地址了，让官方去确认，后台就可以利用hash这个参数结合blocks_info这个action去查询后对比。~~
 
@@ -86,7 +84,7 @@ Content-Type:application/json; charset=utf-8
 
 ------
 
-### 提现（从MOL积分币到MOL链）withdraw
+### 提现chain/withdraw（从MOL积分币到MOL链）
 
 这个接口可以被设计成一个通用的、独立的模块，以后所有业务中的撒给用户的币都以积分形式表达，用该接口让用户提现，从MOL积分币换成MOL链上的真实币。
 
@@ -150,12 +148,12 @@ Pragma: no-cache
 
 这个接口可以被设计成一个通用的、独立的模块，以后所有业务中的撒给用户的币都以积分形式表达，用该接口查询提现记录。
 
-> 地址：https://api.xxx.com/path/v1/withdraw/records
+> 地址：https://api.xxx.com/path/v1/chain/records
 
 ##### 请求头
 
 ```
-GET /path/v1/withdraw/records
+GET /path/v1/chain/records
 Accept: application/json
 Content-Type: application/json;charset=UTF-8
 Token: token_G34G34G34G34G35G5
@@ -165,14 +163,17 @@ Platform: Android
 
 ##### 参数
 
-?keyword=热点&sort=des&page=0&pageSize=20
+?type=deposit&keyword=热点&sort=des&page=0&pageSize=20
 
-| params   | 类型   | 是否必须 | 描述 |
-| -------- | ------ | -------- | ---- |
-| keyword  | String | 否       | 同上 |
-| sort     | String | 否       | 同上 |
-| page     | int    | 否       | 同上 |
-| pageSize | int    | 否       | 同上 |
+> 此处type这个参数，本来想定义值为send和receive，但是发现这两个词意表达是具有相对方向性的，并无法表达到底是固定哪一方给哪一方打款，因此改用deposit和withdraw。
+
+| params   | 类型   | 是否必须 | 描述                                                         |
+| -------- | ------ | -------- | ------------------------------------------------------------ |
+| keyword  | String | 否       | 同上                                                         |
+| sort     | String | 否       | 同上                                                         |
+| page     | int    | 否       | 同上                                                         |
+| pageSize | int    | 否       | 同上                                                         |
+| type     | String | 否       | 用于区分记录类型，不传表示默认，默认表示获取全部类型的记录，值为deposit表示充值记录（用户地址打款给官方指定地址），值为withdraw表示提现记录（官方指定地址打款给用户地址）。 |
 
 ##### 响应头
 
